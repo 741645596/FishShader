@@ -561,6 +561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bing
       objectReference: {fileID: 0}
+    - target: {fileID: 8544209686378790003, guid: 3b11904d2d3c5b541b538c7329e120ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b11904d2d3c5b541b538c7329e120ab, type: 3}
 --- !u!1001 &725128536
@@ -631,9 +635,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1648849580942186576, guid: 51f4c3fe5d2085c4a9ab49b842c79731, type: 3}
     - target: {fileID: -2668377783141745851, guid: 0ffb73cea70b5a94ebcf56d59dc58732, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2668377783141745851, guid: 0ffb73cea70b5a94ebcf56d59dc58732, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 91976384b38ab7540b57cf2bd00de8d1, type: 2}
+    - target: {fileID: -2668377783141745851, guid: 0ffb73cea70b5a94ebcf56d59dc58732, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d0926eb88d41ffe418fd00d7aafebc1a, type: 2}
     - target: {fileID: 919132149155446097, guid: 0ffb73cea70b5a94ebcf56d59dc58732, type: 3}
       propertyPath: m_Name
       value: fish_huangjinshuangqisha_001
@@ -1727,7 +1739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8544209686378790003, guid: 3b11904d2d3c5b541b538c7329e120ab, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b11904d2d3c5b541b538c7329e120ab, type: 3}
