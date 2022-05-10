@@ -27,8 +27,16 @@ Material:
         m_Texture: {fileID: 8900000, guid: ed321bf963fa4e74ac424420f78235d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _IceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 88ff7575bffeb7e498b8c4ee156fe11a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 14bad70a7aa7d8545a8acf330cad7791, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -61,19 +69,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpAmt: 10
-    - _Cutoff: 1
+    - _Cutoff: 0.27272728
     - _FPOW: 5
-    - _FrenelPower: 5
+    - _FrenelPower: 3.8306818
     - _LightStr: 0
-    - _LightStrength: 1
+    - _LightStrength: 3.7272727
     - _Opacity: 0.5
     - _Parallax: 0.02
     - _R0: 0.05
-    - _RefStrength: 3.5
+    - _RefStrength: 6.681818
     - _ReflectionStrength: 1
     - _RefractionIntensity: 0
     - _RefractionMultiply: 0.5
-    - _RefractionStrength: 1
+    - _RefractionStrength: 0.09090911
     - _Shininess: 2.03
     - _Sininess: 1
     - _TexAlphaAdd: 0.1

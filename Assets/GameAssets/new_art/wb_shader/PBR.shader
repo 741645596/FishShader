@@ -30,21 +30,19 @@ Shader "WB/PBR"
 		_HSVSat("饱和度", Range(0, 1)) = 1
 		_HSVValue("亮度", Range(0, 1)) = 1
 
+		_VeterxOff("_VeterxOff[阴影位置偏移值xyz有效]", Vector) = (0, 0, 0, 0)
+		_ShadowColor("ShadowColor[阴影色]", Color) = (0.3, 0.3, 0.3, 0.3)
 	}
 
 	SubShader
 	{
-
-
 		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" "Queue"="Geometry" }
 		Cull Back
-		
-
 		Pass
 		{
 			
 			Name "Forward"
-			Tags { "LightMode"="UniversalForward" }
+			Tags { "LightMode" = "UniversalForward" "RenderType" = "Opaque" "Queue" = "Geometry" }
 			
 			Blend One Zero, One Zero
 			ZWrite On
@@ -55,18 +53,8 @@ Shader "WB/PBR"
 
 			HLSLPROGRAM
 
-			#define _RECEIVE_SHADOWS_OFF 1
-
-			
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-			
-
 			#pragma vertex vert
 			#pragma fragment frag
-
-			#define SHADERPASS_FORWARD
 
 			#include "ColorCore.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -81,10 +69,8 @@ Shader "WB/PBR"
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
 				float4 ase_tangent : TANGENT;
-				float4 texcoord1 : TEXCOORD1;
 				float4 texcoord : TEXCOORD0;
-				
-				
+				float4 texcoord1 : TEXCOORD1;
 			};
 
 			struct VertexOutput
@@ -126,8 +112,6 @@ Shader "WB/PBR"
 			float _HSVHue;
 			float _HSVSat;
 			float _HSVValue;
-
-			
 			
 			CBUFFER_END
 			sampler2D _BaseMap;
@@ -140,8 +124,6 @@ Shader "WB/PBR"
 			VertexOutput VertexFunction( VertexInput v  )
 			{
 				VertexOutput o = (VertexOutput)0;
-				
-
 				o.uv.xy = v.texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
@@ -187,7 +169,7 @@ Shader "WB/PBR"
 				float3 WorldPosition = float3(IN.tSpace0.w,IN.tSpace1.w,IN.tSpace2.w);
 				float3 WorldViewDirection = _WorldSpaceCameraPos.xyz  - WorldPosition;
 				float4 ShadowCoords = float4( 0, 0, 0, 0 );
-				
+				float3x3 tangentTransform = float3x3(WorldTangent, WorldBiTangent, WorldNormal);
 				//----------------------
 	
 				WorldViewDirection = SafeNormalize( WorldViewDirection );
@@ -245,7 +227,7 @@ Shader "WB/PBR"
 				inputData.viewDirectionWS = WorldViewDirection;
 				inputData.shadowCoord = ShadowCoords;
 
-				inputData.normalWS = TransformTangentToWorld(Normal, half3x3( WorldTangent, WorldBiTangent, WorldNormal ));
+				inputData.normalWS = TransformTangentToWorld(Normal, tangentTransform);
 
 
 				float ndv = dot( normalize(inputData.normalWS) , WorldViewDirection + _RimOffset.xyz );
@@ -267,6 +249,7 @@ Shader "WB/PBR"
 				inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(IN.clipPos);
 				inputData.shadowMask = SAMPLE_SHADOWMASK(IN.lightmapUVOrVertexSH.xy);
 
+
 				half4 color = UniversalFragmentPBR(
 					inputData, 
 					Albedo, 
@@ -276,17 +259,85 @@ Shader "WB/PBR"
 					Occlusion, 
 					Emission, 
 					Alpha);
-
-				
-				
 				return color;
 			}
 
 			ENDHLSL
 		}
+		/*
+		Pass
+		{
+			Name "Shadow"
+			Tags { "LightMode" = "SRPDefaultUnlit"  "RenderType" = "Transparent" "Queue" = "Transparent" }
+			Blend SrcAlpha OneMinusSrcAlpha
+			//ZWrite Off
+			ZWrite On
+			ZTest LEqual
+			Offset 0 , 0
+			ColorMask RGBA
 
-		
 
+			HLSLPROGRAM
+
+			#pragma vertex vert
+			#pragma fragment frag
+
+			#include "ColorCore.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+
+
+			struct VertexInput
+			{
+				float4 vertex : POSITION;
+			};
+
+			struct VertexOutput
+			{
+				float4 clipPos : SV_POSITION;
+			};
+
+			CBUFFER_START(UnityPerMaterial)
+
+
+			float4 _VeterxOff;
+			float4 _ShadowColor;
+
+			CBUFFER_END
+
+
+
+			VertexOutput VertexFunction(VertexInput v)
+			{
+				VertexOutput o = (VertexOutput)0;
+				float3 positionWS = TransformObjectToWorld(v.vertex.xyz) +  _VeterxOff.xyz;
+				float3 positionVS = TransformWorldToView(positionWS);
+				float4 positionCS = TransformWorldToHClip(positionWS);
+
+
+				o.clipPos = positionCS;
+
+				return o;
+			}
+
+
+
+			VertexOutput vert(VertexInput v)
+			{
+				return VertexFunction(v);
+			}
+
+			half4 frag(VertexOutput IN) : SV_Target
+			{
+				return _ShadowColor;
+			}
+
+			ENDHLSL
+		}
+        */
 	}
 	
 	
