@@ -11,13 +11,21 @@ Shader "WB/FishShadow"
 		Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Transparent" "Queue" = "Transparent" }
 		Cull Back
 
+		Stencil
+		{
+			Ref 1
+			Comp NotEqual // 不相等
+			Pass replace//如果模板测试（和深度测试）通过，如何处理缓冲区的内容  替换模板缓冲区中的数据为1
+		}
+
 		Pass
 		{
 			Name "Shadow"
 			Tags { "LightMode" = "SRPDefaultUnlit"  "RenderType" = "Transparent" "Queue" = "Transparent" }
 			Blend SrcAlpha OneMinusSrcAlpha
+
 			ZWrite On
-			ZTest LEqual
+		    ZTest LEqual
 			Offset 0 , 0
 			ColorMask RGBA
 
