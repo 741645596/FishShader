@@ -96,6 +96,9 @@ Material:
     - _GlossMapScale: 0.85
     - _Glossiness: 0.59
     - _GlossyReflections: 1
+    - _HSVHue: 0.5
+    - _HSVSat: 1
+    - _HSVValue: 1
     - _HeightFog: 0
     - _HeightFogDensity: 1
     - _HeightFogEnd: 10
@@ -124,12 +127,14 @@ Material:
     - _RimLight: 1
     - _RimPower: 1
     - _RimSpread: 1.22
+    - _SPECULARHIGHLIGHTS: 1
     - _Shadow: 1
     - _ShadowOffsetToggle: 1
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpecularStrength: 1
     - _SrcBlend: 1
     - _Streamer: 0
     - _StreamerAlpha: 1
@@ -155,10 +160,11 @@ Material:
     - _HitRimOffset: {r: 0, g: 0, b: 0, a: 0}
     - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
     - _OverlayRimOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
     - _RimOffset: {r: 0.43, g: -0.16, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
     - _ShadowOffset: {r: 0.18, g: -0.6, b: 0, a: 0}
     - _StreamerColor: {r: 1, g: 1, b: 1, a: 1}
     - _TransColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0}
+    - _VeterxOff: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
