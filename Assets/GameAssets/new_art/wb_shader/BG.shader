@@ -11,7 +11,7 @@ Shader "WB/BG"
         _CausticsMap("CausticsMap", 2D) = "black" { }
         _CausticsMaskMap("CausticsMaskMap", 2D) = "white" { }
         _CausticsSpeed("CausticsSpeed", Float) = 0
-        _CausticsContrast("CausticsContrast", Range(0.5, 2)) = 1
+        _CausticsContrast("CausticsContrast", Range(0.8, 2)) = 1
         [HDR] _CausticsColor("CausticsColor", Color) = (1, 1, 1, 1)
 
     }

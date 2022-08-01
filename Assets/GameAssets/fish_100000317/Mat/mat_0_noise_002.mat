@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mat_0_noise_002
+  m_Shader: {fileID: 4800000, guid: 25bc2059e3295094cb15999bf42a8832, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 40ad186633cfb704ba38795ff6dfbd0a, type: 3}
+        m_Scale: {x: 1.07, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 40ad186633cfb704ba38795ff6dfbd0a, type: 3}
+        m_Scale: {x: 1.07, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 3d2a90ca81ebb4144b8f8b2e431e7500, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _mask_01:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _wenli:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaScale: 1
+    - _Cull: 2
+    - _DstBlend: 1
+    - _DstBlendRGB: 1
+    - _GlowScale: 1
+    - _SrcBlend: 5
+    - _SrcBlendRGB: 5
+    - _ZTest: 4
+    - _ZWriteMode: 0
+    - _colorliangdu: 1
+    m_Colors:
+    - _BaseColor: {r: 0.9529412, g: 0.783827, b: 0.26666668, a: 1}
+    - _BaseColorSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.9529412, g: 0.783827, b: 0.26666668, a: 1}
+    - _Color0: {r: 1, g: 0.73324776, b: 0.25, a: 1}
+    - _MaskSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _maskspeed: {r: 0, g: 10, b: 0, a: 0}
+    - _wenli_Tinling: {r: 1, g: 1, b: 1, a: 1}
+    - _wenlispeed: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -1,0 +1,4371 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &734072992476823003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5477023490976084737}
+  - component: {fileID: 4983172353124234239}
+  m_Layer: 0
+  m_Name: KylinSkillFootplant
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5477023490976084737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734072992476823003}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4983172353124234239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734072992476823003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 1, y: 2, z: 0}
+  - {x: 2, y: 1, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 28, y: 17, z: 0}
+  - {x: 16, y: 20, z: 0}
+  - {x: 27, y: -27, z: 0}
+  - {x: -16, y: 22, z: 0}
+  - {x: 27, y: -27, z: 0}
+  - {x: -16, y: 22, z: 0}
+  - {x: 14, y: 6, z: 0}
+  - {x: -20, y: -7, z: 0}
+  - {x: 15, y: 29, z: 0}
+  - {x: -9, y: -2, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 2, y: 2, z: 1.1}
+  - {x: 2.2, y: 2.2, z: 1.1}
+  - {x: 1, y: 1, z: 1.1}
+  - {x: 1.18, y: 1.18, z: 1.1}
+  - {x: 1.15, y: 1.15, z: 1.1}
+  - {x: 1.12, y: 1.12, z: 1.1}
+  - {x: 1.13, y: 1.13, z: 1.1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1.07, y: 1.07, z: 1.1}
+  - {x: 1.03, y: 1.03, z: 1.1}
+  - {x: 1.04, y: 1.04, z: 1.1}
+  - {x: 1, y: 1, z: 1.1}
+  ScaleDurationAndDelay:
+  - {x: 0.8, y: 0}
+  - {x: 0.7, y: 0}
+  - {x: 0.18, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.4, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &885731070217327122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1233350957186244165}
+  - component: {fileID: 7631624819355549700}
+  m_Layer: 0
+  m_Name: EleCrabSmall
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1233350957186244165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885731070217327122}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7631624819355549700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885731070217327122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: -5, y: -10, z: 0}
+  - {x: 4, y: -8, z: 0}
+  - {x: -8, y: -7, z: 0}
+  - {x: -5, y: -5, z: 0}
+  - {x: -4, y: 6, z: 0}
+  - {x: -8, y: -3, z: 0}
+  - {x: 6, y: 3, z: 0}
+  - {x: 2, y: -8, z: 0}
+  - {x: -5, y: 5, z: 0}
+  - {x: 1, y: -10, z: 0}
+  - {x: -4, y: 2, z: 0}
+  - {x: -4, y: 6, z: 0}
+  - {x: -2, y: 10, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: 9, y: 3, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: 8, y: 5, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &2478279412557787918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7584658693205860632}
+  m_Layer: 0
+  m_Name: Clips
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7584658693205860632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2478279412557787918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3719969226533828495}
+  - {fileID: 2305803943435900865}
+  - {fileID: 5994465734946713699}
+  - {fileID: 7122973300312054575}
+  - {fileID: 5779314032749016378}
+  - {fileID: 5384721304861109934}
+  - {fileID: 8240866305201226457}
+  - {fileID: 1233350957186244165}
+  - {fileID: 5608430011092763520}
+  - {fileID: 7147076068299196726}
+  - {fileID: 1172166603830860137}
+  - {fileID: 7165221353135580401}
+  - {fileID: 411768729183365027}
+  - {fileID: 3473149247854025380}
+  - {fileID: 5477023490976084737}
+  - {fileID: 142024979883668419}
+  - {fileID: 426932422206859171}
+  - {fileID: 1407713343929970093}
+  - {fileID: 462610865455346237}
+  m_Father: {fileID: 1829319744108564237}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2737815501361651053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3473149247854025380}
+  - component: {fileID: 3816144366554950380}
+  m_Layer: 0
+  m_Name: KylinSkillFire
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3473149247854025380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737815501361651053}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3816144366554950380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737815501361651053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 0, y: 1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: 0, y: 4, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: 1, y: 3, z: 0}
+  - {x: 4, y: 4, z: 0}
+  - {x: -5, y: 3, z: 0}
+  - {x: 0, y: -2, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 3, y: 5, z: 0}
+  - {x: -3, y: 4, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 4, y: -3, z: 0}
+  - {x: 2, y: 4, z: 0}
+  - {x: 0, y: -4, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: 5, y: 1, z: 0}
+  - {x: 5, y: -4, z: 0}
+  - {x: 2, y: -3, z: 0}
+  - {x: -2, y: 5, z: 0}
+  - {x: -4, y: 3, z: 0}
+  - {x: -6, y: 2, z: 0}
+  - {x: -2, y: -5, z: 0}
+  - {x: -5, y: -5, z: 0}
+  - {x: 3, y: 5, z: 0}
+  - {x: -3, y: 1, z: 0}
+  - {x: 3, y: -2, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: -2, y: -3, z: 0}
+  - {x: 28, y: -2, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 28, y: 1, z: 0}
+  - {x: 2, y: -1, z: 0}
+  - {x: 28, y: 0, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: 28, y: 0, z: 0}
+  - {x: -2, y: 1, z: 0}
+  - {x: 28, y: -1, z: 0}
+  - {x: -3, y: 1, z: 0}
+  - {x: 16, y: -2, z: 0}
+  - {x: 28, y: 0, z: 0}
+  - {x: 27, y: 1, z: 0}
+  - {x: -16, y: 1, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: -20, y: 1, z: 0}
+  - {x: 15, y: 0, z: 0}
+  - {x: -9, y: 1, z: 0}
+  - {x: 26, y: 0, z: 0}
+  - {x: -30, y: -1, z: 0}
+  - {x: -26, y: -2, z: 0}
+  - {x: -6, y: 2, z: 0}
+  - {x: 29, y: 2, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: -19, y: 1, z: 0}
+  - {x: -30, y: -2, z: 0}
+  - {x: 22, y: -1, z: 0}
+  - {x: -4, y: -2, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: -1, y: -1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.2, y: 1.2, z: 1.1}
+  - {x: 1.02, y: 1.02, z: 1.05}
+  - {x: 1.13, y: 1.13, z: 1.15}
+  - {x: 1.14, y: 1.14, z: 1.15}
+  - {x: 1.15, y: 1.15, z: 1.15}
+  - {x: 1.16, y: 1.16, z: 1.15}
+  - {x: 1.15, y: 1.15, z: 1.15}
+  - {x: 1.16, y: 1.16, z: 1.15}
+  - {x: 1.17, y: 1.17, z: 1.15}
+  - {x: 1.16, y: 1.16, z: 1.15}
+  - {x: 1.17, y: 1.17, z: 1.15}
+  - {x: 1.18, y: 1.18, z: 1.15}
+  - {x: 1.17, y: 1.17, z: 1.15}
+  - {x: 1.18, y: 1.18, z: 1.15}
+  - {x: 1.19, y: 1.19, z: 1.15}
+  - {x: 1.2, y: 1.2, z: 1.15}
+  - {x: 1.19, y: 1.19, z: 1.15}
+  - {x: 1.2, y: 1.2, z: 1.15}
+  - {x: 1.21, y: 1.21, z: 1.15}
+  - {x: 1.2, y: 1.2, z: 1.15}
+  - {x: 1.21, y: 1.21, z: 1.15}
+  - {x: 1.22, y: 1.22, z: 1.15}
+  - {x: 1.21, y: 1.21, z: 1.15}
+  - {x: 1.22, y: 1.22, z: 1.15}
+  - {x: 1.23, y: 1.23, z: 1.15}
+  - {x: 1.05, y: 1.05, z: 1.15}
+  - {x: 1, y: 1, z: 1.15}
+  ScaleDurationAndDelay:
+  - {x: 1, y: 0}
+  - {x: 0.6, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.4, y: 0}
+  - {x: 0.2, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &3049238902817573798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5608430011092763520}
+  - component: {fileID: 8812080491947027055}
+  m_Layer: 0
+  m_Name: EleCrabBig
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5608430011092763520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049238902817573798}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8812080491947027055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049238902817573798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 6, y: 6, z: 0}
+  - {x: 15, y: 1, z: 0}
+  - {x: -18, y: -1, z: 0}
+  - {x: 19, y: 20, z: 0}
+  - {x: 11, y: 15, z: 0}
+  - {x: 20, y: -19, z: 0}
+  - {x: 10, y: 18, z: 0}
+  - {x: -18, y: 16, z: 0}
+  - {x: -15, y: -17, z: 0}
+  - {x: -2, y: -6, z: 0}
+  - {x: 13, y: 19, z: 0}
+  - {x: 20, y: -16, z: 0}
+  - {x: -14, y: 18, z: 0}
+  - {x: -14, y: -13, z: 0}
+  - {x: 16, y: 8, z: 0}
+  - {x: -16, y: 11, z: 0}
+  - {x: 17, y: 10, z: 0}
+  - {x: 10, y: 7, z: 0}
+  - {x: -11, y: 2, z: 0}
+  - {x: -8, y: 8, z: 0}
+  - {x: -10, y: 5, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: -4, y: -2, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -5, y: 2, z: 0}
+  - {x: 1, y: 4, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &3572549771217437463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5779314032749016378}
+  - component: {fileID: 715095023116801356}
+  m_Layer: 0
+  m_Name: MIddleFish
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5779314032749016378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3572549771217437463}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715095023116801356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3572549771217437463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: -5, y: -10, z: 0}
+  - {x: 4, y: -8, z: 0}
+  - {x: -8, y: -7, z: 0}
+  - {x: -5, y: -5, z: 0}
+  - {x: -4, y: 6, z: 0}
+  - {x: -8, y: -3, z: 0}
+  - {x: 6, y: 3, z: 0}
+  - {x: 2, y: -8, z: 0}
+  - {x: -5, y: 5, z: 0}
+  - {x: 1, y: -10, z: 0}
+  - {x: -4, y: 2, z: 0}
+  - {x: -4, y: 6, z: 0}
+  - {x: -2, y: 10, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: 9, y: 3, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: 8, y: 5, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.02, y: 1.02, z: 1.05}
+  - {x: 1.02, y: 1.02, z: 1.05}
+  - {x: 1.01, y: 1.01, z: 1.05}
+  - {x: 1.01, y: 1.01, z: 1.05}
+  - {x: 1, y: 1, z: 1.05}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &3673173200337761994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142024979883668419}
+  - component: {fileID: 186811845094906915}
+  m_Layer: 0
+  m_Name: KylinSkillEruption
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &142024979883668419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673173200337761994}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &186811845094906915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673173200337761994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: -25, y: 13, z: 0}
+  - {x: -23, y: 21, z: 0}
+  - {x: 27, y: 7, z: 0}
+  - {x: 23, y: 4, z: 0}
+  - {x: 16, y: -22, z: 0}
+  - {x: 10, y: 13, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: 6, y: -7, z: 0}
+  - {x: 0, y: -8, z: 0}
+  - {x: -3, y: -2, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: -25, y: 13, z: 0}
+  - {x: -23, y: 21, z: 0}
+  - {x: 27, y: 7, z: 0}
+  - {x: 10, y: 13, z: 0}
+  - {x: 16, y: -22, z: 0}
+  - {x: 10, y: 13, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 4, y: -7, z: 0}
+  - {x: 0, y: -8, z: 0}
+  - {x: -3, y: -2, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: -25, y: 13, z: 0}
+  - {x: -23, y: 21, z: 0}
+  - {x: 27, y: 7, z: 0}
+  - {x: 23, y: 4, z: 0}
+  - {x: -23, y: -13, z: 0}
+  - {x: 10, y: 13, z: 0}
+  - {x: 4, y: -7, z: 0}
+  - {x: 0, y: -10, z: 0}
+  - {x: -3, y: -2, z: 0}
+  - {x: -6, y: -2, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.09, y: 1.09, z: 1.06}
+  - {x: 1.15, y: 1.15, z: 1.09}
+  - {x: 1.21, y: 1.21, z: 1.12}
+  - {x: 1.19, y: 1.19, z: 1.15}
+  - {x: 1.17, y: 1.17, z: 1.18}
+  - {x: 1.15, y: 1.15, z: 1.21}
+  - {x: 1.13, y: 1.13, z: 1.21}
+  - {x: 1.11, y: 1.11, z: 1.21}
+  - {x: 1.1, y: 1.1, z: 1.21}
+  - {x: 1, y: 1, z: 1.21}
+  - {x: 1.03, y: 1.03, z: 1.21}
+  - {x: 1.09, y: 1.09, z: 1.21}
+  - {x: 1.15, y: 1.15, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.19, y: 1.19, z: 1.21}
+  - {x: 1.17, y: 1.17, z: 1.21}
+  - {x: 1.15, y: 1.15, z: 1.21}
+  - {x: 1.13, y: 1.13, z: 1.21}
+  - {x: 1.11, y: 1.11, z: 1.21}
+  - {x: 1.1, y: 1.1, z: 1.21}
+  - {x: 1, y: 1, z: 1.21}
+  - {x: 1.03, y: 1.03, z: 1.21}
+  - {x: 1.09, y: 1.09, z: 1.21}
+  - {x: 1.15, y: 1.15, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.19}
+  - {x: 1.19, y: 1.19, z: 1.16}
+  - {x: 1.17, y: 1.17, z: 1.13}
+  - {x: 1.15, y: 1.15, z: 1.1}
+  - {x: 1.13, y: 1.13, z: 1.07}
+  - {x: 1.11, y: 1.11, z: 1.04}
+  - {x: 1.1, y: 1.1, z: 1.02}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &4012182116180682176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1829319744108564237}
+  - component: {fileID: 4086890378617220969}
+  m_Layer: 0
+  m_Name: ShakeSet
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1829319744108564237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012182116180682176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7584658693205860632}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4086890378617220969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012182116180682176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329c091d63444199080734119e4ad9eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationIndex: 650000006700000066000000720000007100000073000000740000007500000068000000770000007600000078000000790000007a0000007b0000007c0000007d0000007e000000
+  AnimationClip:
+  - {fileID: 7992478360556073755}
+  - {fileID: 715095023116801356}
+  - {fileID: 8098073821007631987}
+  - {fileID: 1265719178436640825}
+  - {fileID: 1706519289733181430}
+  - {fileID: 7631624819355549700}
+  - {fileID: 8812080491947027055}
+  - {fileID: 5630754000082033120}
+  - {fileID: 1924993194252105336}
+  - {fileID: 8733888714178250173}
+  - {fileID: 3843229131914843742}
+  - {fileID: 9143847146392257719}
+  - {fileID: 3816144366554950380}
+  - {fileID: 4983172353124234239}
+  - {fileID: 186811845094906915}
+  - {fileID: 6424477174100190155}
+  - {fileID: 8258382436004986974}
+  - {fileID: 8798508907578932922}
+  ShakeTarget: {fileID: 0}
+  TestId: 102
+  TestPlay: 0
+  TestStop: 0
+  AnimationCount: 0
+--- !u!1 &4378396708389931775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7147076068299196726}
+  - component: {fileID: 1924993194252105336}
+  m_Layer: 0
+  m_Name: CrabCollision
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7147076068299196726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378396708389931775}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1924993194252105336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378396708389931775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: -5, y: -10, z: 0}
+  - {x: 4, y: -8, z: 0}
+  - {x: -8, y: -7, z: 0}
+  - {x: -5, y: -5, z: 0}
+  - {x: -4, y: 6, z: 0}
+  - {x: -8, y: -3, z: 0}
+  - {x: 6, y: 3, z: 0}
+  - {x: 2, y: -8, z: 0}
+  - {x: -5, y: 5, z: 0}
+  - {x: 1, y: -10, z: 0}
+  - {x: -4, y: 2, z: 0}
+  - {x: -4, y: 6, z: 0}
+  - {x: -2, y: 10, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: 9, y: 3, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: 8, y: 5, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.05}
+  - {x: 1.02, y: 1.02, z: 1.05}
+  - {x: 1.02, y: 1.02, z: 1.05}
+  - {x: 1.01, y: 1.01, z: 1.05}
+  - {x: 1.01, y: 1.01, z: 1.05}
+  - {x: 1, y: 1, z: 1.05}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &4743888986655189387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 462610865455346237}
+  - component: {fileID: 8798508907578932922}
+  m_Layer: 0
+  m_Name: YuXiSkill2
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &462610865455346237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4743888986655189387}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8798508907578932922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4743888986655189387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 6, y: 6, z: 0}
+  - {x: 15, y: 1, z: 0}
+  - {x: -17, y: 13, z: 0}
+  - {x: -5, y: 4, z: 0}
+  - {x: 12, y: -15, z: 0}
+  - {x: 3, y: -17, z: 0}
+  - {x: -5, y: 8, z: 0}
+  - {x: 25, y: -18, z: 0}
+  - {x: 17, y: -19, z: 0}
+  - {x: 14, y: -7, z: 0}
+  - {x: 15, y: 19, z: 0}
+  - {x: 17, y: 19, z: 0}
+  - {x: -5, y: 9, z: 0}
+  - {x: 6, y: -25, z: 0}
+  - {x: 16, y: -12, z: 0}
+  - {x: 6, y: 6, z: 0}
+  - {x: 3, y: 25, z: 0}
+  - {x: -13, y: -18, z: 0}
+  - {x: 7, y: 22, z: 0}
+  - {x: -5, y: 17, z: 0}
+  - {x: -11, y: 14, z: 0}
+  - {x: -10, y: -17, z: 0}
+  - {x: 16, y: 24, z: 0}
+  - {x: 9, y: -20, z: 0}
+  - {x: 19, y: 9, z: 0}
+  - {x: 25, y: 18, z: 0}
+  - {x: -17, y: 22, z: 0}
+  - {x: -15, y: 24, z: 0}
+  - {x: 10, y: 13, z: 0}
+  - {x: 6, y: -15, z: 0}
+  - {x: -5, y: -25, z: 0}
+  - {x: -21, y: -8, z: 0}
+  - {x: 18, y: -5, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: -23, y: 16, z: 0}
+  - {x: -13, y: -15, z: 0}
+  - {x: 10, y: -1, z: 0}
+  - {x: 22, y: 12, z: 0}
+  - {x: -6, y: -17, z: 0}
+  - {x: 13, y: -5, z: 0}
+  - {x: 9, y: 12, z: 0}
+  - {x: -4, y: -7, z: 0}
+  - {x: 19, y: -16, z: 0}
+  - {x: -1, y: -16, z: 0}
+  - {x: -11, y: 21, z: 0}
+  - {x: -19, y: 0, z: 0}
+  - {x: 11, y: -19, z: 0}
+  - {x: -21, y: 25, z: 0}
+  - {x: 21, y: -6, z: 0}
+  - {x: 16, y: 23, z: 0}
+  - {x: 3, y: 23, z: 0}
+  - {x: -11, y: 10, z: 0}
+  - {x: -7, y: -11, z: 0}
+  - {x: 16, y: -15, z: 0}
+  - {x: 4, y: 25, z: 0}
+  - {x: -9, y: 9, z: 0}
+  - {x: 15, y: 17, z: 0}
+  - {x: 8, y: 2, z: 0}
+  - {x: 8, y: 18, z: 0}
+  - {x: 2, y: 15, z: 0}
+  - {x: 20, y: 21, z: 0}
+  - {x: -7, y: 10, z: 0}
+  - {x: 4, y: -17, z: 0}
+  - {x: 2, y: -11, z: 0}
+  - {x: -17, y: 4, z: 0}
+  - {x: -19, y: 13, z: 0}
+  - {x: -19, y: -18, z: 0}
+  - {x: -6, y: 1, z: 0}
+  - {x: 16, y: -16, z: 0}
+  - {x: -2, y: 3, z: 0}
+  - {x: 24, y: 7, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.01, y: 1.01, z: 1.1}
+  - {x: 1.02, y: 1.02, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.05, y: 1.05, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.3, y: 1.3, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 1.5, y: 0}
+  - {x: 0.2, y: 0}
+  - {x: 1.5, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &5037251591106908351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5994465734946713699}
+  - component: {fileID: 1265719178436640825}
+  m_Layer: 0
+  m_Name: BossFish
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5994465734946713699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037251591106908351}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265719178436640825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037251591106908351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: -25, y: 17, z: 0}
+  - {x: 23, y: -13, z: 0}
+  - {x: -19, y: -19, z: 0}
+  - {x: -18, y: 6, z: 0}
+  - {x: 34, y: -5, z: 0}
+  - {x: 27, y: -31, z: 0}
+  - {x: -29, y: -24, z: 0}
+  - {x: 35, y: 20, z: 0}
+  - {x: -25, y: -15, z: 0}
+  - {x: -19, y: 32, z: 0}
+  - {x: 25, y: -10, z: 0}
+  - {x: -25, y: -33, z: 0}
+  - {x: -23, y: 21, z: 0}
+  - {x: 27, y: 7, z: 0}
+  - {x: -34, y: -34, z: 0}
+  - {x: 33, y: -13, z: 0}
+  - {x: -28, y: 22, z: 0}
+  - {x: 3, y: 27, z: 0}
+  - {x: 6, y: -10, z: 0}
+  - {x: -24, y: -18, z: 0}
+  - {x: 14, y: -21, z: 0}
+  - {x: -23, y: 15, z: 0}
+  - {x: 24, y: 13, z: 0}
+  - {x: -6, y: -24, z: 0}
+  - {x: -2, y: -9, z: 0}
+  - {x: -8, y: 9, z: 0}
+  - {x: 0, y: -4, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: 4, y: -7, z: 0}
+  - {x: 0, y: -10, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: -6, y: -2, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: -2}
+  - {x: 0, y: 0, z: 3}
+  - {x: 0, y: 0, z: -3}
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: -4}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: -5}
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: -3}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  Scale:
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.09, y: 1.09, z: 1.09}
+  - {x: 1.12, y: 1.12, z: 1.12}
+  - {x: 1.15, y: 1.15, z: 1.15}
+  - {x: 1.18, y: 1.18, z: 1.18}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.21, y: 1.21, z: 1.21}
+  - {x: 1.19, y: 1.19, z: 1.19}
+  - {x: 1.16, y: 1.16, z: 1.16}
+  - {x: 1.13, y: 1.13, z: 1.13}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1.07, y: 1.07, z: 1.07}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &5387688872538481252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7165221353135580401}
+  - component: {fileID: 8733888714178250173}
+  m_Layer: 0
+  m_Name: FirePhoenixSmallBoom
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7165221353135580401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5387688872538481252}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8733888714178250173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5387688872538481252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 2, y: -2, z: 0}
+  - {x: -4, y: 3, z: 0}
+  - {x: 2, y: -4, z: 0}
+  - {x: -5, y: 5, z: 0}
+  - {x: -3, y: 1, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: -5, y: -5, z: 0}
+  - {x: -2, y: -1, z: 0}
+  - {x: 4, y: 3, z: 0}
+  - {x: -4, y: -5, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: -4, y: 4, z: 0}
+  - {x: -3, y: -3, z: 0}
+  - {x: 2, y: -3, z: 0}
+  - {x: 3, y: -2, z: 0}
+  - {x: -2, y: -2, z: 0}
+  - {x: 4, y: 1, z: 0}
+  - {x: 0, y: -5, z: 0}
+  - {x: -1, y: -1, z: 0}
+  - {x: -2, y: 4, z: 0}
+  - {x: -4, y: -1, z: 0}
+  - {x: -2, y: 2, z: 0}
+  - {x: 2, y: 1, z: 0}
+  - {x: 3, y: 2, z: 0}
+  - {x: 5, y: 4, z: 0}
+  - {x: 2, y: 5, z: 0}
+  - {x: -4, y: 3, z: 0}
+  - {x: -4, y: -2, z: 0}
+  - {x: -3, y: 4, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 4, y: 4, z: 0}
+  - {x: -4, y: -1, z: 0}
+  - {x: -2, y: -5, z: 0}
+  - {x: -5, y: -5, z: 0}
+  - {x: 3, y: 5, z: 0}
+  - {x: -3, y: 1, z: 0}
+  - {x: 3, y: -2, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: -2, y: -3, z: 0}
+  - {x: 5, y: -4, z: 0}
+  - {x: -3, y: 3, z: 0}
+  - {x: -2, y: 4, z: 0}
+  - {x: 2, y: -2, z: 0}
+  - {x: 2, y: -4, z: 0}
+  - {x: -1, y: -5, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: -2, y: 5, z: 0}
+  - {x: -3, y: -5, z: 0}
+  - {x: -3, y: 3, z: 0}
+  - {x: -1, y: 4, z: 0}
+  - {x: 0, y: -3, z: 0}
+  - {x: 4, y: 5, z: 0}
+  - {x: -2, y: -2, z: 0}
+  - {x: -4, y: -3, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 5, y: -1, z: 0}
+  - {x: -3, y: 2, z: 0}
+  - {x: 4, y: 4, z: 0}
+  - {x: -1, y: -3, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: -1, z: 0}
+  - {x: 4, y: -1, z: 0}
+  - {x: -2, y: -3, z: 0}
+  - {x: 0, y: -4, z: 0}
+  - {x: 5, y: -1, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: -1, y: 3, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: -1, y: -1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.03, y: 1.03, z: 1.1}
+  - {x: 1.04, y: 1.04, z: 1.05}
+  - {x: 1, y: 1, z: 1.15}
+  ScaleDurationAndDelay:
+  - {x: 0.05, y: 0}
+  - {x: 2.85, y: 0}
+  - {x: 0.05, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &5905154263046503753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7122973300312054575}
+  - component: {fileID: 8098073821007631987}
+  m_Layer: 0
+  m_Name: GoldFish
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7122973300312054575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5905154263046503753}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8098073821007631987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5905154263046503753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 6, y: 6, z: 0}
+  - {x: 15, y: 1, z: 0}
+  - {x: -18, y: -1, z: 0}
+  - {x: 19, y: 20, z: 0}
+  - {x: 11, y: 15, z: 0}
+  - {x: 20, y: -19, z: 0}
+  - {x: 10, y: 18, z: 0}
+  - {x: -18, y: 16, z: 0}
+  - {x: -15, y: -17, z: 0}
+  - {x: -2, y: -6, z: 0}
+  - {x: 13, y: 19, z: 0}
+  - {x: 20, y: -16, z: 0}
+  - {x: -14, y: 18, z: 0}
+  - {x: -14, y: -13, z: 0}
+  - {x: 16, y: 8, z: 0}
+  - {x: -16, y: 11, z: 0}
+  - {x: 17, y: 10, z: 0}
+  - {x: 10, y: 7, z: 0}
+  - {x: -11, y: 2, z: 0}
+  - {x: -8, y: 8, z: 0}
+  - {x: -10, y: 5, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: -4, y: -2, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -5, y: 2, z: 0}
+  - {x: 1, y: 4, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &5922551657361459043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2305803943435900865}
+  - component: {fileID: 1706519289733181430}
+  m_Layer: 0
+  m_Name: BossComming
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2305803943435900865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5922551657361459043}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1706519289733181430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5922551657361459043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 2, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: -4, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: -4, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: -5, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: -5, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  - {x: -7, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  - {x: -7, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  - {x: -8, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  - {x: -9, y: 0, z: 0}
+  - {x: 9, y: 0, z: 0}
+  - {x: -9, y: 0, z: 0}
+  - {x: 9, y: 0, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: -11, y: 0, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: -11, y: 0, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: -13, y: 0, z: 0}
+  - {x: 13, y: 0, z: 0}
+  - {x: -13, y: 0, z: 0}
+  - {x: 13, y: 0, z: 0}
+  - {x: -14, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: -14, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: -15, y: 0, z: 0}
+  - {x: 15, y: 0, z: 0}
+  - {x: -15, y: 0, z: 0}
+  - {x: 15, y: 0, z: 0}
+  - {x: -16, y: 0, z: 0}
+  - {x: 16, y: 0, z: 0}
+  - {x: -16, y: 0, z: 0}
+  - {x: 16, y: 0, z: 0}
+  - {x: -15, y: 0, z: 0}
+  - {x: 15, y: 0, z: 0}
+  - {x: -14, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: -13, y: 0, z: 0}
+  - {x: 13, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: -11, y: 0, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: -9, y: 0, z: 0}
+  - {x: 9, y: 0, z: 0}
+  - {x: -8, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  - {x: -7, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: -5, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: -4, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.15, y: 1.15, z: 1.15}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1.2, y: 1.2, z: 1.2}
+  - {x: 1.1, y: 1.1, z: 1.1}
+  - {x: 1.15, y: 1.15, z: 1.15}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 1.2, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &7017399611135911423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426932422206859171}
+  - component: {fileID: 6424477174100190155}
+  m_Layer: 0
+  m_Name: BigCrabComming
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &426932422206859171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017399611135911423}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6424477174100190155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017399611135911423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 0, y: 0, z: 0}
+  - {x: 15, y: 1, z: 0}
+  - {x: -18, y: -1, z: 0}
+  - {x: 19, y: 20, z: 0}
+  - {x: 11, y: 15, z: 0}
+  - {x: 20, y: -19, z: 0}
+  - {x: 10, y: 18, z: 0}
+  - {x: -18, y: 16, z: 0}
+  - {x: -15, y: -17, z: 0}
+  - {x: -2, y: -6, z: 0}
+  - {x: 13, y: 19, z: 0}
+  - {x: 20, y: -16, z: 0}
+  - {x: -14, y: 18, z: 0}
+  - {x: -14, y: -13, z: 0}
+  - {x: 16, y: 8, z: 0}
+  - {x: -16, y: 11, z: 0}
+  - {x: 17, y: 10, z: 0}
+  - {x: 10, y: 7, z: 0}
+  - {x: -11, y: 2, z: 0}
+  - {x: -8, y: 8, z: 0}
+  - {x: -10, y: 5, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: -4, y: -2, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -5, y: 2, z: 0}
+  - {x: 1, y: 4, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 6, y: 6, z: 0}
+  - {x: 15, y: 1, z: 0}
+  - {x: -18, y: -1, z: 0}
+  - {x: 19, y: 20, z: 0}
+  - {x: 11, y: 15, z: 0}
+  - {x: 20, y: -19, z: 0}
+  - {x: 10, y: 18, z: 0}
+  - {x: -18, y: 16, z: 0}
+  - {x: -15, y: -17, z: 0}
+  - {x: -2, y: -6, z: 0}
+  - {x: 13, y: 19, z: 0}
+  - {x: 20, y: -16, z: 0}
+  - {x: -14, y: 18, z: 0}
+  - {x: -13, y: -13, z: 0}
+  - {x: 16, y: 8, z: 0}
+  - {x: -16, y: 11, z: 0}
+  - {x: 17, y: 10, z: 0}
+  - {x: 10, y: 7, z: 0}
+  - {x: -11, y: 2, z: 0}
+  - {x: -8, y: 8, z: 0}
+  - {x: -10, y: 5, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: -4, y: -2, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -5, y: 2, z: 0}
+  - {x: 1, y: 4, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.7, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.6, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.03, y: 1.03, z: 1.03}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1.01, y: 1.01, z: 1.01}
+  - {x: 1, y: 1, z: 1}
+  - {x: 2, y: 2, z: 2}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.7, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.6, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.8, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &7100226981513040790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3719969226533828495}
+  - component: {fileID: 5630754000082033120}
+  m_Layer: 0
+  m_Name: CrabBomb
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3719969226533828495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100226981513040790}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5630754000082033120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100226981513040790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 6, y: 6, z: 0}
+  - {x: 15, y: 1, z: 0}
+  - {x: 1, y: -15, z: 0}
+  - {x: -8, y: -4, z: 0}
+  - {x: -21, y: 18, z: 0}
+  - {x: 10, y: 11, z: 0}
+  - {x: 20, y: -4, z: 0}
+  - {x: -1, y: 18, z: 0}
+  - {x: 12, y: 11, z: 0}
+  - {x: 7, y: -21, z: 0}
+  - {x: -12, y: 25, z: 0}
+  - {x: -8, y: -14, z: 0}
+  - {x: 6, y: -14, z: 0}
+  - {x: 21, y: -13, z: 0}
+  - {x: 7, y: 17, z: 0}
+  - {x: 12, y: -24, z: 0}
+  - {x: 14, y: 25, z: 0}
+  - {x: -1, y: 20, z: 0}
+  - {x: -23, y: -25, z: 0}
+  - {x: -13, y: -19, z: 0}
+  - {x: -9, y: 9, z: 0}
+  - {x: -18, y: -24, z: 0}
+  - {x: -13, y: 19, z: 0}
+  - {x: -11, y: 25, z: 0}
+  - {x: 15, y: 15, z: 0}
+  - {x: -1, y: 6, z: 0}
+  - {x: 10, y: 7, z: 0}
+  - {x: -3, y: -7, z: 0}
+  - {x: 3, y: 7, z: 0}
+  - {x: 6, y: -5, z: 0}
+  - {x: 4, y: 2, z: 0}
+  - {x: 6, y: -5, z: 0}
+  - {x: -2, y: -5, z: 0}
+  - {x: -2, y: 5, z: 0}
+  - {x: 6, y: 1, z: 0}
+  - {x: 4, y: -1, z: 0}
+  - {x: -2, y: 3, z: 0}
+  - {x: 3, y: 1, z: 0}
+  - {x: -2, y: -1, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.06, y: 1.06, z: 1.06}
+  - {x: 1.04, y: 1.04, z: 1.04}
+  - {x: 1.02, y: 1.02, z: 1.02}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.1, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &7215585345464932335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8240866305201226457}
+  - component: {fileID: 7992478360556073755}
+  m_Layer: 0
+  m_Name: Animationbeifen
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8240866305201226457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7215585345464932335}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7992478360556073755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7215585345464932335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 30, y: -20, z: 0}
+  - {x: -17, y: 15, z: 0}
+  - {x: -39, y: 22, z: 0}
+  - {x: 34, y: -29, z: 0}
+  - {x: -33, y: 10, z: 0}
+  - {x: 39, y: 33, z: 0}
+  - {x: -27, y: -21, z: 0}
+  - {x: -31, y: 22, z: 0}
+  - {x: 33, y: -24, z: 0}
+  - {x: -7, y: -26, z: 0}
+  - {x: -19, y: 18, z: 0}
+  - {x: -17, y: -15, z: 0}
+  - {x: 18, y: 24, z: 0}
+  - {x: 27, y: -21, z: 0}
+  - {x: -19, y: -15, z: 0}
+  - {x: -23, y: 22, z: 0}
+  - {x: 24, y: -14, z: 0}
+  - {x: 20, y: 12, z: 0}
+  - {x: -19, y: -21, z: 0}
+  - {x: -23, y: 22, z: 0}
+  - {x: 23, y: -13, z: 0}
+  - {x: 25, y: -15, z: 0}
+  - {x: -23, y: 18, z: 0}
+  - {x: 14, y: 11, z: 0}
+  - {x: -3, y: -7, z: 0}
+  - {x: 9, y: 6, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1.05, y: 1.05, z: 1.05}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.05, y: 0}
+  - {x: 0.01, y: 0}
+  - {x: 0.01, y: 0}
+  - {x: 0.01, y: 0}
+  - {x: 0.01, y: 0}
+  - {x: 0.01, y: 0}
+  - {x: 0.5, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &7755709284632520516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172166603830860137}
+  - component: {fileID: 3843229131914843742}
+  m_Layer: 0
+  m_Name: FirePhoenixComming
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172166603830860137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755709284632520516}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3843229131914843742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755709284632520516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 2, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: -4, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: -4, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: -5, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: -5, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  - {x: -7, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  - {x: -7, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  - {x: -8, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  - {x: -9, y: 0, z: 0}
+  - {x: 9, y: 0, z: 0}
+  - {x: -9, y: 0, z: 0}
+  - {x: 9, y: 0, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: -11, y: 0, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: -11, y: 0, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: -13, y: 0, z: 0}
+  - {x: 13, y: 0, z: 0}
+  - {x: -13, y: 0, z: 0}
+  - {x: 13, y: 0, z: 0}
+  - {x: -14, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: -14, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: -15, y: 0, z: 0}
+  - {x: 15, y: 0, z: 0}
+  - {x: -15, y: 0, z: 0}
+  - {x: 15, y: 0, z: 0}
+  - {x: -16, y: 0, z: 0}
+  - {x: 16, y: 0, z: 0}
+  - {x: -16, y: 0, z: 0}
+  - {x: 16, y: 0, z: 0}
+  - {x: -15, y: 0, z: 0}
+  - {x: 15, y: 0, z: 0}
+  - {x: -14, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: -13, y: 0, z: 0}
+  - {x: 13, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: -11, y: 0, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: -9, y: 0, z: 0}
+  - {x: 9, y: 0, z: 0}
+  - {x: -8, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  - {x: -7, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: -5, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: -4, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  - {x: 0.07, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.2, y: 1.2, z: 1.1}
+  - {x: 1.1, y: 1.1, z: 1.05}
+  - {x: 1.4, y: 1.4, z: 1.15}
+  - {x: 1.3, y: 1.3, z: 1.1}
+  - {x: 1.6, y: 1.6, z: 1.2}
+  - {x: 1.3, y: 1.3, z: 1.1}
+  - {x: 1.4, y: 1.4, z: 1.15}
+  - {x: 1.2, y: 1.2, z: 1}
+  - {x: 7, y: 7, z: 1}
+  - {x: 1.3, y: 1.3, z: 1}
+  - {x: 1.4, y: 1.4, z: 1}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.3, y: 0}
+  - {x: 0.3, y: 0}
+  - {x: 0.3, y: 0}
+  - {x: 0.3, y: 0}
+  - {x: 0.3, y: 0}
+  - {x: 0.3, y: 0}
+  - {x: 0.3, y: 0}
+  - {x: 0.2, y: 0}
+  - {x: 0.1, y: 0}
+  - {x: 0.55, y: 0}
+  - {x: 1.7, y: 0}
+  - {x: 0.25, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &8074634373948394572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1407713343929970093}
+  - component: {fileID: 8258382436004986974}
+  m_Layer: 0
+  m_Name: YuXiSkill
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1407713343929970093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074634373948394572}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8258382436004986974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074634373948394572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.4, y: 1.4, z: 1.4}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 0.7, y: 0}
+  - {x: 0.7, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &8555099473005626833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411768729183365027}
+  - component: {fileID: 9143847146392257719}
+  m_Layer: 0
+  m_Name: FirePhoenixBigBoom
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &411768729183365027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8555099473005626833}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9143847146392257719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8555099473005626833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 6, y: 6, z: 0}
+  - {x: 15, y: 1, z: 0}
+  - {x: -18, y: -1, z: 0}
+  - {x: 19, y: 20, z: 0}
+  - {x: 11, y: 15, z: 0}
+  - {x: 20, y: -19, z: 0}
+  - {x: 10, y: 18, z: 0}
+  - {x: -18, y: 16, z: 0}
+  - {x: -15, y: -17, z: 0}
+  - {x: -2, y: -6, z: 0}
+  - {x: 13, y: 19, z: 0}
+  - {x: 20, y: -16, z: 0}
+  - {x: 23, y: 12, z: 0}
+  - {x: 12, y: 21, z: 0}
+  - {x: -12, y: -14, z: 0}
+  - {x: 13, y: -18, z: 0}
+  - {x: 22, y: -6, z: 0}
+  - {x: 18, y: 1, z: 0}
+  - {x: 23, y: 6, z: 0}
+  - {x: 18, y: 25, z: 0}
+  - {x: 23, y: 6, z: 0}
+  - {x: -23, y: 21, z: 0}
+  - {x: 16, y: 24, z: 0}
+  - {x: -27, y: 27, z: 0}
+  - {x: -20, y: -12, z: 0}
+  - {x: 18, y: -8, z: 0}
+  - {x: 0, y: 23, z: 0}
+  - {x: 2, y: 5, z: 0}
+  - {x: -22, y: 15, z: 0}
+  - {x: 28, y: -9, z: 0}
+  - {x: 5, y: -27, z: 0}
+  - {x: 21, y: 20, z: 0}
+  - {x: 7, y: -14, z: 0}
+  - {x: -4, y: 3, z: 0}
+  - {x: -6, y: 26, z: 0}
+  - {x: -2, y: -5, z: 0}
+  - {x: -5, y: -5, z: 0}
+  - {x: 3, y: 5, z: 0}
+  - {x: -3, y: 1, z: 0}
+  - {x: 3, y: -2, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: -2, y: -3, z: 0}
+  - {x: 5, y: -4, z: 0}
+  - {x: -3, y: 3, z: 0}
+  - {x: -2, y: 4, z: 0}
+  - {x: 2, y: -2, z: 0}
+  - {x: 2, y: -4, z: 0}
+  - {x: -1, y: -5, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: -2, y: 5, z: 0}
+  - {x: -3, y: -5, z: 0}
+  - {x: -3, y: 3, z: 0}
+  - {x: -1, y: 4, z: 0}
+  - {x: 0, y: -3, z: 0}
+  - {x: 4, y: 5, z: 0}
+  - {x: -2, y: -2, z: 0}
+  - {x: -4, y: -3, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 5, y: -1, z: 0}
+  - {x: -3, y: 2, z: 0}
+  - {x: 4, y: 4, z: 0}
+  - {x: -1, y: -3, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: -1, z: 0}
+  - {x: 4, y: -1, z: 0}
+  - {x: -2, y: -3, z: 0}
+  - {x: 0, y: -4, z: 0}
+  - {x: 5, y: -1, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: -1, y: 3, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: -1, y: -1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  Scale:
+  - {x: 1.01, y: 1.01, z: 1.1}
+  - {x: 1.02, y: 1.02, z: 1.05}
+  - {x: 1.03, y: 1.03, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.05, y: 1.05, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.05, y: 1.05, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.05, y: 1.05, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.05, y: 1.05, z: 1.15}
+  - {x: 1.06, y: 1.06, z: 1.15}
+  - {x: 1.05, y: 1.05, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.03, y: 1.03, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1.04, y: 1.04, z: 1.15}
+  - {x: 1, y: 1, z: 1.15}
+  ScaleDurationAndDelay:
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 0.04, y: 0}
+  - {x: 2, y: 0}
+  - {x: 0.04, y: 0}
+  RepeatAnimationOfAll: 1
+--- !u!1 &8559046703900855193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5384721304861109934}
+  - component: {fileID: 68909056492045136}
+  m_Layer: 0
+  m_Name: AnimationShakeTest (1)
+  m_TagString: 
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5384721304861109934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559046703900855193}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7584658693205860632}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &68909056492045136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559046703900855193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d33d271b77c641658528a1081c21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Position:
+  - {x: 100, y: 100, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 100, y: 100, z: 0}
+  - {x: 0, y: 0, z: 0}
+  PositionDurationAndDelay:
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  Euler:
+  - {x: 0, y: 0, z: 20}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 20}
+  - {x: 0, y: 0, z: 0}
+  EulerDurationAndDelay:
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  Scale:
+  - {x: 1.5, y: 1.5, z: 0}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.5, y: 1.5, z: 0}
+  - {x: 1, y: 1, z: 1}
+  ScaleDurationAndDelay:
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  - {x: 4, y: 0}
+  RepeatAnimationOfAll: 5

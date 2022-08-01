@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Wenli015_b001
+  m_Shader: {fileID: 4800000, guid: 898677ac66fbb244ca8d32e666caa010, type: 3}
+  m_ShaderKeywords: _ALPHADIS_ON _ALPHATEST_ON _MULTSECONDTEX_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 4967e7485d9c84944a07b57ff3536474, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 2800000, guid: 5c439a5c5d73e6443a148d66c1003d66, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 4967e7485d9c84944a07b57ff3536474, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 5c439a5c5d73e6443a148d66c1003d66, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaScale: 1
+    - _Cull: 0
+    - _DstBlend: 10
+    - _Flow_Intensity: 1
+    - _GlowScale: 3
+    - _R_Intensity: 1
+    - _Rate: 2
+    - _SrcBlend: 5
+    - _ZTest: 4
+    - _ZWriteMode: 1
+    - __dirty: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColorSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _FlowColor: {r: 126.50718, g: 52.32496, b: 4.636389, a: 1}
+    - _FlowSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _Flow_Colpr: {r: 1, g: 1, b: 1, a: 1}
+    - _G_UV_Tiling: {r: 0, g: 0, b: 0, a: 0}
+    - _G_Uv_SpeeD: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _R_ColoR: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

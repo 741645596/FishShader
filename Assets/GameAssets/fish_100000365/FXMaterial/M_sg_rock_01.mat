@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_sg_rock_01
+  m_Shader: {fileID: 4800000, guid: ffbfc2a593556f24fa04a361eb991d01, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: d1b48679442a8184b81fd1ffd2a409b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: d1b48679442a8184b81fd1ffd2a409b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseMapTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaMask: 0
+    - _AlphaScale: 1
+    - _Cull: 0
+    - _CullMode: 0
+    - _DiffuseAlpha: 2.34
+    - _DiffuseUV2_XY: 0
+    - _DiffuseUV3_XY: 0
+    - _DissolveEdge: 0
+    - _DissolveEdgeIntensity: 1
+    - _DissolveEdgeWidth: 1
+    - _DissolveHardness: 0.5
+    - _DissolveMap: 0
+    - _DissolveSoft: 0
+    - _DissolveTexRotator: 0
+    - _DissolveTexSpeedX: 0
+    - _DissolveTexSpeedY: 0
+    - _DissolveUV2_Z: 0
+    - _Dst: 10
+    - _DstBlendRGB: 8
+    - _GlowScale: 1
+    - _MainTexRotator: 0
+    - _MainTexSpeedX: 0
+    - _MainTexSpeedY: 0
+    - _MaskTexRotateSpeed: 0
+    - _MaskTexRotator: 0
+    - _MaskTexSpeedX: 0
+    - _MaskTexSpeedY: 0
+    - _NoiseAniSpeedX: 0
+    - _NoiseAniSpeedY: 0
+    - _NoiseMap: 0
+    - _NoiseStrength: 0.1
+    - _NoiseTexRotator: 0
+    - _NoiseTexRotatorSpeed: 0
+    - _PolarCoordinates: 0
+    - _Src: 5
+    - _SrcBlendRGB: 5
+    - _StencilCompare: 0
+    - _StencilOption: 2
+    - _StencilRefrence: 1
+    - _Timescale: 1
+    - _VERTEXUV2_W_UV2_W: 0
+    - _VertexAni: 0
+    - _VertexAniIntensity: 0
+    - _VertexAniSpeed: 8
+    - _ZTest: 4
+    - _ZTestMode: 2
+    - _ZWrite: 0
+    - _Zwrite: 0
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DiffuseColor: {r: 4.9245777, g: 4.9245777, b: 4.9245777, a: 1}
+    - _DissolveEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

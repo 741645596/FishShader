@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: vfx_xy_zh002
+  m_Shader: {fileID: 4800000, guid: d231506411c0cec488d50923a445e2f9, type: 3}
+  m_ShaderKeywords: USE_CUTOUT_TEX _USEDISSOLVE_ON _USEHARDEDGE_ON _USEMASK_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: e6d11d944410e8c4a9e3aed6378f5668, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CutoutTex:
+        m_Texture: {fileID: 2800000, guid: e9656a34303de634c9d727970d3e820c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaScale: 1
+    - _Cull: 2
+    - _CutOut: 0.1
+    - _CutoutThreshold: 0
+    - _DstBlend: 1
+    - _GlowScale: 1
+    - _SrcBlend: 5
+    - _UseCutoutTex: 1
+    - _UseParticlesAlphaCutout: 0.11
+    - _UseSoftCutout: 0.5
+    - _ZTest: 2
+    - _ZWriteMode: 0
+    m_Colors:
+    - _BaseColor: {r: 0.47531584, g: 2.5833313, b: 2.6701567, a: 1}
+    - _CutoutColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

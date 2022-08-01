@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 183658v0l6lm3dy35lmrre
+  m_Shader: {fileID: 4800000, guid: 898677ac66fbb244ca8d32e666caa010, type: 3}
+  m_ShaderKeywords: _EMISSION_ON _PANNER_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 30b47e14d6a65d44dab46aa52e40402f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 2800000, guid: bd183f89369e2dc42aa2edad907f3ba9, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 2800000, guid: bd183f89369e2dc42aa2edad907f3ba9, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 30b47e14d6a65d44dab46aa52e40402f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaScale: 1
+    - _BlendModeDst: 10
+    - _BlendModeSrc: 5
+    - _BlendTemp: 0
+    - _Clip_On: 0
+    - _ColorMask: 15
+    - _Cull: 0
+    - _CullMode: 0
+    - _DissolveFactor: 0.5
+    - _DissolveMode: 0
+    - _DissolveTex_PannerSpeedU: 0
+    - _DissolveTex_PannerSpeedV: 0
+    - _DissolveWidth: 0.1
+    - _DstBlend: 10
+    - _EmissionTex_PannerSpeedU: 0.5
+    - _EmissionTex_PannerSpeedV: 0
+    - _Emission_On: 1
+    - _FresnelMode: 0
+    - _FresnelWidth: 0.5
+    - _GlowScale: 1
+    - _HardnessFactor: 0.9
+    - _IsUIShader: 0
+    - _MainTexAlpha: 0
+    - _MainTex_PannerSpeedU: 0
+    - _MainTex_PannerSpeedV: 0
+    - _MaskTexAlpha: 1
+    - _MaskTex_PannerSpeedU: 0
+    - _MaskTex_PannerSpeedV: 0
+    - _Mask_ON: 0
+    - _NoiseIntensity: 0.5
+    - _NoiseTex_PannerSpeedU: 0
+    - _NoiseTex_PannerSpeedV: 0
+    - _Noise_On: 0
+    - _Panner_On: 1
+    - _ParticleMode: 0
+    - _ReverseDissolve: 0
+    - _SrcBlend: 5
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteMode: 0
+    m_Colors:
+    - _BaseColor: {r: 5.2164755, g: 1.747929, b: 0.43698224, a: 1}
+    - _EmissionColor: {r: 4, g: 4, b: 4, a: 1}
+    - _FlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowSpeed: {r: 0.5, g: 0, b: 0, a: 0}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 6.498019, g: 2.1660066, b: 0.53513104, a: 1}
+    - _WidthColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

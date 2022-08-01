@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mat_noise143_1014_2
+  m_Shader: {fileID: 4800000, guid: be3a59a0ab774574a9ba1ab91faf0160, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 0.5, y: 1}
+        m_Offset: {x: 0, y: 0.79}
+    - _mask_01:
+        m_Texture: {fileID: 2800000, guid: efd31964fe5b13e49b273e90dc31f2e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _wenli:
+        m_Texture: {fileID: 2800000, guid: 202885ac9fd62684c85364000f3f315d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Brightness: 2
+    - _BumpScale: 1
+    - _ColorMaskTex: 0
+    - _Cutoff: 0.5
+    - _DestBlend: 10.58
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Level: 1
+    - _MMultiplier: 3
+    - _MainTex1_Wrap: 0
+    - _MainTex2_Wrap: 0
+    - _MainTex_Wrap: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _RefractionIntensity: 1
+    - _Scroll2X: 0
+    - _Scroll2Y: 0
+    - _ScrollX: -25
+    - _ScrollY: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 5
+    - _UVSec: 0
+    - _ZWrite: 1
+    - _colorliangdu: 1
+    m_Colors:
+    - _Color: {r: 0.9056604, g: 0.3197454, b: 0.04699182, a: 1}
+    - _Color0: {r: 4.237095, g: 2.5289466, b: 0.35493988, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 0.5}
+    - _UVXX: {r: 0.28, g: 1, b: 1, a: 1}
+    - _maskspeed: {r: 0, g: 0, b: 0, a: 0}
+    - _wenli_Tinling: {r: 0.62, g: 1, b: 0, a: 0}
+    - _wenlispeed: {r: -1, g: 0, b: 0, a: 0}

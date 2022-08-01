@@ -117,7 +117,7 @@ Shader "FX/Bing" {
 				float2 uv = IN.uv;
 
 			
-				float2 uvMainLoop = TRANSFORM_TEX(uv, _MainTex) + float2(_MainTexSpeed_U, _MainTexSpeed_V) * _Time.g * 0.1f ;
+				float2 uvMainLoop = TRANSFORM_TEX(uv, _MainTex) + float2(_MainTexSpeed_U, _MainTexSpeed_V) * _Time.g ;
 
 				
 

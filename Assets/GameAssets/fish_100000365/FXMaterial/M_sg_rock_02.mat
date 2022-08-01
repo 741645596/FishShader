@@ -1,0 +1,189 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_sg_rock_02
+  m_Shader: {fileID: 4800000, guid: 898677ac66fbb244ca8d32e666caa010, type: 3}
+  m_ShaderKeywords: USE_FRESNEL USE_FRESNEL_FADING _BLENDMODE_ADD _DissolveEdge_ON
+    _DissolveMap_ON _NoiseMap_ON _ZWRITE_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 4eb213bbe4a6939458f83ea0a3e7347a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CutoutTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 2800000, guid: 4eb213bbe4a6939458f83ea0a3e7347a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 0.5, y: 0.1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseMapTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UVNoiseTex:
+        m_Texture: {fileID: 2800000, guid: 4eb213bbe4a6939458f83ea0a3e7347a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaMask: 0
+    - _AlphaMinus: 0
+    - _AlphaScale: 1.5
+    - _BlendMode: 0
+    - _BumpScale: 1
+    - _Cull: 2
+    - _CullMode: 0
+    - _CutOut: 0
+    - _Cutoff: 0.5
+    - _CutoutThreshold: 0.14
+    - _DetailNormalMapScale: 1
+    - _DiffuseAlpha: 1
+    - _DiffuseUV2_XY: 0
+    - _DiffuseUV3_XY: 0
+    - _DissolveEdge: 1
+    - _DissolveEdgeWidth: 1.2
+    - _DissolveHardness: -0.464
+    - _DissolveMap: 1
+    - _DissolveSoft: 0
+    - _DissolveTexRotator: 0
+    - _DissolveTexSpeedX: 0
+    - _DissolveTexSpeedY: 0
+    - _DissolveUV2_Z: 0
+    - _DistortionBlend: 9.2
+    - _DistortionStrengthScaled: 2.65
+    - _Dst: 10
+    - _DstBlend: 0
+    - _DstBlendRGB: 8
+    - _FresnelFadeFactor: 1.79
+    - _FresnelPow: 12.27
+    - _FresnelR0: 0.03
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _GlowScale: 1.44
+    - _Height: 0.1
+    - _InvFade: 1
+    - _MainTexRotator: 0
+    - _MainTexSpeedX: 0
+    - _MainTexSpeedY: 0
+    - _MaskTexRotateSpeed: 0
+    - _MaskTexRotator: 0
+    - _MaskTexSpeedX: 0
+    - _MaskTexSpeedY: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _NoiseAniSpeedX: 0.3
+    - _NoiseAniSpeedY: 0
+    - _NoiseMap: 1
+    - _NoiseStrength: 0.1
+    - _NoiseTexRotator: 0
+    - _NoiseTexRotatorSpeed: 0
+    - _OcclusionStrength: 1
+    - _OuterEdgeIntensity: 0
+    - _Parallax: 0.02
+    - _PolarCoordinates: 0
+    - _SmoothnessTextureChannel: 0
+    - _SoftOn: 0
+    - _SpecularHighlights: 1
+    - _Src: 5
+    - _SrcBlend: 1
+    - _SrcBlendRGB: 5
+    - _StencilCompare: 0
+    - _StencilRefrence: 1
+    - _SystemAlpha: 1
+    - _Timescale: 1
+    - _TransitionRange: 1
+    - _UVDistortion: 1
+    - _UVSec: 0
+    - _UseCutoutTex: 0
+    - _UseFresnel: 1
+    - _UseFresnelFading: 1
+    - _UseParticlesAlphaCutout: -4.8
+    - _UseSoftCutout: 0
+    - _VERTEXUV2_W_UV2_W: 0
+    - _VertexAni: 0
+    - _VertexAniIntensity: 0
+    - _VertexAniSpeed: 8
+    - _ZTest: 2
+    - _ZTestMode: 2
+    - _ZWrite: 1
+    - _ZWriteMode: 1
+    - _Zwrite: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColorSpeed: {r: 1, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _CutoutColor: {r: 0.9528302, g: 0.112362035, b: 0.112362035, a: 1}
+    - _DiffuseColor: {r: 3.478208, g: 1.6764815, b: 1.6242574, a: 1}
+    - _DissolveInnerEdgeColor: {r: 1, g: 0, b: 0, a: 1}
+    - _DissolveOuterEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _FresnelColor: {r: 0.6792453, g: 0.0032039948, b: 0.0032039948, a: 1}
+    - _MaskSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _NoiseScroll: {r: 0, g: -0.98, b: 1, a: 1}
+  m_BuildTextureStacks: []

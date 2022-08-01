@@ -2,16 +2,16 @@ Shader "WB/FishShadow"
 {
 	Properties
 	{
-		_VeterxOff("_VeterxOff[xyz offset]", Vector) = (0, 0, 0, 0)
-		_ShadowColor("ShadowColor", Color) = (0.3, 0.3, 0.3, 0.3)
+		_VeterxOff("_VeterxOff[xyz offset]", Vector) = (1, 1, 1, 0)
+		_ShadowColor("ShadowColor", Color) = (0.25, 0.25, 0.25, 0.6)
 	}
 
 	SubShader
 	{
-		Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Transparent" "Queue" = "Transparent" }
+		Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Transparent" "Queue" = "Transparent-250" }
 		Cull Back
 
-		Stencil
+		Stencil  // 加入模板缓冲，解决显示内部纹理纹路异常
 		{
 			Ref 1
 			Comp NotEqual // 不相等
@@ -23,9 +23,8 @@ Shader "WB/FishShadow"
 			Name "Shadow"
 			Tags { "LightMode" = "SRPDefaultUnlit"  "RenderType" = "Transparent" "Queue" = "Transparent" }
 			Blend SrcAlpha OneMinusSrcAlpha
-
 			ZWrite On
-		    ZTest LEqual
+			ZTest LEqual
 			Offset 0 , 0
 			ColorMask RGBA
 

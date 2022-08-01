@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_bbgs_bs_star_2
+  m_Shader: {fileID: 4800000, guid: ffbfc2a593556f24fa04a361eb991d01, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 8bb4d9a2be0f25647bc7ab7da092db38, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UVNoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaScale: 1
+    - _Cull: 0
+    - _CustomUV: 1
+    - _DstBlend: 1
+    - _DstBlendRGB: 1
+    - _GlowScale: 1
+    - _InvFade: 1
+    - _SoftOn: 0
+    - _SrcBlend: 5
+    - _SrcBlendRGB: 5
+    - _UVDistortion: 0
+    - _ZTest: 4
+    - _ZWriteMode: 0
+    m_Colors:
+    - _BaseColor: {r: 1, g: 0.675417, b: 0.41037738, a: 1}
+    - _BaseColorSpeed: {r: 0, g: 0, b: -0.83, a: 0}
+    - _MainSpeed: {r: 0, g: 0, b: -0.8, a: 0}
+    - _MaskSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _UVScrollDir: {r: 0, g: 0, b: 1, a: 1}
+--- !u!114 &1454956376670613071
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
