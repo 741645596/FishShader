@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX415
+  m_Shader: {fileID: 4800000, guid: 28564ad08d997f44abd4784eaad9074b, type: 3}
+  m_ShaderKeywords: _HITCOLORCHANNEL_RIM
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _2DCube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: a471905d751c5a7478612d0448bf945c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BlendTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: e90fea35113a63a42a01247419a62589, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a471905d751c5a7478612d0448bf945c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecCube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMask1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMask2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMatCap1:
+        m_Texture: {fileID: 2800000, guid: dd4698ddf47c90b4fbca73c9499afeca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMatCap2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMatCapRim:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexTransparency:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _2DCubeInt: 0
+    - _AlbedoIntensity: 1.7
+    - _AlphaClip: 0
+    - _AlphaClipThreshold: 0
+    - _BaseInt: 1
+    - _Blend: 0
+    - _BlendStrength: 0
+    - _BlendSwitch: 1
+    - _BumpScale: 1
+    - _CubeMap: 1
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DstBlend: 0
+    - _DstBlendRGB: 0
+    - _EffectShinness: 0.5
+    - _Emission: 2
+    - _EmissionScale: 0
+    - _EnableMatCap1: 1
+    - _EnableMetal: 0
+    - _EnableRim: 1
+    - _EnableRoughnessMask1: 0
+    - _EnableRoughnessMask2: 0
+    - _EnableTransparencyMap: 0
+    - _EnvScale: 1
+    - _EnvironmentReflections: 1
+    - _FishAlpha: 1
+    - _FlowIn: 0
+    - _FlowLe: 0
+    - _FlowMap: 0
+    - _FlowSpeed: 0.1
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _HitColorChannel: 0
+    - _HitColorInt: 1
+    - _HitColorValue: 0
+    - _HitColorWeight: 0
+    - _HitMultiple: 1
+    - _HitRimPower: 0.1
+    - _HitRimSpread: 0.1
+    - _HurtMultiple: 1
+    - _HurtMultipleCust: 0.45
+    - _HurtName: 1
+    - _IsHurt: 0
+    - _LightInt: 1.95
+    - _MatCapFix1: 0
+    - _MatCapFix2: 0
+    - _Metallic: 0
+    - _NormalMap: 1
+    - _NormalStr: 1.53
+    - _NumberScale: 1
+    - _OcclusionStrength: 1
+    - _OverlayMultiple: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _RimStr: 0.42
+    - _Roughness: 0.915
+    - _Roughness1: 0
+    - _Roughness2: 0
+    - _Smoothness: 0.055
+    - _SmoothnessTextureChannel: 0
+    - _SpecCubeInt: 0.73
+    - _SpecInt: 0.501
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SrcBlendRGB: 1
+    - _Surface: 0
+    - _TestHitColor: 0
+    - _Transparency: 1
+    - _UseVertexNormal: 0
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    - _ZWriteMode: 1
+    m_Colors:
+    - _BaseColor: {r: 0.588, g: 0.588, b: 0.588, a: 1}
+    - _Color: {r: 0.588, g: 0.588, b: 0.588, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlowColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _HitColor: {r: 0.8156863, g: 0.9843137, b: 1, a: 1}
+    - _HurtColor: {r: 1, g: 0, b: 0, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LightVec: {r: 0, g: 1, b: 0, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.6564169, g: 0.81617504, b: 0.9339623, a: 0}
+    - _SpecColor: {r: 0.5481933, g: 0.87261957, b: 0.9150943, a: 1}
+  m_BuildTextureStacks: []
+--- !u!114 &7252625838399325442
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2

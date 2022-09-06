@@ -1,0 +1,728 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+using UnityEditor.IMGUI.Controls;
+using UnityEngine.U2D;
+using UnityEditor.U2D;
+
+
+namespace ABAssetsChecker
+{
+
+    public class ABAssetsCheckerWindow : EditorWindow
+    {
+        //依赖模式的key
+        const string isDependPrefKey = "ReferenceFinderData_IsDepend";
+
+        //是否需要更新信息状态的key
+        const string needUpdateStatePrefKey = "ReferenceFinderData_needUpdateState";
+
+        ReferenceFinderData m_data = new ReferenceFinderData();
+        private static bool initializedData = false;
+
+        private bool m_isDepend = false;
+        private bool m_needUpdateState = true;
+
+        private bool needUpdateAssetTree = false;
+
+        private bool initializedGUIStyle = false;
+
+        //工具栏按钮样式
+        private GUIStyle toolbarButtonGUIStyle;
+
+        //工具栏样式
+        private GUIStyle toolbarGUIStyle;
+
+        //选中资源列表
+        private List<string> m_selectedAssetGuidList = new List<string>();
+
+        private ABAssetTreeView m_AssetTreeView;
+
+        [SerializeField] private TreeViewState m_TreeViewState;
+
+        string m_SelectFolder  = "";
+
+
+        //打开窗口
+        [MenuItem("资源检查/AB资源冗余")]
+        static void OpenWindow()
+        {
+            ABAssetsCheckerWindow window = GetWindow<ABAssetsCheckerWindow>();
+            window.wantsMouseMove = false;
+            window.titleContent = new GUIContent("AB资源冗余");
+            window.Show();
+            window.Focus();
+        }
+
+        //初始化GUIStyle
+        void InitGUIStyleIfNeeded()
+        {
+            if (!initializedGUIStyle)
+            {
+                toolbarButtonGUIStyle = new GUIStyle("ToolbarButton");
+                toolbarGUIStyle = new GUIStyle("Toolbar");
+                initializedGUIStyle = true;
+            }
+        }
+
+        bool IsRedundanceFile(string path)
+        {
+            if (path.EndsWith(".cs"))
+            {
+                return false;
+            }
+
+
+            // 指定目录不做判断
+            if (path.Contains(AssetsCheckerUtils.CheckPath))
+            {
+                return false;
+            }
+
+            // 判断ab包名是否存在，不存在则表示会冗余
+            //AssetImporter assetImporter = AssetImporter.GetAtPath(path);
+            //if (null == assetImporter)
+            //{
+            //    return false;
+            //}
+            //if (string.IsNullOrEmpty(assetImporter.assetBundleName))
+            //{
+            //    return true;
+            //}
+            return true;
+        }
+
+        void SelectInvalidDependcy()
+        {
+            m_isDepend = true;
+            m_selectedAssetGuidList.Clear();
+            List<string> list = new List<string>();
+            m_data.EnableNotInAssets = true;
+            m_data.CollectDependenciesInfo();
+
+            foreach (var key in m_data.m_assetDict)
+            {
+                var info = key.Value;
+                var rList = info.dependencies;
+                string path = info.path;
+                if (m_SelectFolder != "" && !path.Contains(m_SelectFolder))
+                {
+                    continue;
+                }
+                if (path.Contains(".prefab"))
+                {
+                    if (path.Contains(AssetsCheckerUtils.CheckPath))
+                    {
+                        var obj = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        if (obj == null)
+                        {
+                            continue;
+                        }
+                        bool bError = false;
+                        var renderers = obj.GetComponentsInChildren<Renderer>(true);
+                        foreach (var render in renderers)
+                        {
+                            if (render.sharedMaterials == null)
+                            {
+                                continue;
+                            }
+
+                            foreach (var mat in render.sharedMaterials)
+                            {
+                                if (mat == null)
+                                {
+                                    continue;
+                                }
+
+                                if (mat.shader.name == "Sprites/Default")
+                                {
+                                    continue;
+                                }
+
+                                var shaderPath = AssetDatabase.GetAssetPath(mat.shader);
+                                if (IsRedundanceFile(shaderPath))
+                                {
+                                    var uniqueKey = AssetsCheckUILogic.GetTipsUniqueKey(render.gameObject);
+                                    info.desc = uniqueKey;
+                                    Debug.Log($"{path} {shaderPath} {mat.shader.name} {uniqueKey}");
+                                    bError = true;
+                                }
+                            }
+                        }
+
+                        if (bError)
+                        {
+                            m_selectedAssetGuidList.Add(key.Key);
+                            info.dependencies.Clear();
+                        }
+                    }
+                }
+
+            }
+            needUpdateAssetTree = true;
+        }
+
+        void EmptyMeshMaterial()
+        {
+            m_isDepend = true;
+            m_selectedAssetGuidList.Clear();
+            List<string> list = new List<string>();
+            m_data.EnableNotInAssets = true;
+            m_data.CollectDependenciesInfo();
+
+            foreach (var key in m_data.m_assetDict)
+            {
+                var info = key.Value;
+                var rList = info.dependencies;
+                string path = info.path;
+                if (m_SelectFolder != "" && !path.Contains(m_SelectFolder))
+                {
+                    continue;
+                }
+                if (path.Contains(".prefab"))
+                {
+                    if (path.Contains(AssetsCheckerUtils.CheckPath))
+                    {
+                        var obj = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        if (obj == null)
+                        {
+                            continue;
+                        }
+                        bool bError = false;
+                        var renderers = obj.GetComponentsInChildren<Renderer>(true);
+                        foreach (var render in renderers)
+                        {
+                            if (render.sharedMaterials == null || render.sharedMaterials == null || render.sharedMaterials.Length == 0)
+                            {
+                                if (render.gameObject.GetComponent<ParticleSystem>() != null)
+                                {
+                                    continue;
+                                }
+                                var uniqueKey = AssetsCheckUILogic.GetTipsUniqueKey(render.gameObject);
+                                info.desc = uniqueKey;
+                                bError = true;
+                                break;
+                            }
+                            
+                        }
+                        if (bError)
+                        {
+                            m_selectedAssetGuidList.Add(key.Key);
+                            info.dependencies.Clear();
+                        }
+                    }
+                }
+
+            }
+            needUpdateAssetTree = true;
+        }
+
+        void EmptyParticleMaterial()
+        {
+            m_isDepend = true;
+            m_selectedAssetGuidList.Clear();
+            List<string> list = new List<string>();
+            m_data.EnableNotInAssets = true;
+            m_data.CollectDependenciesInfo();
+
+            foreach (var key in m_data.m_assetDict)
+            {
+                var info = key.Value;
+                var rList = info.dependencies;
+                string path = info.path;
+                if (m_SelectFolder != "" && !path.Contains(m_SelectFolder))
+                {
+                    continue;
+                }
+                if (path.Contains(".prefab"))
+                {
+                    if (path.Contains(AssetsCheckerUtils.CheckPath))
+                    {
+                        var obj = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        if (obj == null)
+                        {
+                            continue;
+                        }
+                        bool bError = false;
+                        var renderers = obj.GetComponentsInChildren<Renderer>(true);
+                        foreach (var render in renderers)
+                        {
+                            if (render.gameObject.GetComponent<ParticleSystem>() == null)
+                            {
+                                continue;
+                            }
+                            if (render.sharedMaterials == null || render.sharedMaterials == null || render.sharedMaterials.Length == 0)
+                            {
+                                var uniqueKey = AssetsCheckUILogic.GetTipsUniqueKey(render.gameObject);
+                                info.desc = uniqueKey;
+                                bError = true;
+                                break;
+                            }
+
+                        }
+                        if (bError)
+                        {
+                            m_selectedAssetGuidList.Add(key.Key);
+                            info.dependencies.Clear();
+                        }
+                    }
+                }
+
+            }
+            needUpdateAssetTree = true;
+        }
+
+        string GetTipsUniqueKey(GameObject obj)
+        {
+            // 用父节点和子几点名称组合当唯一key，防止只用自己名字容易重名
+            if (obj.transform.parent == null)
+            {
+                return $"null/{obj.name}";
+            }
+            return $"{obj.transform.parent.name}/{obj.name}";
+        }
+
+        private ABAssetViewItem mapToTvRoot(Dictionary<string, List<string>> selectedAssetGuid)
+        {
+            updatedAssetSet.Clear();
+            int elementCount = 0;
+            var root = new ABAssetViewItem { id = elementCount, depth = -1, displayName = "Root", data = null };
+            int depth = 0;
+            var stack = new Stack<string>();
+
+            foreach (var itm in selectedAssetGuid.OrderByDescending(x => x.Value.Count()))
+            {
+                string hash = itm.Key;
+                List<string> textureGUIDList = itm.Value;
+                if (textureGUIDList.Count == 1)
+                    continue;
+
+                var hashRefCount = 0;
+                for (int i = 0; i < textureGUIDList.Count; i++)
+                {
+                    var childGuid = textureGUIDList[i];
+                    if (m_data.m_assetDict[childGuid].references.Count == 0)
+                        continue;
+                    hashRefCount++;
+                }
+
+                if (hashRefCount == 0)
+                    continue;
+
+                elementCount++;
+
+                var hashRoot = new ABAssetViewItem
+                {
+                    type = ABTVItemType.HASH,
+                    hash = hash,
+                    id = elementCount,
+                    depth = depth,
+                    displayName = textureGUIDList.Count + "",
+                    data = null
+                };
+                root.AddChild(hashRoot);
+
+                for (int i = 0; i < textureGUIDList.Count; i++)
+                {
+                    var childGuid = textureGUIDList[i];
+                    var child = CreateTree(childGuid, ref elementCount, depth + 1, stack);
+                    if (child != null)
+                        hashRoot.AddChild(child);
+                }
+            }
+
+            updatedAssetSet.Clear();
+            return root;
+        }
+
+        //通过选中资源列表更新TreeView
+        private void UpdateAssetTree()
+        {
+            if (needUpdateAssetTree && m_selectedAssetGuidList.Count != 0)
+            {
+                var root = SelectedAssetGuidToRootItem(m_selectedAssetGuidList);
+                updateTreeView(root);
+                needUpdateAssetTree = false;
+            }
+        }
+
+        private void updateTreeView(ABAssetViewItem root)
+        {
+            if (m_AssetTreeView == null)
+            {
+                //初始化TreeView
+                if (m_TreeViewState == null)
+                    m_TreeViewState = new TreeViewState();
+                var headerState = ABAssetTreeView.CreateDefaultMultiColumnHeaderState(position.width);
+                var multiColumnHeader = new MultiColumnHeader(headerState);
+                m_AssetTreeView = new ABAssetTreeView(m_TreeViewState, multiColumnHeader);
+            }
+
+            m_AssetTreeView.assetRoot = root;
+            m_AssetTreeView.CollapseAll();
+            m_AssetTreeView.Reload();
+        }
+
+        private void OnGUI()
+        {
+            InitGUIStyleIfNeeded();
+            DrawOptionBar();
+            UpdateAssetTree();
+            if (m_AssetTreeView != null)
+            {
+                //绘制Treeview
+                m_AssetTreeView.OnGUI(new Rect(0, toolbarGUIStyle.fixedHeight, position.width,
+                    position.height - toolbarGUIStyle.fixedHeight));
+            }
+        }
+
+        //绘制上条
+        public void DrawOptionBar()
+        {
+            EditorGUILayout.BeginHorizontal(toolbarGUIStyle);
+
+            if (GUILayout.Button("检查引用到外部shader", toolbarButtonGUIStyle))
+            {
+                SelectInvalidDependcy();
+            }
+
+            if (GUILayout.Button("模型空材质检查", toolbarButtonGUIStyle))
+            {
+                EmptyMeshMaterial();
+            }
+
+            if (GUILayout.Button("粒子空材质检查", toolbarButtonGUIStyle))
+            {
+                EmptyParticleMaterial();
+            }
+
+
+
+
+            GUILayout.FlexibleSpace();
+
+            //扩展
+            if (GUILayout.Button("Expand", toolbarButtonGUIStyle))
+            {
+                if (m_AssetTreeView != null) m_AssetTreeView.ExpandAll();
+            }
+
+            //折叠
+            if (GUILayout.Button("Collapse", toolbarButtonGUIStyle))
+            {
+                if (m_AssetTreeView != null) m_AssetTreeView.CollapseAll();
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        private void OnModelSelect()
+        {
+            needUpdateAssetTree = true;
+        }
+
+
+        //生成root相关
+        private HashSet<string> updatedAssetSet = new HashSet<string>();
+
+        //通过选择资源列表生成TreeView的根节点
+        private ABAssetViewItem SelectedAssetGuidToRootItem(List<string> selectedAssetGuid)
+        {
+            updatedAssetSet.Clear();
+            int elementCount = 0;
+            var root = new ABAssetViewItem { id = elementCount, depth = -1, displayName = "Root", data = null };
+            int depth = 0;
+            var stack = new Stack<string>();
+            foreach (var childGuid in selectedAssetGuid)
+            {
+                var child = CreateTree(childGuid, ref elementCount, depth, stack);
+                if (child != null)
+                    root.AddChild(child);
+            }
+
+            updatedAssetSet.Clear();
+            return root;
+        }
+
+        //通过每个节点的数据生成子节点
+        private ABAssetViewItem CreateTree(string guid, ref int elementCount, int _depth, Stack<string> stack)
+        {
+            if (stack.Contains(guid))
+                return null;
+
+            ABAssetViewItem root = null;
+
+            stack.Push(guid);
+            if (m_needUpdateState && !updatedAssetSet.Contains(guid))
+            {
+                m_data.UpdateAssetState(guid);
+                updatedAssetSet.Add(guid);
+            }
+
+            ++elementCount;
+            if (m_data.m_assetDict.ContainsKey(guid))
+            {
+                var referenceData = m_data.m_assetDict[guid];
+                root = new ABAssetViewItem
+                { id = elementCount, displayName = referenceData.name, data = referenceData, depth = _depth };
+                var childGuids = m_isDepend ? referenceData.dependencies : referenceData.references;
+                foreach (var childGuid in childGuids)
+                {
+                    var child = CreateTree(childGuid, ref elementCount, _depth + 1, stack);
+                    if (child != null)
+                        root.AddChild(child);
+                }
+            }
+            else
+            {
+                var guidToAssetPath = AssetDatabase.GUIDToAssetPath(guid);
+                Debug.Log($"GUID not in assetDict{guidToAssetPath}");
+            }
+
+            stack.Pop();
+            return root;
+        }
+    }
+
+    public enum ABTVItemType
+    {
+        NONE,
+        Asset,
+        HASH
+    }
+
+    //带数据的TreeViewItem
+    public class ABAssetViewItem : TreeViewItem
+    {
+        public ABTVItemType type = ABTVItemType.NONE;
+        public string hash;
+        public ReferenceFinderData.AssetDescription data;
+
+        public ABAssetViewItem()
+        {
+
+        }
+    }
+
+    //资源引用树
+    public class ABAssetTreeView : TreeView
+    {
+        //图标宽度
+        const float kIconWidth = 18f;
+
+        //列表高度
+        const float kRowHeights = 25f;
+        public ABAssetViewItem assetRoot;
+
+        private GUIStyle stateGUIStyle = new GUIStyle { richText = true, alignment = TextAnchor.MiddleCenter };
+        public Dictionary<string, List<string>> hashTextures;
+
+
+        enum MyColumns
+        {
+            //列信息
+            Name,
+            Path,
+            Description,
+
+        }
+
+        public ABAssetTreeView(TreeViewState state, MultiColumnHeader multicolumnHeader) : base(state, multicolumnHeader)
+        {
+            rowHeight = kRowHeights;
+            columnIndexForTreeFoldouts = 0;
+            showAlternatingRowBackgrounds = true;
+            showBorder = false;
+            customFoldoutYOffset =
+                (kRowHeights - EditorGUIUtility.singleLineHeight) *
+                0.5f; // center foldout in the row since we also center content. See RowGUI
+            extraSpaceBeforeIconAndLabel = kIconWidth;
+        }
+
+        //响应右击事件
+        protected override void ContextClickedItem(int id)
+        {
+            var item = (ABAssetViewItem)FindItem(id, rootItem);
+            if (item == null)
+                return;
+
+            if (item.data == null)
+                return;
+
+            GenericMenu menu = new GenericMenu();
+
+            menu.AddItem(new GUIContent("Delete Asset"), false, x =>
+            {
+                var selection = this.GetSelection();
+                List<string> rslt = new List<string>();
+                for (int i = 0; i < selection.Count; i++)
+                {
+                    var selId = selection[i];
+                    var findItem = this.FindItem(selId, item.parent) as ABAssetViewItem;
+                    AssetDatabase.DeleteAsset(findItem.data.path);
+                    rslt.Add(findItem.data.path);
+                }
+            }, item);
+            if (menu.GetItemCount() > 0)
+            {
+                menu.ShowAsContext();
+            }
+            else
+            {
+                SetExpanded(id, !IsExpanded(id));
+            }
+        }
+
+        //响应双击事件
+        protected override void DoubleClickedItem(int id)
+        {
+            var item = (ABAssetViewItem)FindItem(id, rootItem);
+            //在ProjectWindow中高亮双击资源
+            if (item == null)
+                return;
+            if (item.data == null)
+                return;
+
+            var assetObject = AssetDatabase.LoadAssetAtPath(item.data.path, typeof(UnityEngine.Object));
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = assetObject;
+            EditorGUIUtility.PingObject(assetObject);
+
+            var info = item.data;
+            var list = new HashSet<string>();
+            list.Add(info.desc);
+            AssetsCheckUILogic.GoToAndSelectTips(info.path, list);
+        }
+
+        //生成ColumnHeader
+        public static MultiColumnHeaderState CreateDefaultMultiColumnHeaderState(float treeViewWidth)
+        {
+            var columns = new[] {
+            //图标+名称
+            new MultiColumnHeaderState.Column {
+                headerContent = new GUIContent("Name"),
+                headerTextAlignment = TextAlignment.Center,
+                sortedAscending = false,
+                width = 200,
+                minWidth = 60,
+                autoResize = false,
+                allowToggleVisibility = false,
+                canSort = false
+            },
+            //路径
+            new MultiColumnHeaderState.Column {
+                headerContent = new GUIContent("Path"),
+                headerTextAlignment = TextAlignment.Center,
+                sortedAscending = false,
+                width = 560,
+                minWidth = 60,
+                autoResize = false,
+                allowToggleVisibility = false,
+                canSort = false
+            },
+             //描述
+            new MultiColumnHeaderState.Column {
+                headerContent = new GUIContent("Description"),
+                headerTextAlignment = TextAlignment.Center,
+                sortedAscending = false,
+                width = 230,
+                minWidth = 100,
+                autoResize = false,
+                allowToggleVisibility = true,
+                canSort = false
+            }
+
+        };
+            var state = new MultiColumnHeaderState(columns);
+            return state;
+        }
+
+        protected override TreeViewItem BuildRoot()
+        {
+            return assetRoot;
+        }
+
+        protected override void RowGUI(RowGUIArgs args)
+        {
+            var item = (ABAssetViewItem)args.item;
+            for (int i = 0; i < args.GetNumVisibleColumns(); ++i)
+            {
+                CellGUI(args.GetCellRect(i), item, (MyColumns)args.GetColumn(i), ref args);
+            }
+        }
+
+        void CellGUI(Rect cellRect, ABAssetViewItem item, MyColumns column, ref RowGUIArgs args)
+        {
+            //绘制列表中的每项内容
+            CenterRectUsingSingleLineHeight(ref cellRect);
+            var assetDescription = item.data;
+            switch (column)
+            {
+                case MyColumns.Name:
+                    {
+                        var iconRect = cellRect;
+                        iconRect.x += GetContentIndent(item);
+                        iconRect.width = kIconWidth;
+                        if (iconRect.x < cellRect.xMax)
+                        {
+                            var icon = assetDescription == null ? null : GetIcon(assetDescription.path);
+                            if (icon != null)
+                                GUI.DrawTexture(iconRect, icon, ScaleMode.ScaleToFit);
+                        }
+
+                        args.rowRect = cellRect;
+                        base.RowGUI(args);
+                    }
+                    break;
+                case MyColumns.Path:
+                    {
+                        GUI.Label(cellRect, item.type == ABTVItemType.HASH ? item.hash : assetDescription.path);
+                    }
+                    break;
+
+                case MyColumns.Description:
+                    {
+                        if (assetDescription != null)
+                        {
+                            var str = assetDescription.desc;
+                            if (str.Contains("ASTC_6x6"))
+                            {
+                                GUI.Label(cellRect, $"<color=#F0672AFF>{assetDescription.desc}</color>", stateGUIStyle);
+                            }
+                            else if (str.Contains("ASTC_5x5"))
+                            {
+                                GUI.Label(cellRect, $"<color=#F067FAFF>{assetDescription.desc}</color>", stateGUIStyle);
+                            }
+                            else if (str.Contains("ASTC_4x4"))
+                            {
+                                GUI.Label(cellRect, $"<color=#FFFF2AFF>{assetDescription.desc}</color>", stateGUIStyle);
+                            }
+                            else
+                            {
+                                GUI.Label(cellRect, $"<color=#FF0000FF>{assetDescription.desc}</color>", stateGUIStyle);
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        //根据资源信息获取资源图标
+        private Texture2D GetIcon(string path)
+        {
+            UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object));
+            if (obj != null)
+            {
+                Texture2D icon = AssetPreview.GetMiniThumbnail(obj);
+                if (icon == null)
+                    icon = AssetPreview.GetMiniTypeThumbnail(obj.GetType());
+                return icon;
+            }
+
+            return null;
+        }
+    }
+}

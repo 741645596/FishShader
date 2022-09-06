@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_Material_fxhit_glow_011
+  m_Shader: {fileID: 4800000, guid: 0e85992774d4a9647b2fd5697172f283, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 0ee48390a57ac914e900fc8ca8d4edd9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TwistTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexAnimateTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaScale: 1
+    - _Cull: 0
+    - _CullMode: 2
+    - _DisEdgeSmooth: 0
+    - _DisEdgeValue: 0
+    - _DisScrollingX: 0
+    - _DisScrollingY: 0
+    - _DisTwistScale: 0
+    - _DisValue: 0
+    - _DstBlend: 10
+    - _DstBlendRGB: 10
+    - _FresnelPower: 30
+    - _FresnelStrenght: 0
+    - _GlowScale: 1
+    - _InvFade: 1.44
+    - _MainTexRotate: 0
+    - _MainTexSpeed_U: 0
+    - _MainTexSpeed_V: 0
+    - _MainTwistScale: 0
+    - _MaskTexSpeed_U: 0
+    - _MaskTexSpeed_V: 0
+    - _SoftOn: 0
+    - _SrcBlend: 5
+    - _SrcBlendRGB: 5
+    - _TwistScrollingX: 0
+    - _TwistScrollingY: 0
+    - _VertexScrollingX: 0
+    - _VertexScrollingY: 0
+    - _VertexStrength: 0
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteMode: 0
+    m_Colors:
+    - _BaseColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
+    - _ClipRect: {r: -1, g: -1, b: 0, a: 0}
+    - _Color: {r: 2, g: 2, b: 2, a: 1}
+    - _DisEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0.6431373}
+  m_BuildTextureStacks: []

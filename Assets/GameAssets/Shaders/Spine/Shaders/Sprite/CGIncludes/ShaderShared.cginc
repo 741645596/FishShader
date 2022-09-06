@@ -1,39 +1,18 @@
 // Upgrade NOTE: upgraded instancing buffer 'PerDrawSprite' to new syntax.
 
-// Upgrade NOTE: upgraded instancing buffer 'PerDrawSprite' to new syntax.
-
 #ifndef SHADER_SHARED_INCLUDED
 #define SHADER_SHARED_INCLUDED
 
 #if defined(USE_LWRP)
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
+#include "Packages/com.esotericsoftware.spine.lwrp-shaders/Shaders/CGIncludes/SpineCoreShaders/Spine-Common.cginc"
 #elif defined(USE_URP)
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "Packages/com.esotericsoftware.spine.urp-shaders/Shaders/Include/SpineCoreShaders/Spine-Common.cginc"
 #else
 #include "UnityCG.cginc"
+#include "../../CGIncludes/Spine-Common.cginc"
 #endif
-
-#ifdef UNITY_INSTANCING_ENABLED
-
-    UNITY_INSTANCING_BUFFER_START(PerDrawSprite)
-        // SpriteRenderer.Color while Non-Batched/Instanced.
-        fixed4 unity_SpriteRendererColorArray[UNITY_INSTANCED_ARRAY_SIZE];
-        // this could be smaller but that's how bit each entry is regardless of type
-        float4 unity_SpriteFlipArray[UNITY_INSTANCED_ARRAY_SIZE];
-    UNITY_INSTANCING_BUFFER_END(PerDrawSprite)
-
-    #define _RendererColor unity_SpriteRendererColorArray[unity_InstanceID]
-    #define _Flip unity_SpriteFlipArray[unity_InstanceID]
-
-#endif // instancing
-
-CBUFFER_START(UnityPerDrawSprite)
-#ifndef UNITY_INSTANCING_ENABLED
-    fixed4 _RendererColor;
-    float4 _Flip;
-#endif
-    float _EnableExternalAlpha;
-CBUFFER_END
 
 ////////////////////////////////////////
 // Space functions
@@ -98,7 +77,10 @@ inline half3 calculateWorldNormal(float3 normal)
 #if defined(_NORMALMAP)
 
 uniform sampler2D _BumpMap;
+
+#if !defined(USE_LWRP) && !defined(USE_URP)
 uniform half _BumpScale;
+#endif
 
 half3 UnpackScaleNormal(half4 packednormal, half bumpScale)
 {
@@ -150,15 +132,17 @@ inline half3 calculateNormalFromBumpMap(float2 texUV, half3 tangentWorld, half3 
 ////////////////////////////////////////
 // Blending functions
 //
-
-inline fixed4 prepareLitPixelForOutput(fixed4 finalPixel, fixed4 color) : SV_Target
+inline fixed4 prepareLitPixelForOutput(fixed4 finalPixel, fixed textureAlpha, fixed colorAlpha) : SV_Target
 {
 #if defined(_ALPHABLEND_ON)
 	//Normal Alpha
 	finalPixel.rgb *= finalPixel.a;
+#elif defined(_ALPHAPREMULTIPLY_VERTEX_ONLY)
+	//PMA vertex, straight texture
+	finalPixel.rgb *= textureAlpha;
 #elif defined(_ALPHAPREMULTIPLY_ON)
-	//Pre multiplied alpha
-	finalPixel.rgb *= color.a;
+	//Pre multiplied alpha, both vertex and texture
+	// texture and vertex colors are premultiplied already
 #elif defined(_MULTIPLYBLEND)
 	//Multiply
 	finalPixel = lerp(fixed4(1,1,1,1), finalPixel, finalPixel.a);
@@ -169,7 +153,7 @@ inline fixed4 prepareLitPixelForOutput(fixed4 finalPixel, fixed4 color) : SV_Tar
 #elif defined(_ADDITIVEBLEND)
 	//Additive
 	finalPixel *= 2.0f;
-	finalPixel.rgb *= color.a;
+	finalPixel.rgb *= colorAlpha;
 #elif defined(_ADDITIVEBLEND_SOFT)
 	//Additive soft
 	finalPixel.rgb *= finalPixel.a;
@@ -183,7 +167,7 @@ inline fixed4 prepareLitPixelForOutput(fixed4 finalPixel, fixed4 color) : SV_Tar
 inline fixed4 calculateLitPixel(fixed4 texureColor, fixed4 color, fixed3 lighting) : SV_Target
 {
 	fixed4 finalPixel = texureColor * color * fixed4(lighting, 1);
-	finalPixel = prepareLitPixelForOutput(finalPixel, color);
+	finalPixel = prepareLitPixelForOutput(finalPixel, texureColor.a, color.a);
 	return finalPixel;
 }
 
@@ -201,9 +185,13 @@ inline fixed4 calculateAdditiveLitPixel(fixed4 texureColor, fixed4 color, fixed3
 	//Normal Alpha, Additive and Multiply modes
 	finalPixel.rgb = (texureColor.rgb * lighting * color.rgb) * (texureColor.a * color.a);
 	finalPixel.a = 1.0;
+#elif defined(_ALPHAPREMULTIPLY_VERTEX_ONLY)
+	//PMA vertex, straight texture
+	finalPixel.rgb = texureColor.rgb * lighting * color.rgb * texureColor.a;
+	finalPixel.a = 1.0;
 #elif defined(_ALPHAPREMULTIPLY_ON)
-	//Pre multiplied alpha
-	finalPixel.rgb = texureColor.rgb * lighting * color.rgb * color.a;
+	//Pre multiplied alpha, both vertex and texture
+	finalPixel.rgb = texureColor.rgb * lighting * color.rgb;
 	finalPixel.a = 1.0;
 #else
 	//Opaque
@@ -218,7 +206,7 @@ inline fixed4 calculateAdditiveLitPixel(fixed4 texureColor, fixed3 lighting) : S
 {
 	fixed4 finalPixel;
 
-#if defined(_ALPHABLEND_ON)	|| defined(_MULTIPLYBLEND) || defined(_MULTIPLYBLEND_X2) || defined(_ADDITIVEBLEND) || defined(_ADDITIVEBLEND_SOFT)
+#if defined(_ALPHABLEND_ON)	|| defined(_ALPHAPREMULTIPLY_VERTEX_ONLY) || defined(_MULTIPLYBLEND) || defined(_MULTIPLYBLEND_X2) || defined(_ADDITIVEBLEND) || defined(_ADDITIVEBLEND_SOFT)
 	//Normal Alpha, Additive and Multiply modes
 	finalPixel.rgb = (texureColor.rgb * lighting) * texureColor.a;
 	finalPixel.a = 1.0;
@@ -249,7 +237,9 @@ inline fixed4 calculatePixel(fixed4 texureColor) : SV_Target
 
 #if defined(_ALPHA_CLIP)
 
+#if !defined(USE_LWRP) && !defined(USE_URP)
 uniform fixed _Cutoff;
+#endif
 
 #define ALPHA_CLIP(pixel, color) clip((pixel.a * color.a) - _Cutoff);
 
@@ -260,22 +250,52 @@ uniform fixed _Cutoff;
 #endif
 
 ////////////////////////////////////////
+// Additive Slot blend mode
+// return unlit textureColor, alpha clip textureColor.a only
+//
+#if defined(_ALPHAPREMULTIPLY_ON) && !defined(_LIGHT_AFFECTS_ADDITIVE)
+	#define RETURN_UNLIT_IF_ADDITIVE_SLOT(textureColor, vertexColor) \
+	if (vertexColor.a == 0 && (vertexColor.r || vertexColor.g || vertexColor.b)) {\
+		ALPHA_CLIP(texureColor, fixed4(1, 1, 1, 1))\
+		return texureColor * vertexColor;\
+	}
+#elif defined(_ALPHAPREMULTIPLY_VERTEX_ONLY) && !defined(_LIGHT_AFFECTS_ADDITIVE)
+	#define RETURN_UNLIT_IF_ADDITIVE_SLOT(textureColor, vertexColor) \
+	if (vertexColor.a == 0 && (vertexColor.r || vertexColor.g || vertexColor.b)) {\
+		ALPHA_CLIP(texureColor, fixed4(1, 1, 1, 1))\
+		return texureColor * texureColor.a * vertexColor;\
+	}
+#else
+	#define RETURN_UNLIT_IF_ADDITIVE_SLOT(textureColor, vertexColor)
+#endif
+
+////////////////////////////////////////
 // Color functions
 //
 
+#if !defined(USE_LWRP) && !defined(USE_URP)
 uniform fixed4 _Color;
+#endif
 
 inline fixed4 calculateVertexColor(fixed4 color)
 {
+#if defined(_ALPHAPREMULTIPLY_ON) || _ALPHAPREMULTIPLY_VERTEX_ONLY
+	return PMAGammaToTargetSpace(color) * _Color;
+#elif !defined (UNITY_COLORSPACE_GAMMA)
+	return fixed4(GammaToLinearSpace(color.rgb), color.a) * _Color;
+#else
 	return color * _Color;
+#endif
 }
 
 #if defined(_COLOR_ADJUST)
 
+#if !defined(USE_LWRP) && !defined(USE_URP)
 uniform float _Hue;
 uniform float _Saturation;
 uniform float _Brightness;
 uniform fixed4 _OverlayColor;
+#endif
 
 float3 rgb2hsv(float3 c)
 {
@@ -339,7 +359,7 @@ inline fixed4 applyFog(fixed4 pixel, float fogCoordOrFactorAtLWRP)
 	//In multipliedx2 mode fade to grey based on inverse luminance
 	float luminance = pixel.r * 0.3 + pixel.g * 0.59 + pixel.b * 0.11;
 	fixed4 fogColor = lerp(fixed4(0.5f,0.5f,0.5f,0.5f), fixed4(0,0,0,0), luminance);
-#elif defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON)
+#elif defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_VERTEX_ONLY) || defined(_ALPHAPREMULTIPLY_ON)
 	//In alpha blended modes blend to fog color based on pixel alpha
 	fixed4 fogColor = lerp(fixed4(0,0,0,0), unity_FogColor, pixel.a);
 #else
@@ -376,14 +396,11 @@ inline fixed4 applyFog(fixed4 pixel, float fogCoordOrFactorAtLWRP)
 
 uniform sampler2D _MainTex;
 
-#if ETC1_EXTERNAL_ALPHA
-//External alpha texture for ETC1 compression
-uniform sampler2D _AlphaTex;
-#endif //ETC1_EXTERNAL_ALPHA
-
 #if _TEXTURE_BLEND
 uniform sampler2D _BlendTex;
+#if !defined(USE_LWRP) && !defined(USE_URP)
 uniform float _BlendAmount;
+#endif
 
 inline fixed4 calculateBlendedTexturePixel(float2 texcoord)
 {
@@ -401,11 +418,6 @@ inline fixed4 calculateTexturePixel(float2 texcoord)
 	pixel = tex2D(_MainTex, texcoord);
 #endif // !_TEXTURE_BLEND
 
-#if ETC1_EXTERNAL_ALPHA
-    fixed4 alpha = tex2D (_AlphaTex, texcoord);
-    pixel.a = lerp (pixel.a, alpha.r, _EnableExternalAlpha);
-#endif
-
 #if defined(_COLOR_ADJUST)
 	pixel = adjustColor(pixel);
 #endif // _COLOR_ADJUST
@@ -413,11 +425,14 @@ inline fixed4 calculateTexturePixel(float2 texcoord)
 	return pixel;
 }
 
+#if !defined(USE_LWRP) && !defined(USE_URP)
 uniform fixed4 _MainTex_ST;
+#endif
 
 inline float2 calculateTextureCoord(float4 texcoord)
 {
 	return TRANSFORM_TEX(texcoord, _MainTex);
 }
+
 
 #endif // SHADER_SHARED_INCLUDED

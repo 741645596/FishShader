@@ -1,0 +1,241 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mat_0_fish_100000422
+  m_Shader: {fileID: 4800000, guid: 28564ad08d997f44abd4784eaad9074b, type: 3}
+  m_ShaderKeywords: _HITCOLORCHANNEL_RIM
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _2DCube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 68e4cba35e2c6e041a2cb1ba4086e082, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 7986fa15b7dc70741b12a5bf5c9155ef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 3, y: 3}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 68e4cba35e2c6e041a2cb1ba4086e082, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normals:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecCube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMask1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMask2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMatCap1:
+        m_Texture: {fileID: 2800000, guid: fa96be887bd2da545a94269986921e11, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexMatCap2:
+        m_Texture: {fileID: 2800000, guid: fa96be887bd2da545a94269986921e11, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _2DCubeInt: 0
+    - _Albedo: 0.49
+    - _AlbedoIntensity: 1
+    - _Alpha: 1
+    - _AlphaA_Strength: 1.379
+    - _AlphaB_Strength: 0.774
+    - _AlphaClipThreshold: 0.5
+    - _BackInt: 1
+    - _BaseInt: 1
+    - _BlendStrength: 0
+    - _BlendSwitch: 0
+    - _BumpScale: 1
+    - _CubeMap: 1
+    - _Cube_r: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DarkInt: 0
+    - _DarkSide: 4
+    - _Dark_MainTex: 0.56
+    - _Dark_Smoothness: 0.39
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _DstBlendRGB: 0
+    - _EffectShinness: 0.5
+    - _Emission: 0
+    - _EmissionScale: 0.1
+    - _EmissionStrength: 4
+    - _EmissionStrength_2: 0
+    - _EmissionTex_Mask_Color: 1
+    - _EmissionTex_Mask_SpecColor: 1
+    - _EnableMetal: 0
+    - _EnableRim: 0
+    - _EnableRoughnessMask1: 0
+    - _EnableRoughnessMask2: 0
+    - _EnableTransparencyMap: 0
+    - _EnvScale: 1
+    - _FishAlpha: 1
+    - _FlowIn: 0
+    - _FlowInt: 1
+    - _FlowLe: 0
+    - _FlowLerp: 0.5
+    - _FlowMap: 1
+    - _FlowMask: 1
+    - _FlowSide: 4
+    - _FlowSpeed: 0.1
+    - _FlowStrenth: 5
+    - _FlowTime: 0
+    - _FreInt: 0
+    - _FrezFalloff: 10
+    - _FrozenColorValue: 0
+    - _FrozenSaturation: 0.2
+    - _Gloss: 0.078
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _GrayValue: 0
+    - _Hbt: 0.5
+    - _HitAniValue: 0
+    - _HitColorChannel: 0
+    - _HitColorInt: 1.43
+    - _HitColorValue: 0
+    - _HitColorWeight: 0.127
+    - _HitColor_Add: 5
+    - _HitColor_Rate: 0
+    - _HitMultiple: 1
+    - _HitRimPower: 0.5
+    - _HitRimSpread: 0.1
+    - _HitSaturation: 0.2
+    - _HurtMultiple: 1
+    - _HurtMultipleCust: 0.45
+    - _HurtName: 1
+    - _InterSity: 0
+    - _IsHurt: 0
+    - _LightInt: 3.47
+    - _MainLightPos_2_X: 0
+    - _MainLightPos_2_Y: 0
+    - _MainLightPos_2_Z: 0
+    - _MatCapFix1: 0
+    - _MatCapFix2: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _NormalMap: 1
+    - _NormalStr: 1
+    - _NumberScale: 1
+    - _OcclusionStrength: 1
+    - _OverlayMultiple: 0
+    - _Parallax: 0.02
+    - _Reflection: 0.772
+    - _RimStr: 0
+    - _Roughness: 1
+    - _Roughness1: 0
+    - _Roughness2: 0
+    - _Scale: 1
+    - _Shininess: 0.93
+    - _Smoothness: 0.009
+    - _SmoothnessTextureChannel: 0
+    - _SpecCubeInt: 1
+    - _SpecInt: 0.383
+    - _Specular: 0.781
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SrcBlendRGB: 1
+    - _TestGrayFlag: 0
+    - _TestHitColor: 0
+    - _TransNo: 1
+    - _Transparency: 1
+    - _UVSec: 0
+    - _UseVertexNormal: 0
+    - _ZWrite: 1
+    - _ZWriteMode: 1
+    - _test: 1
+    - _test_float: 0
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.9491931, b: 0.19339621, a: 1}
+    - _DarkColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _EmissionColor: {r: 1, g: 0.68092275, b: 0, a: 1}
+    - _FlowColor: {r: 0.85490197, g: 0.90588236, b: 1, a: 1}
+    - _FreColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FrozenColor: {r: 0.564, g: 1, b: 1, a: 1}
+    - _HitColor: {r: 0.8156863, g: 0.9843137, b: 1, a: 1}
+    - _HurtColor: {r: 1, g: 0, b: 0, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LightVec: {r: 0, g: 1, b: 0, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _PreHitColor: {r: 0.03773582, g: 0.001601992, b: 0.001601992, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SpecColor: {r: 1, g: 0.72200024, b: 0.043137252, a: 1}
+    - _TestGrayColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.1}
+  m_BuildTextureStacks: []

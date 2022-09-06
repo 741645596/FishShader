@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_Material_409_dilie_001
+  m_Shader: {fileID: 4800000, guid: a1b3d010a5012ae4bbbd4310430df169, type: 3}
+  m_ShaderKeywords: USE_CUTOUT_TEX _ADDCOLOR_ON _CUSTOMDATA_ON _DISSOLVE_ON _DISTORTION_ON
+    _MASK_ON _SCROLL_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 89baa097e169bef4fbfd7ba63c1f912f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorTex:
+        m_Texture: {fileID: 2800000, guid: 9d5caaa018f78f349b20c1677db4a2d1, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _CutoutTex:
+        m_Texture: {fileID: 2800000, guid: 60cad1906096be942b1d19d7b0908df9, type: 3}
+        m_Scale: {x: 1, y: 1.5}
+        m_Offset: {x: 0, y: 0}
+    - _DisolveTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 3, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisortMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 2, y: 3}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 2800000, guid: da6fd520219a32e44b7c8113f17ff88a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UVNoiseTex:
+        m_Texture: {fileID: 2800000, guid: 07892902f2572144c859d9aee5a1a271, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _VertexAnimateTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AddColor: 3
+    - _AddColorName: 1
+    - _Addcolor: 1
+    - _Alpha: 0
+    - _AlphaScale: 1
+    - _BaseName: 1
+    - _BlendName: 1
+    - _BumpScale: 1
+    - _Cull: 0
+    - _CullBack: 0
+    - _CustomCutOut: 1
+    - _CustomData: 1
+    - _CustomUV: 0
+    - _CutOut: 1
+    - _Cutoff: 0.5
+    - _CutoutThreshold: 0.16
+    - _DetailNormalMapScale: 1
+    - _Disolve: 0
+    - _DisolveUV2: 0
+    - _DisolveUV3: 0
+    - _Dissolve: 1
+    - _DissolveName: 1
+    - _Distortion: 1
+    - _DistortionName: 1
+    - _DstBlend: 10
+    - _Exposure: 1.37
+    - _Flow: 0
+    - _FlowIntensity: 0.2
+    - _FlowTexSpeed: 1
+    - _ForceX: 0
+    - _ForceY: 0
+    - _Fresnel: 0
+    - _FresnelCtrl: 1
+    - _Glossiness: 0.5
+    - _GlowScale: 1.5
+    - _HeatTimeX: 0
+    - _HeatTimeY: 0
+    - _Intensity: 1
+    - _InvFade: 1
+    - _MainTexFlowSpeed: 1.23
+    - _MainUspeed: 0.25
+    - _MainVspeed: 0
+    - _Mask: 1
+    - _MaskDirostItensity: 1
+    - _MaskName: 1
+    - _MaskSpeedX: 0
+    - _MaskSpeedY: 0
+    - _MaskUspeed: 0
+    - _MaskVspeed: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _N_BY_KD: 0
+    - _N_BY_QD: 3
+    - _N_mask: 0.3
+    - _NoiseSpeedX: 10
+    - _NoiseSpeedY: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Percent: 0
+    - _Range: 0.1
+    - _RotateAngle: 0
+    - _Scroll: 1
+    - _ScrollName: 1
+    - _Side: 0
+    - _SpeedX: 15
+    - _SpeedY: 0
+    - _SrcBlend: 5
+    - _Stretch: 1
+    - _UVDistortion: 0.15
+    - _UVSec: 0
+    - _UseCenterDisort: 0
+    - _UseCutoutTex: 1
+    - _UseDisortMask: 0
+    - _UseGrabTex: 0
+    - _UseParticlesAlphaCutout: 0
+    - _UseSoftCutout: 0
+    - _Uspeed: -0.15
+    - _VertexAnimateName: 1
+    - _VertexOffset: 0
+    - _VertexScrollingX: 0
+    - _VertexScrollingY: 0
+    - _VertexStrength: 0
+    - _Vertexani: 0
+    - _VortexAbsorption: 0
+    - _Vspeed: 0
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteMode: 0
+    - _Zwrite: 0
+    - _rim: 1
+    - _rongjie: 1
+    - _vertexOffsetIntensity: 1
+    m_Colors:
+    - _AlphaCtrl: {r: 1, g: 1, b: 0, a: 0}
+    - _BaseColor: {r: 36.289253, g: 20.867516, b: 10.78407, a: 1}
+    - _BaseColorSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _C_BYcolor: {r: 0.09433961, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorAlpha: {r: 4, g: 4, b: 4, a: 0.23529412}
+    - _CutoutColor: {r: 2, g: 0.1882353, b: 0.007843138, a: 1}
+    - _Debug: {r: 0, g: 0, b: 0, a: 0}
+    - _DisolveColor: {r: 2, g: 2, b: 2, a: 1}
+    - _DisolveCtrl: {r: 1.01, g: 0, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlowCtrl: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowDirs: {r: 0, g: 0, b: 0, a: 0}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 11.313708, g: 11.313708, b: 11.313708, a: 1}
+    - _MainSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _MaskSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _MinMax: {r: -1, g: 1, b: 0, a: 0}
+    - _NoiseScroll: {r: 0, g: -0.1, b: 1, a: 1}
+    - _ObjectCenterOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _TargetPos: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 4.866642, g: 4.171407, b: 14.754423, a: 1}
+    - _UVBaseScroll: {r: 0, g: 0, b: 0, a: 0}
+    - _UVCutOutScroll: {r: 0, g: 0, b: 0, a: 0}
+    - _UVScrollDir: {r: -0.075, g: -0.075, b: 1, a: 1}
+  m_BuildTextureStacks: []
