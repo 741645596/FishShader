@@ -60,7 +60,7 @@ Shader "WB/PBRFish"
 
         [Foldout] _HurtName("受击面板",Range(0,1)) = 0
 		[FoldoutItem][KeywordEnum(Rim,Albedo,None)] _HitColorChannel("HitColorType", Float) = 1.0
-		[FoldoutItem][Toggle] _TestHitColor("美术测试受击变红颜色开关", Float) = 0.0
+		//[FoldoutItem][Toggle] _TestHitColor("美术测试受击变红颜色开关", Float) = 0.0
 		[FoldoutItem] _HitColor("HitColor[美术控制]", Color) = (1,1,1,1)
 		[FoldoutItem] _HitMultiple("HitMultiple[美术控制]", Range(0,1)) = 1
 		[FoldoutItem] _HitRimPower("HitRim Power[美术控制]", Range(0.01, 10)) = 0.01
@@ -124,12 +124,12 @@ Shader "WB/PBRFish"
 
 			HLSLPROGRAM
 			#pragma multi_compile __ _SPECULARHIGHLIGHTS_OFF
-			#pragma multi_compile __ _FISHEYE_ON
+			//#pragma multi_compile __ _FISHEYE_ON
 			#pragma multi_compile __ _EMISSION_ON
 			#pragma multi_compile __ _STREAMER_ON
 			#pragma multi_compile __ _LIGHTDIRCONTROL_ON
 		    #pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
-		    #pragma multi_compile __ _TESTHITCOLOR_ON
+		    //#pragma multi_compile __ _TESTHITCOLOR_ON
 
 			#define _RECEIVE_SHADOWS_OFF 1
 
@@ -140,7 +140,8 @@ Shader "WB/PBRFish"
 			#define SHADERPASS_FORWARD
 			#include "ColorCore.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			#include "LightingCore.hlsl"
+			//#include "LightingCore.hlsl"
+			#include "SimpleLightingCore.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
@@ -150,7 +151,6 @@ Shader "WB/PBRFish"
 				float4 vertex : POSITION;
 				float3 ase_normal : NORMAL;
 				float4 ase_tangent : TANGENT;
-				float4 texcoord1 : TEXCOORD1;
 				float4 texcoord : TEXCOORD0;
 				
 			};
@@ -163,7 +163,7 @@ Shader "WB/PBRFish"
 				float4 tSpace0 : TEXCOORD3;
 				float4 tSpace1 : TEXCOORD4;
 				float4 tSpace2 : TEXCOORD5;
-				float4 uv : TEXCOORD6;
+				float2 uv : TEXCOORD6;
 #if _STREAMER_ON
 				float4 streamerUv : TEXCOORD7;
 #endif
@@ -204,6 +204,7 @@ Shader "WB/PBRFish"
 			float _NonMetalThreshold;
 			float _NonMetalStrength;
 
+			float _FishEye;
 			float _RadiusAlphaStrength;
 			float _RadiusAlphaMin, _RadiusAlphaMax;
 
@@ -215,7 +216,8 @@ Shader "WB/PBRFish"
 			float4 _StreamerColor;
 			float4 _StreamerTex_ST;
 //#endif
-
+			float _Alpha;
+			float3 _LightDir;
 			CBUFFER_END
 			sampler2D _BaseMap;
 			sampler2D _NormalMap;
@@ -224,8 +226,7 @@ Shader "WB/PBRFish"
 			//float4 _EmissionColor;
 			sampler2D _EmissionMap;
 #endif
-			float _Alpha;
-			float3 _LightDir;
+
 #if _STREAMER_ON
 			//float _StreamerAlpha;
 			//float _StreamerNoiseSpeed;
@@ -238,33 +239,25 @@ Shader "WB/PBRFish"
 			sampler2D _StreamerMask;
 #endif
 			
-			VertexOutput VertexFunction( VertexInput v  )
+
+			VertexOutput vert ( VertexInput v )
 			{
 				VertexOutput o = (VertexOutput)0;
-				
-
 				o.uv.xy = v.texcoord.xy;
-				//setting value to unused interpolator channels and avoid initialization warnings
-				o.uv.zw = 0;
-				
-				float3 positionWS = TransformObjectToWorld( v.vertex.xyz );
-				float3 positionVS = TransformWorldToView( positionWS );
-				float4 positionCS = TransformWorldToHClip( positionWS );
+				float3 positionWS = TransformObjectToWorld(v.vertex.xyz);
+				float3 positionVS = TransformWorldToView(positionWS);
+				float4 positionCS = TransformWorldToHClip(positionWS);
 
-				VertexNormalInputs normalInput = GetVertexNormalInputs( v.ase_normal, v.ase_tangent );
+				VertexNormalInputs normalInput = GetVertexNormalInputs(v.ase_normal, v.ase_tangent);
 
-				o.tSpace0 = float4( normalInput.normalWS, positionWS.x);
-				o.tSpace1 = float4( normalInput.tangentWS, positionWS.y);
-				o.tSpace2 = float4( normalInput.bitangentWS, positionWS.z);
+				o.tSpace0 = float4(normalInput.normalWS, positionWS.x);
+				o.tSpace1 = float4(normalInput.tangentWS, positionWS.y);
+				o.tSpace2 = float4(normalInput.bitangentWS, positionWS.z);
 
-				OUTPUT_LIGHTMAP_UV( v.texcoord1, unity_LightmapST, o.lightmapUVOrVertexSH.xy );
-				OUTPUT_SH( normalInput.normalWS.xyz, o.lightmapUVOrVertexSH.xyz );
+				OUTPUT_SH(normalInput.normalWS.xyz, o.lightmapUVOrVertexSH.xyz);
+				//half3 vertexLight = VertexLighting( positionWS, normalInput.normalWS );
+				//o.vertexLight = half4(vertexLight, 0);
 
-				
-				half3 vertexLight = VertexLighting( positionWS, normalInput.normalWS );
-				
-				o.vertexLight = half4(vertexLight, 0);
-				
 				o.clipPos = positionCS;
 #if _STREAMER_ON
 				float4 offset = (_Time.xyyx * float4(_StreamerScrollX, _StreamerScrollY, _StreamerScrollY, _StreamerScrollX));
@@ -273,15 +266,6 @@ Shader "WB/PBRFish"
 				o.streamerUv = streamerUv + offset;
 #endif
 				return o;
-			}
-			
-			
-			
-
-
-			VertexOutput vert ( VertexInput v )
-			{
-				return VertexFunction( v );
 			}
 
             #include "HitRed_fun.hlsl"
@@ -375,9 +359,7 @@ Shader "WB/PBRFish"
 				Emission += streamer;
 #endif
 
-
-
-				inputData.vertexLighting = IN.vertexLight.xyz;
+				//inputData.vertexLighting = IN.vertexLight.xyz;
 				#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
 					float3 SH = SampleSH(inputData.normalWS.xyz);
 				#else
@@ -385,13 +367,9 @@ Shader "WB/PBRFish"
 				#endif
 
 				inputData.bakedGI = SAMPLE_GI( IN.lightmapUVOrVertexSH.xy, SH, inputData.normalWS );
-				
-				
-				inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(IN.clipPos);
-				inputData.shadowMask = SAMPLE_SHADOWMASK(IN.lightmapUVOrVertexSH.xy);
-#if _FISHEYE_ON
+//#if _FISHEYE_ON
 				// 标识出金鱼眼圈。
-				if (tex2DNode11.b < 0.3)
+				if (tex2DNode11.b < 0.3 && _FishEye == 1.0f)
 				{
 					float cosAngel = saturate(ndv);
 					float RadiusDistance = 1 - cosAngel * cosAngel;
@@ -399,7 +377,7 @@ Shader "WB/PBRFish"
 					RadiusAlpha = lerp(_RadiusAlphaMin, _RadiusAlphaMax, RadiusAlpha);
 					Alpha = RadiusAlpha;
 				}
-#endif
+//#endif
 				Alpha = Alpha * _Alpha;
 				clip(Alpha - 0.1f);
 				half4 color = UniversalFragmentPBR(
@@ -416,8 +394,6 @@ Shader "WB/PBRFish"
 
 				color.rgb = HitRed(color.rgb, Emission.rgb, inputData.normalWS, WorldViewDirection);
 				color.rgb = CalcFinalColor(color.rgb, _OverColor, _OverMultiple, _ContrastScale);
-				//color.rgb = CalcFinalColor(color.rgb, _ContrastScale);
-				
 				return color;
 			}
 			
@@ -427,43 +403,298 @@ Shader "WB/PBRFish"
 	}
 	SubShader
 	{
-		Tags { "Queue" = "Geometry" "RenderType" = "Opaque" }
+		Tags {  "RenderPipeline" = "UniversalPipeline"  "Queue" = "Transparent -300" }
+		Cull[_CullMode]
 		LOD 150
 
 		Pass
 		{
-			HLSLPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
 
-			#include "ColorCore.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			Name "Forward"
+			Tags { "LightMode" = "UniversalForward" }
 
-			struct appdata
-			{
-				float4 vertex : POSITION;
+			Blend[_SourceBlend][_DestBlend]
+			ZWrite[_ZWriteMode]
+
+			ZTest LEqual
+			Offset 0 , 0
+			ColorMask RGBA
+
+		//模板测试总是通过，并写入模板缓存区值为1
+		Stencil
+		{
+			Ref 9
+			Comp always
+			Pass replace
+			Fail keep
+			ZFail keep
+		}
+
+		HLSLPROGRAM
+		#pragma multi_compile __ _SPECULARHIGHLIGHTS_OFF
+		//#pragma multi_compile __ _FISHEYE_ON
+		#pragma multi_compile __ _EMISSION_ON
+		#pragma multi_compile __ _STREAMER_ON
+		#pragma multi_compile __ _LIGHTDIRCONTROL_ON
+		#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
+		//#pragma multi_compile __ _TESTHITCOLOR_ON
+
+		#define _RECEIVE_SHADOWS_OFF 1
+
+
+		#pragma vertex vert
+		#pragma fragment frag
+
+		#define SHADERPASS_FORWARD
+		#include "ColorCore.hlsl"
+		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+		#include "SimpleLightingCore.hlsl"
+		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
+		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
+		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+
+		struct VertexInput
+		{
+			float4 vertex : POSITION;
+			float3 ase_normal : NORMAL;
+			float4 ase_tangent : TANGENT;
+			float4 texcoord : TEXCOORD0;
+
+		};
+
+		struct VertexOutput
+		{
+			float4 clipPos : SV_POSITION;
+			float4 lightmapUVOrVertexSH : TEXCOORD0;
+			float4 tSpace0 : TEXCOORD3;
+			float4 tSpace1 : TEXCOORD4;
+			float4 tSpace2 : TEXCOORD5;
+			float2 uv : TEXCOORD6;
+#if _STREAMER_ON
+				float4 streamerUv : TEXCOORD7;
+#endif
 			};
 
-			struct v2f
-			{
-				float4 vertex : SV_POSITION;
-			};
+			CBUFFER_START(UnityPerMaterial)
+#include "HitRed_dec.hlsl"
 
+			float4 _BaseColor;
+			float _ColorScale;
+			float _ContrastScale;
+			float3 _OverColor;
+			float  _OverMultiple;
 
-			v2f vert(appdata v)
+			float4 _BaseMap_ST;
+			float4 _NormalMap_ST;
+			float4 _MixMap_ST;
+
+			float4 _RimColor;
+			float _RimSpread;
+			float4 _RimOffset;
+			float _RimPower;
+
+			float _MetallicRemapMin, _MetallicRemapMax;
+			float _SmoothnessRemapMin, _SmoothnessRemapMax;
+			float _GlossMapScale;
+			float _OcclusionStrength;
+			float _BumpStrength;
+//#if			_EMISSION_ON
+			float4 _EmissionColor;
+//#endif
+
+			float _HSVHue;
+			float _HSVSat;
+			float _HSVValue;
+			float _SpecularStrength;
+
+			float _NonMetalThreshold;
+			float _NonMetalStrength;
+
+			float _FishEye;
+			float _RadiusAlphaStrength;
+			float _RadiusAlphaMin, _RadiusAlphaMax;
+
+//#if _STREAMER_ON
+			float _StreamerAlpha;
+			float _StreamerNoiseSpeed;
+			float _StreamerScrollX;
+			float _StreamerScrollY;
+			float4 _StreamerColor;
+			float4 _StreamerTex_ST;
+//#endif
+			float _Alpha;
+			float3 _LightDir;
+			CBUFFER_END
+			sampler2D _BaseMap;
+			sampler2D _NormalMap;
+			sampler2D _MixMap;
+#if			_EMISSION_ON
+	        //float4 _EmissionColor;
+			sampler2D _EmissionMap;
+		#endif
+		#if _STREAMER_ON
+			//float _StreamerAlpha;
+			//float _StreamerNoiseSpeed;
+			//float _StreamerScrollX;
+			//float _StreamerScrollY;
+			//float4 _StreamerColor;
+			//float4 _StreamerTex_ST;
+			sampler2D _StreamerNoise;
+			sampler2D _StreamerTex;
+			sampler2D _StreamerMask;
+		#endif
+
+			VertexOutput vert(VertexInput v)
 			{
-				v2f o;
-				o.vertex = TransformObjectToHClip(v.vertex.xyz);
+				VertexOutput o = (VertexOutput)0;
+				o.uv.xy = v.texcoord.xy;
+
+				float3 positionWS = TransformObjectToWorld(v.vertex.xyz);
+				float3 positionVS = TransformWorldToView(positionWS);
+				float4 positionCS = TransformWorldToHClip(positionWS);
+
+				VertexNormalInputs normalInput = GetVertexNormalInputs(v.ase_normal, v.ase_tangent);
+
+				o.tSpace0 = float4(normalInput.normalWS, positionWS.x);
+				o.tSpace1 = float4(normalInput.tangentWS, positionWS.y);
+				o.tSpace2 = float4(normalInput.bitangentWS, positionWS.z);
+
+				OUTPUT_SH(normalInput.normalWS.xyz, o.lightmapUVOrVertexSH.xyz);
+
+				o.clipPos = positionCS;
+#if _STREAMER_ON
+				float4 offset = (_Time.xyyx * float4(_StreamerScrollX, _StreamerScrollY, _StreamerScrollY, _StreamerScrollX));
+				offset = frac(offset);
+				float4 streamerUv = v.texcoord.xyxy * _StreamerTex_ST.xyxy + _StreamerTex_ST.zwzw;
+				o.streamerUv = streamerUv + offset;
+#endif
 				return o;
 			}
 
-			float4 frag(v2f i) : SV_Target
+			#include "HitRed_fun.hlsl"
+			half4 frag(VertexOutput IN) : SV_Target
 			{
-				 return float4(1, 0, 0,1.0f);
+				float3 WorldNormal = normalize(IN.tSpace0.xyz);
+				float3 WorldTangent = IN.tSpace1.xyz;
+				float3 WorldBiTangent = IN.tSpace2.xyz;
+
+				float3 WorldPosition = float3(IN.tSpace0.w,IN.tSpace1.w,IN.tSpace2.w);
+				float3 WorldViewDirection = _WorldSpaceCameraPos.xyz - WorldPosition;
+				float4 ShadowCoords = float4(0, 0, 0, 0);
+
+				//----------------------
+
+				WorldViewDirection = SafeNormalize(WorldViewDirection);
+
+
+				float2 uv_BaseMap = IN.uv.xy * _BaseMap_ST.xy + _BaseMap_ST.zw;
+				
+				float2 uv_NormalMap = IN.uv.xy * _NormalMap_ST.xy + _NormalMap_ST.zw;
+
+				float2 uv_MixMap = IN.uv.xy * _MixMap_ST.xy + _MixMap_ST.zw;
+
+				float4 tex2DNode11 = tex2D(_MixMap, uv_MixMap);
+
+				float4 emission = float4(0, 0, 0, 0);
+#if		_EMISSION_ON
+				float4 emissionMapColor = tex2D(_EmissionMap, IN.uv.xy);
+				emission = emissionMapColor * _EmissionColor;
+#else
+				emission = _EmissionColor * tex2DNode11.b;
+#endif
+				
+				float4 Albedo = tex2D(_BaseMap, uv_BaseMap).rgba;
+				// hsv 处理
+				float3 hvs = rgb2hsv(Albedo.rgb);
+				hvs.x = fmod(_HSVHue * 0.00277777785 + hvs.x, 1);
+				hvs.yz *= float2(_HSVSat, _HSVValue);
+				Albedo.rgb = hsv2rgb(hvs);
+				Albedo = Albedo.rgba * _BaseColor.rgba;
+				Albedo.rgb = Albedo.rgb * _ColorScale;
+				float Alpha = Albedo.a;
+
+
+				float3 Normal = UnpackNormalScale(tex2D(_NormalMap, uv_NormalMap), _BumpStrength);
+
+				float meta = lerp(_MetallicRemapMin, _MetallicRemapMax, tex2DNode11.r);
+
+
+				float smooth = lerp(_SmoothnessRemapMin, _SmoothnessRemapMax, tex2DNode11.a) * _GlossMapScale;
+
+				//float3 Specular = 0.5;
+				float3 Specular = _SpecularStrength;
+				float Metallic = meta;
+				float Smoothness = smooth;
+				float Occlusion = tex2DNode11.g * _OcclusionStrength;
+				// 先屏蔽
+				if (tex2DNode11.r < _NonMetalThreshold)
+				{
+					Occlusion = Occlusion * _NonMetalStrength;
+				}
+
+				float3 BakedGI = 0;
+				float3 RefractionColor = 1;
+				float RefractionIndex = 1;
+				float3 Transmission = 1;
+				float3 Translucency = 1;
+
+				InputData inputData;
+				inputData.positionWS = WorldPosition;
+				inputData.viewDirectionWS = WorldViewDirection;
+				inputData.shadowCoord = ShadowCoords;
+
+				inputData.normalWS = TransformTangentToWorld(Normal, half3x3(WorldTangent, WorldBiTangent, WorldNormal));
+
+				float ndv = dot(normalize(inputData.normalWS), normalize(WorldViewDirection + _RimOffset.xyz));
+				float3 rimColor = (pow((1.0 - saturate(ndv)), 5.0 - _RimSpread) * _RimColor).rgb * _RimPower;
+				float3 Emission = emission.rgb + rimColor;
+#if _STREAMER_ON
+				float streamNoiseX = tex2D(_StreamerNoise, IN.streamerUv.yx).x;
+				float streamNoiseY = tex2D(_StreamerNoise, IN.streamerUv.zw).y;
+				float streamNoise = streamNoiseX * streamNoiseY;
+				float2 streamerUvNew = streamNoise.xx * _StreamerNoiseSpeed + IN.streamerUv.xy;
+				float3 streamer = tex2D(_StreamerTex, streamerUvNew.xy).xyz;
+				float3 streamerMask = tex2D(_StreamerMask, IN.uv.xy).xyz;
+				streamer *= _StreamerColor.rgb;
+				streamer *= streamerMask;
+				streamer *= _StreamerAlpha;
+				Emission += streamer;
+#endif
+				#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
+					float3 SH = SampleSH(inputData.normalWS.xyz);
+				#else
+					float3 SH = IN.lightmapUVOrVertexSH.xyz;
+				#endif
+
+				inputData.bakedGI = SAMPLE_GI(IN.lightmapUVOrVertexSH.xy, SH, inputData.normalWS);
+//#if _FISHEYE_ON
+				// 标识出金鱼眼圈。
+				if (tex2DNode11.b < 0.3 && _FishEye == 1.0f)
+				{
+					float cosAngel = saturate(ndv);
+					float RadiusDistance = 1 - cosAngel * cosAngel;
+					float RadiusAlpha = pow(RadiusDistance, _RadiusAlphaStrength);
+					RadiusAlpha = lerp(_RadiusAlphaMin, _RadiusAlphaMax, RadiusAlpha);
+					Alpha = RadiusAlpha;
+				}
+//#endif
+				Alpha = Alpha * _Alpha;
+				clip(Alpha - 0.1f);
+				half4 color = UniversalFragmentPBR(
+					inputData,
+					Albedo.rgb ,
+					Metallic,
+					Specular,
+					Smoothness,
+					Occlusion,
+					float3(0,0,0),
+					Alpha,
+					_LightDir
+					);
+
+				color.rgb = HitRed(color.rgb, Emission.rgb, inputData.normalWS, WorldViewDirection);
+				color.rgb = CalcFinalColor(color.rgb, _OverColor, _OverMultiple, _ContrastScale);
+				return color;
 			}
 			ENDHLSL
 		}
