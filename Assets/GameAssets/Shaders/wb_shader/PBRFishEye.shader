@@ -1,5 +1,5 @@
 
-Shader "WB/PBRFish"
+Shader "WB/PBRFishEye"
 {
 	Properties
 	{
@@ -51,6 +51,10 @@ Shader "WB/PBRFish"
 		[FoldoutItem] _NonMetalThreshold("非金属阈值", Range(0, 0.2)) = 0.1
 		[FoldoutItem] _NonMetalStrength("非金属强度", Range(0, 10)) = 1.0
 
+		[Foldout] _FishEyeName("鱼眼径向透明度面板",Range(0,1)) = 0
+		[FoldoutItem] _RadiusAlphaStrength("RadiusAlphaStrength[径向透明度强度]", Range(1, 3)) = 1
+		[FoldoutItem] _RadiusAlphaMin("_RadiusAlphaMin[径向透明度区间]", Range(0, 0.5)) = 0.3
+		[FoldoutItem] _RadiusAlphaMax("_RadiusAlphaMax[径向透明度区间]", Range(0.9, 1)) = 1
 
         [Foldout] _HurtName("受击面板",Range(0,1)) = 0
 		[FoldoutItem][KeywordEnum(Rim,Albedo,None)] _HitColorChannel("HitColorType", Float) = 1.0
@@ -64,22 +68,6 @@ Shader "WB/PBRFish"
         [Foldout] _FadeName("淡入淡出控制面板[程序控制]",Range(0,1)) = 0
 		[FoldoutItem] _Alpha("_Alpha", float) = 1
 
-
-		[Foldout] _EmissionName("自发光控制面板",Range(0,1)) = 0
-		[FoldoutItem][Toggle] _Emission("自发光控制开关开关", Float) = 0.0
-		[FoldoutItem][HDR]_EmissionColor("Emission Color[自发光]", Color) = (0, 0, 0, 0)
-		[FoldoutItem][NoScaleOffset] _EmissionMap("EmissionMap[自发光]", 2D) = "black" {}
-
-		[Foldout] _StreamerName("流光控制面板",Range(0,1)) = 0
-		[FoldoutItem][Toggle] _Streamer("流光控制开关开关", Float) = 0.0
-		[FoldoutItem] _StreamerNoise("StreamerNoise", 2D) = "black" {}
-		[FoldoutItem] _StreamerMask("StreamerMask[流光mask]", 2D) = "black" {}
-		[FoldoutItem] _StreamerTex("StreamerTex[流光纹理]", 2D) = "black" {}
-		[FoldoutItem] _StreamerAlpha("StreamerAlpha[流光Alpha]", Range(0, 1)) = 1
-		[FoldoutItem] _StreamerNoiseSpeed("StreamerNoiseSpeed[流光速度]", Range(0, 10)) = 1
-		[FoldoutItem] _StreamerScrollX("StreamerScrollX[流光方向]", Range(-10, 10)) = 1
-		[FoldoutItem] _StreamerScrollY("StreamerScrollY[流光方向]", Range(-10, 10)) = 1
-		[FoldoutItem][HDR]_StreamerColor("StreamerColor", Color) = (0, 0, 0, 0)
 
 	    [Foldout] _LightDirName("灯光方向面板",Range(0,1)) = 0
 		[FoldoutItem][Toggle] _LightDirControl("灯光方向控制开关", Float) = 0.0
@@ -116,20 +104,14 @@ Shader "WB/PBRFish"
 			}
 
 			HLSLPROGRAM
-			#pragma multi_compile __ _EMISSION_ON
-			#pragma multi_compile __ _STREAMER_ON
-		    #pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
+		    //#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO
+            #define _HITCOLORCHANNEL_ALBEDO 1
 
-			//#define _RECEIVE_SHADOWS_OFF 1
-
-			
 			#pragma vertex vert
 			#pragma fragment frag
 
-			//#define SHADERPASS_FORWARD
 			#include "ColorCore.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			//#include "LightingCore.hlsl"
 			#include "HighLightingCore.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
@@ -152,9 +134,6 @@ Shader "WB/PBRFish"
 				half4 tSpace1 : TEXCOORD2;
 				half4 tSpace2 : TEXCOORD3;
 				half2 uv : TEXCOORD4;
-#if _STREAMER_ON
-				half4 streamerUv : TEXCOORD5;
-#endif
 			};
 
 			CBUFFER_START(UnityPerMaterial)
@@ -180,9 +159,7 @@ Shader "WB/PBRFish"
 			half _GlossMapScale;
 			half _OcclusionStrength;
 			half _BumpStrength;
-//#if			_EMISSION_ON
-			half4 _EmissionColor;
-//#endif
+
 
 			half _HSVHue;
 			half _HSVSat;
@@ -191,14 +168,11 @@ Shader "WB/PBRFish"
 
 			half _NonMetalThreshold;
 			half _NonMetalStrength;
-//#if _STREAMER_ON
-			half _StreamerAlpha;
-			half _StreamerNoiseSpeed;
-			half _StreamerScrollX;
-			half _StreamerScrollY;
-			half4 _StreamerColor;
-			half4 _StreamerTex_ST;
-//#endif
+
+			half _RadiusAlphaStrength;
+			half _RadiusAlphaMin, _RadiusAlphaMax;
+
+
 			half _Alpha;
 			half _LightDirControl;
 			half3 _LightDir;
@@ -206,22 +180,8 @@ Shader "WB/PBRFish"
 			sampler2D _BaseMap;
 			sampler2D _NormalMap;
 			sampler2D _MixMap;
-#if			_EMISSION_ON
-			//float4 _EmissionColor;
-			sampler2D _EmissionMap;
-#endif
 
-#if _STREAMER_ON
-			//float _StreamerAlpha;
-			//float _StreamerNoiseSpeed;
-			//float _StreamerScrollX;
-			//float _StreamerScrollY;
-			//float4 _StreamerColor;
-			//float4 _StreamerTex_ST;
-			sampler2D _StreamerNoise;
-			sampler2D _StreamerTex;
-			sampler2D _StreamerMask;
-#endif
+
 			
 
 			VertexOutput vert ( VertexInput v )
@@ -241,12 +201,6 @@ Shader "WB/PBRFish"
 				OUTPUT_SH(normalInput.normalWS.xyz, o.lightmapUVOrVertexSH.xyz);
 
 				o.clipPos = positionCS;
-#if _STREAMER_ON
-				half4 offset = (_Time.xyyx * half4(_StreamerScrollX, _StreamerScrollY, _StreamerScrollY, _StreamerScrollX));
-				offset = frac(offset);
-				half4 streamerUv = v.texcoord.xyxy * _StreamerTex_ST.xyxy + _StreamerTex_ST.zwzw;
-				o.streamerUv = streamerUv + offset;
-#endif
 				return o;
 			}
 
@@ -273,12 +227,6 @@ Shader "WB/PBRFish"
 				half4 tex2DNode11 = tex2D( _MixMap, uv_MixMap );
 
 				half4 emission = half4(0, 0, 0, 0);
-#if			_EMISSION_ON
-				half4 emissionMapColor = tex2D(_EmissionMap, IN.uv.xy);
-			    emission = emissionMapColor * _EmissionColor ; 
-#else
-                emission = _EmissionColor * tex2DNode11.b;
-#endif
 				half4 Albedo = tex2D(_BaseMap, uv_BaseMap).rgba;
 				// hsv 处理
 				half3 hvs = rgb2hsv(Albedo.rgb);
@@ -314,18 +262,6 @@ Shader "WB/PBRFish"
 				half3 rimColor = (pow((1.0 - saturate(ndv)), 5.0 - _RimSpread) * _RimColor).rgb * _RimPower;
 				half3 Emission = emission.rgb + rimColor;
 
-#if _STREAMER_ON
-				half streamNoiseX = tex2D(_StreamerNoise, IN.streamerUv.yx).x;
-				half streamNoiseY = tex2D(_StreamerNoise, IN.streamerUv.zw).y;
-				half streamNoise = streamNoiseX * streamNoiseY;
-				half2 streamerUvNew = streamNoise.xx * _StreamerNoiseSpeed + IN.streamerUv.xy;
-				half3 streamer = tex2D(_StreamerTex, streamerUvNew.xy).xyz;
-				half3 streamerMask = tex2D(_StreamerMask, IN.uv.xy).xyz;
-				streamer *= _StreamerColor.rgb;
-				streamer *= streamerMask;
-				streamer *= _StreamerAlpha;
-				Emission += streamer;
-#endif
 				#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
 				     half3 SH = SampleSH(inputData.normalWS.xyz);
 				#else
@@ -333,8 +269,14 @@ Shader "WB/PBRFish"
 				#endif
 
 			    inputData.bakedGI = SAMPLE_GI( IN.lightmapUVOrVertexSH.xy, SH, inputData.normalWS );
+				// 标识出金鱼眼圈。
+				flag = step(0.3f, tex2DNode11.b);//step(a,b) b >= a ? 1:0
+				half cosAngel = saturate(ndv);
+				half RadiusDistance = 1 - cosAngel * cosAngel;
+				half RadiusAlpha = pow(RadiusDistance, _RadiusAlphaStrength);
+				RadiusAlpha = lerp(_RadiusAlphaMin, _RadiusAlphaMax, RadiusAlpha);
+				Alpha = lerp(RadiusAlpha, 1.0f, flag) * _Alpha;
 
-				Alpha = Alpha * _Alpha;
 				//clip(Alpha - 0.1f);
 				half4 color = UniversalFragmentPBR(
 					inputData, 
@@ -353,6 +295,8 @@ Shader "WB/PBRFish"
 				color.rgb = CalcFinalColor(color.rgb, _OverColor, _OverMultiple, _ContrastScale);
 				return color;
 			}
+			
+
 			ENDHLSL
 		}
 	}

@@ -4,7 +4,6 @@ Shader "WB/Fish2DDiffuseColor"
     {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
         _Color("Tint", Color) = (1,1,1,1)
-        [MaterialToggle] PixelSnap("Pixel snap", Float) = 0
         [HideInInspector] _RendererColor("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip("Flip", Vector) = (1,1,1,1)
         // 先屏蔽，序列帧受击变红走修改color 属性
@@ -43,7 +42,6 @@ Shader "WB/Fish2DDiffuseColor"
             #pragma vertex SpriteVert
             #pragma fragment SpriteFrag
             #pragma target 2.0
-            #pragma multi_compile_local _ PIXELSNAP_ON
             #include "ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -91,11 +89,6 @@ Shader "WB/Fish2DDiffuseColor"
                 OUT.vertex = TransformObjectToHClip(OUT.vertex.xyz);
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color * _RendererColor;
-
-                #ifdef PIXELSNAP_ON
-                OUT.vertex = UnityPixelSnap(OUT.vertex);
-                #endif
-
                 return OUT;
             }
 

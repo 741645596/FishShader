@@ -2,9 +2,13 @@ Shader "WB/fish2d"
 {
     Properties
     {
+        [Enum(UnityEngine.Rendering.CullMode)] _CullMode("CullMode", float) = 2
+        [Enum(UnityEngine.Rendering.BlendMode)] _SourceBlend("Source Blend Mode", Float) = 5
+        [Enum(UnityEngine.Rendering.BlendMode)] _DestBlend("Dest Blend Mode", Float) = 10
+        [Enum(Off, 0, On, 1)]_ZWriteMode("ZWriteMode", float) = 0
+
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
-        [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
         // 先屏蔽，序列帧受击变红走修改color 属性
@@ -32,10 +36,14 @@ Shader "WB/fish2d"
             "CanUseSpriteAtlas"="True"
         }
 
-        Cull Off
+        //Cull Off
         Lighting Off
-        ZWrite Off
-        Blend One OneMinusSrcAlpha
+        //ZWrite Off
+        //Blend One OneMinusSrcAlpha
+        Cull[_CullMode]
+        Blend[_SourceBlend][_DestBlend]
+        ZWrite[_ZWriteMode]
+
 
         Pass
         {
@@ -43,7 +51,6 @@ Shader "WB/fish2d"
         #pragma vertex SpriteVert
         #pragma fragment SpriteFrag
         #pragma target 2.0
-        #pragma multi_compile_local _ PIXELSNAP_ON
         #include "ColorCore.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -87,16 +94,10 @@ Shader "WB/fish2d"
         v2f SpriteVert(appdata_t IN)
         {
             v2f OUT;
-
             OUT.vertex = UnityFlipSprite(IN.vertex.xyz, _Flip);
             OUT.vertex = TransformObjectToHClip(OUT.vertex.xyz);
             OUT.texcoord = IN.texcoord;
             OUT.color = IN.color * _Color * _RendererColor;
-
-            #ifdef PIXELSNAP_ON
-            OUT.vertex = UnityPixelSnap(OUT.vertex);
-            #endif
-
             return OUT;
         }
 

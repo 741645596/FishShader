@@ -1,10 +1,9 @@
-Shader "WB/fish2dHSV"
+Shader "WB/UI/SpriteHSV"
 {
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
-        [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
 
@@ -36,14 +35,12 @@ Shader "WB/fish2dHSV"
         #pragma vertex SpriteVert
         #pragma fragment SpriteFrag
         #pragma target 2.0
-        #pragma multi_compile_local _ PIXELSNAP_ON
-        #include "ColorCore.hlsl"
+        #include "../ColorCore.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
-
 
 
     CBUFFER_START(UnityPerMaterial)
@@ -77,7 +74,13 @@ Shader "WB/fish2dHSV"
         {
             return float4(pos.xy * flip, pos.z, 1.0);
         }
-
+        inline float4 UnityPixelSnap(float4 pos)
+        {
+            float2 hpc = _ScreenParams.xy * 0.5f;
+            float2 pixelPos = round((pos.xy / pos.w) * hpc);
+            pos.xy = pixelPos / hpc * pos.w;
+            return pos;
+        }
         v2f SpriteVert(appdata_t IN)
         {
             v2f OUT;
@@ -87,9 +90,7 @@ Shader "WB/fish2dHSV"
             OUT.texcoord = IN.texcoord;
             OUT.color = IN.color * _Color * _RendererColor;
 
-            #ifdef PIXELSNAP_ON
             OUT.vertex = UnityPixelSnap(OUT.vertex);
-            #endif
 
             return OUT;
         }

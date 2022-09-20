@@ -1,5 +1,5 @@
-#ifndef UNIVERSAL_SIMPLELIGHTINGCORE_INCLUDED
-#define UNIVERSAL_SIMPLELIGHTINGCORE_INCLUDED
+#ifndef UNIVERSAL_HIGHLIGHTINGCORE_INCLUDED
+#define UNIVERSAL_HIGHLIGHTINGCORE_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/CommonMaterial.hlsl"
@@ -166,7 +166,6 @@ half DirectBRDFSpecular(BRDFData brdfData, half3 normalWS, half3 lightDirectionW
 
     return specularTerm;
 }
-
 // Based on Minimalist CookTorrance BRDF
 // Implementation is slightly different from original derivation: http://www.thetenthplanet.de/archives/255
 //
@@ -233,6 +232,7 @@ half3 SampleSHPixel(half3 L2Term, half3 normalWS)
 
 half3 GlossyEnvironmentReflection(half3 reflectVector, half perceptualRoughness, half occlusion)
 {
+
 #if !defined(_ENVIRONMENTREFLECTIONS_OFF)
     half mip = PerceptualRoughnessToMipmapLevel(perceptualRoughness);
     half4 encodedIrradiance = SAMPLE_TEXTURECUBE_LOD(unity_SpecCube0, samplerunity_SpecCube0, reflectVector, mip);
@@ -242,7 +242,6 @@ half3 GlossyEnvironmentReflection(half3 reflectVector, half perceptualRoughness,
 #else
     half3 irradiance = DecodeHDREnvironment(encodedIrradiance, unity_SpecCube0_HDR);
 #endif
-
     return irradiance * occlusion;
 #endif // GLOSSY_REFLECTIONS
 
@@ -273,9 +272,7 @@ half3 LightingPhysicallyBased(BRDFData brdfData,
     half3 radiance = lightColor * (lightAttenuation * NdotL);
 
     half3 brdf = brdfData.diffuse;
-    // 低画质屏蔽高光。
-    //brdf += brdfData.specular * DirectBRDFSpecular(brdfData, normalWS, lightDirectionWS, viewDirectionWS);
-
+    brdf += brdfData.specular * DirectBRDFSpecular(brdfData, normalWS, lightDirectionWS, viewDirectionWS);
     return brdf * radiance;
 }
 
@@ -288,7 +285,7 @@ half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, ha
 //       Used by ShaderGraph and others builtin renderers                    //
 ///////////////////////////////////////////////////////////////////////////////
 // 加入自定义主光源方向
-half4 UniversalFragmentPBR(InputData inputData, SurfaceData surfaceData,half LightDirControl, half3 selfMainLightDirection)
+half4 UniversalFragmentPBR(InputData inputData, SurfaceData surfaceData, half LightDirControl, half3 selfMainLightDirection)
 {
     BRDFData brdfData;
 
@@ -301,7 +298,6 @@ half4 UniversalFragmentPBR(InputData inputData, SurfaceData surfaceData,half Lig
     mainLight.direction = lerp(mainLight.direction, selfMainLightDirection, LightDirControl);
 
     half3 color = GlobalIllumination(brdfData, inputData.bakedGI, surfaceData.occlusion,inputData.normalWS, inputData.viewDirectionWS);
-    // 低画质直接屏蔽直接光处理
     color += LightingPhysicallyBased(brdfData, mainLight,inputData.normalWS, inputData.viewDirectionWS);
 
     color += surfaceData.emission;

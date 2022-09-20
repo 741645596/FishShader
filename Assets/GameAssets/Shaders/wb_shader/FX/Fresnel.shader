@@ -1,4 +1,4 @@
-﻿Shader "WB/Fresnel" {
+Shader "WB/Fresnel" {
     // 模型边缘光fresnel效果 调整光的颜色 宽度 
     Properties {
 
@@ -18,7 +18,7 @@
 
         [HDR]_FresnelColor("Fresnel Color", Color) = (1,1,1,1)
 
-        //_FresnelR0("Fresnel R0", Float) = 0.00
+        _FresnelR0("Fresnel R0", Float) = 0.00
         _FresnelScale("Fresnel Scale", Float) = 1
         _FresnelPow("Fresnel Pow", Float) = 5
 
@@ -45,8 +45,6 @@
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-
-            #pragma shader_feature USE_FRESNEL_FADING
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 

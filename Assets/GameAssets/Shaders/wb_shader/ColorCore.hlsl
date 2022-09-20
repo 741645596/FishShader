@@ -2,44 +2,43 @@
 #define COLOR_CORE_INCLUDED
 
 
-float3 hsv2rgb(float3 c)
+half3 hsv2rgb(half3 c)
 {
-	float4 K = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-	float3 p = abs(frac(c.xxx + K.xyz) * 6.0 - K.www);
+	half4 K = half4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	half3 p = abs(frac(c.xxx + K.xyz) * 6.0 - K.www);
 	return c.z * lerp(K.xxx, saturate(p - K.xxx), c.y);
 }
 
-float3 rgb2hsv(float3 c)
+half3 rgb2hsv(half3 c)
 {
-	float4 K = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
-	float4 p = lerp(float4(c.bg, K.wz), float4(c.gb, K.xy), step(c.b, c.g));
-	float4 q = lerp(float4(p.xyw, c.r), float4(c.r, p.yzx), step(p.x, c.r));
+	half4 K = half4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+	half4 p = lerp(half4(c.bg, K.wz), half4(c.gb, K.xy), step(c.b, c.g));
+	half4 q = lerp(half4(p.xyw, c.r), half4(c.r, p.yzx), step(p.x, c.r));
 
 	float d = q.x - min(q.w, q.y);
 	float e = 1.0e-10;
-	return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+	return half3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
 }
 
-float3 CalcFinalColor(float3 resultColor, float _ContrastScale)
+half3 CalcFinalColor(half3 resultColor, half _ContrastScale)
 {
 	//float3 mulColor = _OverlayColor.xyz * _OverlayMultiple;
-	float3 rimedColor = resultColor;
-	float3 linearRgb = rimedColor;
-	float Luminance = dot(linearRgb.xyz, float3(0.212500006, 0.715399981, 0.0720999986));    //LinearRgbToLuminance
-	float4 col = 0;
+	half3 rimedColor = resultColor;
+	half3 linearRgb = rimedColor;
+	half Luminance = dot(linearRgb.xyz, half3(0.212500006, 0.715399981, 0.0720999986));    //LinearRgbToLuminance
+	half4 col = 0;
 	col.rgb = (rimedColor.xyz - Luminance) * 1.35000002 + Luminance;
 	col.w = 1;
 	col.rgb = (col.rgb - _ContrastScale * 0.5) * 1.10000002 + _ContrastScale * 0.5;
 	return col.rgb;
-
 }
-float3 CalcFinalColor(float3 resultColor, float3 _OverlayColor, float _OverlayMultiple, float _ContrastScale)
+half3 CalcFinalColor(half3 resultColor, half3 _OverlayColor, half _OverlayMultiple, half _ContrastScale)
 {
-    float3 mulColor = _OverlayColor.xyz * _OverlayMultiple;
-	float3 rimedColor = mulColor * resultColor;
-	float3 linearRgb = rimedColor;
-	float Luminance = dot(linearRgb.xyz, float3(0.212500006, 0.715399981, 0.0720999986));    //LinearRgbToLuminance
-	float4 col=0;
+	half3 mulColor = _OverlayColor.xyz * _OverlayMultiple;
+	half3 rimedColor = mulColor * resultColor;
+	half3 linearRgb = rimedColor;
+	half Luminance = dot(linearRgb.xyz, half3(0.212500006, 0.715399981, 0.0720999986));    //LinearRgbToLuminance
+	half4 col=0;
 	col.rgb = (rimedColor.xyz - Luminance) * 1.35000002 + Luminance;
 	col.w = 1;
 	col.rgb = (col.rgb - _ContrastScale * 0.5) * 1.10000002 + _ContrastScale * 0.5;

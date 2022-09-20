@@ -16,12 +16,10 @@ Shader "WB/Background"
         [FoldoutItem][NoScaleOffset] _MaskTex("遮罩贴图", 2D) = "white" {}
 
         [Foldout] _DarkName("径向亚黑控制面板",Range(0,1)) = 0
-        [FoldoutItem][Toggle] _DarkControl("灯光方向控制开关", Float) = 0.0
         [FoldoutItem][NoScaleOffset]_DrakMaskTex("亚黑遮罩贴图", 2D) = "white" {}
         [FoldoutItem] _DarkRadius("DarkRadius", Range(0.01, 10.0)) = 1
         [FoldoutItem] _DarkRimAlphaStrength("_DarkRimAlphaStrength", Range(1, 5)) = 1
         [FoldoutItem] _DarkRimBaseColor("_DarkRimBaseColor", Color) = (0.00, 0.00, 0.00, 0.00)
-        //[FoldoutItem] _xxStrength("_xxStrength", Range(0.5, 5)) = 1
 
         [Foldout] _BossOutName("boss 出场控制面板",Range(0,1)) = 0
         [FoldoutItem][Toggle] _BossOut("Boss善良登场控制开关", Float) = 0.0
@@ -41,8 +39,6 @@ Shader "WB/Background"
         Pass
         {
             HLSLPROGRAM
-
-            #pragma multi_compile __ _DARKCONTROL_ON
             #pragma multi_compile __ _BOSSOUT_ON
 
             #pragma vertex vert
@@ -72,13 +68,12 @@ Shader "WB/Background"
             sampler2D _MainTex;
             sampler2D _MaskTex;
             sampler2D _DrakMaskTex;
+            sampler2D _Caustics;
 
             CBUFFER_START(UnityPerMaterial)
             float4 _MainTex_ST;
             float4 _MaskTex_ST;
             float4 _DrakMaskTex_ST;
-
-            sampler2D _Caustics;
             float4 _Caustics_ST;
 
             float4 _BaseColor;
@@ -123,8 +118,10 @@ Shader "WB/Background"
 
                  float2 mainUV = _Time.y * float2(0.05, 0.0) + i.uv;
                  mainUV = tex2D(_Caustics, mainUV).g * 0.006 - i.uv;
-                 float maskValue = tex2D(_MaskTex, mainUV).r;
+                 float RmaskValue = tex2D(_MaskTex, mainUV).r;
+                 float GmaskValue = tex2D(_MaskTex, mainUV).g;
 
+                 float maskValue = (RmaskValue + GmaskValue) * 0.5f;
                  float brightnessStrength = lerp(1,pow(abs(minCol), _Contrast) * _Factor, maskValue) ;
                  float3 mainColor = tex2D(_MainTex, mainUV).rgb;
                  float grayValue = dot(mainColor, float3(0.2999f, 0.587f, 0.114f));
@@ -140,18 +137,14 @@ Shader "WB/Background"
                  float dis2 = length(i.worldPos - p2) / _Radius2;
                  float dis = min(dis1, dis2);
                  dis = pow(abs(dis), _RimAlpha);
-                 disFactor = lerp(dis, 1, _MaskFactor);
-
-                 
+                 disFactor = lerp(dis, 1, _MaskFactor);     
 #endif 
                  float3 darkStrength = float3(1.0f,1.0f,1.0f);
-#if _DARKCONTROL_ON
                  float2 uv = (-i.uv) - float2(0.5f, 0.5f);
                  uv = uv / _DarkRadius + float2(0.5f, 0.5f);
                  float dr = tex2D(_DrakMaskTex, uv).r;
                  float3 addAlpha = pow(abs(1 - dr), 0.75f) * _DarkRimBaseColor.rgb;
                  darkStrength = dr * _DarkRimAlphaStrength * darkStrength + addAlpha;
-#endif
                  return float4(result * disFactor * darkStrength, 1.0f);
             }
             ENDHLSL
