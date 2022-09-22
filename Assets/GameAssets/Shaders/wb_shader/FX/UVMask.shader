@@ -1,4 +1,4 @@
-﻿Shader "WB/UVMask" {
+Shader "WB/UVMask" {
     // 纹理流动效果，UV速度调整，Mask遮罩，Mask 速度调整
     Properties {
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
@@ -42,35 +42,31 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-
-            float4 _BaseMap_ST;
+            half4 _BaseMap_ST;
             half4 _BaseColor;
             half _GlowScale;
             half _AlphaScale;
-            float4 _BaseColorSpeed;
+            half4 _BaseColorSpeed;
             half4 _Mask_ST;
-            float4 _MaskSpeed;
-
+            half4 _MaskSpeed;
             CBUFFER_END
 
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
-            TEXTURE2D(_Mask);
-            SAMPLER(sampler_Mask);
+            sampler2D _BaseMap;
+            sampler2D _Mask;
 
             struct Attributes
             {
-                float3 vertex : POSITION;
+                half3 vertex : POSITION;
                 half4 color : COLOR;
-                float2 texcoord :TEXCOORD0;
+                half2 texcoord :TEXCOORD0;
             };
 
             struct Varyings
             {
-                float4 positionCS : SV_POSITION;
+                half4 positionCS : SV_POSITION;
                 half4 color : COLOR;
-                float2 texcoord :TEXCOORD0;
-                float2 texcoordMask: TEXCOORD1;
+                half2 texcoord :TEXCOORD0;
+                half2 texcoordMask: TEXCOORD1;
             };
 
 
@@ -84,7 +80,7 @@
                 return output;
             }
 
-            void roateUV(float2 _UVRotate, half2 pivot, inout float2 uv)
+            void roateUV(half2 _UVRotate, half2 pivot, inout half2 uv)
             {
                 half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
                 half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
@@ -92,25 +88,23 @@
                 uv.xy = mul(roation, uv.xy -= pivot) + pivot;
             }
 
-            half4 frag(Varyings in_f) : SV_TARGET
+            half4 frag(Varyings input) : SV_TARGET
             {
                 half2 pivot = 0.5; //_UVRotate.xy;
 
-                float2 uv = in_f.texcoord;
+                half2 uv = input.texcoord;
                 uv += _BaseColorSpeed.xy * _Time.y;
                 roateUV(_BaseColorSpeed.zw, pivot, uv);
-                float4 baseCol = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
+                float4 baseCol = tex2D(_BaseMap, uv);
 
-                float2 uvMask = in_f.texcoordMask;
+                half2 uvMask = input.texcoordMask;
                 uvMask += _MaskSpeed.xy * _Time.y;
                 roateUV(_MaskSpeed.zw, pivot, uvMask);
-                float4 maskCol = SAMPLE_TEXTURE2D(_Mask, sampler_Mask, uvMask);
+                half maskAlpha = tex2D(_Mask, uvMask).r;
 
-                half4 col = in_f.color * baseCol * _BaseColor;
+                half4 col = input.color * baseCol * _BaseColor;
                 col.rgb *= _GlowScale;
-                col.a = saturate(col.a) * _AlphaScale;
-
-                col.a = saturate(col.a * maskCol.r * in_f.color.a * _BaseColor.a);
+                col.a = saturate(col.a * maskAlpha) * _AlphaScale;
                 return col;
             }
             ENDHLSL

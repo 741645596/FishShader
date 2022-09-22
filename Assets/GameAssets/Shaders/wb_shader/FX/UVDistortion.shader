@@ -1,4 +1,4 @@
-﻿Shader "WB/UVDistortion" {
+Shader "WB/UVDistortion" {
     // 纹理扰动效果，扰动数值，扰动的速度以及方向
     Properties {
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
@@ -15,7 +15,6 @@
         _UVNoiseTex("NoiseTex", 2D) = "black" {}
         _UVDistortion("UVDistortion", Float) = 0.5
         _NoiseScroll("NoiseScroll", Vector) = (0,-0.1,1,1)
-
     }
 
     SubShader {
@@ -43,39 +42,34 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-
-            float4 _BaseMap_ST;
+            half4 _BaseMap_ST;
             half4 _BaseColor;
             half4 _MainSpeed;
             half _GlowScale;
             half _AlphaScale;
-
-            sampler2D _UVNoiseTex;
             half4 _UVNoiseTex_ST;
             half _UVDistortion;
             half4 _NoiseScroll;
-
             CBUFFER_END
-
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
+            sampler2D _UVNoiseTex;
+            sampler2D _BaseMap;
 
             struct Attributes
             {
-                float3 vertex : POSITION;
+                half3 vertex : POSITION;
                 half4 color : COLOR;
-                float2 texcoord :TEXCOORD0;
+                half2 texcoord :TEXCOORD0;
             };
 
             struct Varyings
             {
-                float4 positionCS : SV_POSITION;
+                half4 positionCS : SV_POSITION;
                 half4 color : COLOR;
-                float2 texcoord :TEXCOORD0;
-                float2 texcoordNoise: TEXCOORD1;
+                half2 texcoord :TEXCOORD0;
+                half2 texcoordNoise: TEXCOORD1;
             };
 
-            void roateUV(float2 _UVRotate, half2 pivot, inout float2 uv)
+            void roateUV(half2 _UVRotate, half2 pivot, inout half2 uv)
             {
                 half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
                 half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
@@ -94,21 +88,21 @@
             }
 
 
-            half4 frag(Varyings in_f) : SV_TARGET
+            half4 frag(Varyings input) : SV_TARGET
             {
-                float2 uvMain = in_f.texcoord;
+                half2 uvMain = input.texcoord;
 
                 uvMain += _MainSpeed.xy * _Time.y;
                 half2 pivot = 0.5; //_UVRotate.xy;
                 roateUV(_MainSpeed.zw, pivot, uvMain);
 
-                float2 noiseScrollXY = _NoiseScroll.xy;
-                in_f.texcoordNoise.xy += half2(_Time.g * noiseScrollXY);
-                float2 noiseMask = tex2D(_UVNoiseTex, in_f.texcoordNoise.xy).xy * _UVDistortion * _NoiseScroll.zw;
+                half2 noiseScrollXY = _NoiseScroll.xy;
+                input.texcoordNoise.xy += half2(_Time.g * noiseScrollXY);
+                float2 noiseMask = tex2D(_UVNoiseTex, input.texcoordNoise.xy).xy * _UVDistortion * _NoiseScroll.zw;
                 uvMain.xy += noiseMask;
 
-                float4 baseCol = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uvMain);
-                half4 col = in_f.color * baseCol * _BaseColor;
+                half4 baseCol = tex2D(_BaseMap, uvMain);
+                half4 col = input.color * baseCol * _BaseColor;
                 col.rgb *= _GlowScale;
                 col.a = saturate(col.a) * _AlphaScale;
                 return col;

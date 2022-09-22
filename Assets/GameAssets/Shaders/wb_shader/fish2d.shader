@@ -11,18 +11,6 @@ Shader "WB/fish2d"
         _Color ("Tint", Color) = (1,1,1,1)
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
-        // 先屏蔽，序列帧受击变红走修改color 属性
-        /*
-        [Foldout] _HurtName("Hurt plane",Range(0,1)) = 0
-        [FoldoutItem][KeywordEnum(Rim,Albedo)] _HitColorChannel("HitColorType", Float) = 1.0
-        [FoldoutItem][Toggle] _TestHitColor("美术测试受击变红颜色开关", Float) = 0.0
-        [FoldoutItem] _HitColor("HitColor[美术控制]", Color) = (1,1,1,1)
-        [FoldoutItem] _HitMultiple("HitMultiple[美术控制]", Range(0,1)) = 1
-        [FoldoutItem] _HitRimPower("HitRim Power[美术控制]", Range(0.01, 10)) = 0.01
-        [FoldoutItem] _HitRimSpread("Hit Rim Spread[美术控制]", Range(-15, 4.99)) = 0.01
-        [FoldoutItem] _OverlayColor("_OverlayColor[程序控制]", Color) = (1,1,1,1)
-        [FoldoutItem] _OverlayMultiple("_OverlayMultiple[程序控制]", Range(0,1)) = 1
-        */
     }
 
     SubShader
@@ -36,10 +24,7 @@ Shader "WB/fish2d"
             "CanUseSpriteAtlas"="True"
         }
 
-        //Cull Off
         Lighting Off
-        //ZWrite Off
-        //Blend One OneMinusSrcAlpha
         Cull[_CullMode]
         Blend[_SourceBlend][_DestBlend]
         ZWrite[_ZWriteMode]
@@ -58,17 +43,13 @@ Shader "WB/fish2d"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 
-        //#pragma multi_compile _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO
-        //#pragma multi_compile __ _TESTHITCOLOR_ON
 
 
     CBUFFER_START(UnityPerMaterial)
-        half4 _RendererColor;
         half2 _Flip;
         half4 _Color;
-       //#include "HitRed_dec.hlsl"
+        half4 _RendererColor;
     CBUFFER_END
-        
         sampler2D _MainTex;
         
 

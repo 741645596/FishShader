@@ -120,13 +120,9 @@ Shader "WB/PBRFish"
 			#pragma multi_compile __ _STREAMER_ON
 		    #pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
 
-			//#define _RECEIVE_SHADOWS_OFF 1
-
-			
 			#pragma vertex vert
 			#pragma fragment frag
 
-			//#define SHADERPASS_FORWARD
 			#include "ColorCore.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			//#include "LightingCore.hlsl"
@@ -296,7 +292,7 @@ Shader "WB/PBRFish"
 				half Occlusion = tex2DNode11.g * _OcclusionStrength;
 				// 先屏蔽
 				//step(a,b) b >= a ? 1:0
-				float flag = step(_NonMetalThreshold, tex2DNode11.r);
+				half flag = step(_NonMetalThreshold, tex2DNode11.r);
 				/*if (tex2DNode11.r < _NonMetalThreshold)
 				{
 					Occlusion = Occlusion * _NonMetalStrength;

@@ -53,16 +53,15 @@ Shader "WB/Background"
 
             struct appdata
             {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
-
+                half4 vertex : POSITION;
+                half2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
-                float3 worldPos : TEXCOORD1;
+                half2 uv : TEXCOORD0;
+                half4 vertex : SV_POSITION;
+                half3 worldPos : TEXCOORD1;
             };
 
             sampler2D _MainTex;
@@ -71,31 +70,31 @@ Shader "WB/Background"
             sampler2D _Caustics;
 
             CBUFFER_START(UnityPerMaterial)
-            float4 _MainTex_ST;
-            float4 _MaskTex_ST;
-            float4 _DrakMaskTex_ST;
-            float4 _Caustics_ST;
+            half4 _MainTex_ST;
+            half4 _MaskTex_ST;
+            half4 _DrakMaskTex_ST;
+            half4 _Caustics_ST;
 
-            float4 _BaseColor;
-            float _BaseFactor;
-            float4 _NoiseColor;
+            half4 _BaseColor;
+            half _BaseFactor;
+            half4 _NoiseColor;
 
-            float _CausticTile;
-            float _Speed;
-            float _Factor;
-            float _Desaturation;
-            float _Contrast;
+            half _CausticTile;
+            half _Speed;
+            half _Factor;
+            half _Desaturation;
+            half _Contrast;
 
-            float _DarkRadius;
-            float _DarkRimAlphaStrength;
-            float3 _DarkRimBaseColor;
+            half _DarkRadius;
+            half _DarkRimAlphaStrength;
+            half3 _DarkRimBaseColor;
 
-            float3 _Position;
-            float3 _Position2;
-            float _Radius;
-            float _Radius2;
-            float _RimAlpha;
-            float _MaskFactor;
+            half3 _Position;
+            half3 _Position2;
+            half _Radius;
+            half _Radius2;
+            half _RimAlpha;
+            half _MaskFactor;
 
             CBUFFER_END
 
@@ -103,49 +102,48 @@ Shader "WB/Background"
             {
                 v2f o;
                 o.vertex = TransformObjectToHClip(v.vertex.xyz);
-                o.worldPos = mul(unity_ObjectToWorld, float4(v.vertex.x, 0, v.vertex.z, 1.0)).xyz;
+                o.worldPos = mul(unity_ObjectToWorld, half4(v.vertex.x, 0, v.vertex.z, 1.0)).xyz;
                 o.uv = -TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
-            float4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
-                 float2 original = _CausticTile * float2(1.5, 1.0) * i.uv;  // 焦散的tiling
-                 float2 offsetUV = _Time.y * _Speed * float2(0.1, 0.1); // uv offset
-                 float col1 = tex2D(_Caustics, original + offsetUV).r;   // 焦散1
-                 float col2 = tex2D(_Caustics, original - offsetUV + float2(0.418f, 0.355f)).r; // 焦散2
-                 float minCol = min(col1, col2);
+                 half2 original = _CausticTile * half2(1.5, 1.0) * i.uv;  // 焦散的tiling
+                 half2 offsetUV = _Time.y * _Speed * half2(0.1, 0.1); // uv offset
+                 half col1 = tex2D(_Caustics, original + offsetUV).r;   // 焦散1
+                 half col2 = tex2D(_Caustics, original - offsetUV + half2(0.418f, 0.355f)).r; // 焦散2
+                 half minCol = min(col1, col2);
 
-                 float2 mainUV = _Time.y * float2(0.05, 0.0) + i.uv;
+                 half2 mainUV = _Time.y * half2(0.05, 0.0) + i.uv;
                  mainUV = tex2D(_Caustics, mainUV).g * 0.006 - i.uv;
-                 float RmaskValue = tex2D(_MaskTex, mainUV).r;
-                 float GmaskValue = tex2D(_MaskTex, mainUV).g;
+                 half2 RGmaskValue = tex2D(_MaskTex, mainUV).rg;
 
-                 float maskValue = (RmaskValue + GmaskValue) * 0.5f;
-                 float brightnessStrength = lerp(1,pow(abs(minCol), _Contrast) * _Factor, maskValue) ;
-                 float3 mainColor = tex2D(_MainTex, mainUV).rgb;
-                 float grayValue = dot(mainColor, float3(0.2999f, 0.587f, 0.114f));
-                 float3 diffColor = lerp(mainColor, float3(grayValue, grayValue, grayValue), _Desaturation);
-                 float3 result = lerp(_NoiseColor, _BaseColor * _BaseFactor, brightnessStrength).rgb * diffColor;
+                 half maskValue = (RGmaskValue.r + RGmaskValue.g) * 0.5f;
+                 half brightnessStrength = lerp(1,pow(abs(minCol), _Contrast) * _Factor, maskValue) ;
+                 half3 mainColor = tex2D(_MainTex, mainUV).rgb;
+                 float grayValue = dot(mainColor, half3(0.2999f, 0.587f, 0.114f));
+                 half3 diffColor = lerp(mainColor, half3(grayValue, grayValue, grayValue), _Desaturation);
+                 half3 result = lerp(_NoiseColor, _BaseColor * _BaseFactor, brightnessStrength).rgb * diffColor;
                  //
                  float disFactor = 1.0;
 #if _BOSSOUT_ON
-                 float3 p1 = mul(unity_ObjectToWorld, float4(_Position.x, 0, _Position.y, 1.0)).xyz;
-                 float dis1 = length(i.worldPos - p1) / _Radius;
+                 half3 p1 = mul(unity_ObjectToWorld, half4(_Position.x, 0, _Position.y, 1.0)).xyz;
+                 half dis1 = length(i.worldPos - p1) / _Radius;
                  dis1 = saturate(dis1);
-                 float3 p2 = mul(unity_ObjectToWorld, float4(_Position2.x, 0, _Position2.y, 1.0)).xyz;
-                 float dis2 = length(i.worldPos - p2) / _Radius2;
-                 float dis = min(dis1, dis2);
+                 half3 p2 = mul(unity_ObjectToWorld, half4(_Position2.x, 0, _Position2.y, 1.0)).xyz;
+                 half dis2 = length(i.worldPos - p2) / _Radius2;
+                 half dis = min(dis1, dis2);
                  dis = pow(abs(dis), _RimAlpha);
                  disFactor = lerp(dis, 1, _MaskFactor);     
 #endif 
-                 float3 darkStrength = float3(1.0f,1.0f,1.0f);
-                 float2 uv = (-i.uv) - float2(0.5f, 0.5f);
-                 uv = uv / _DarkRadius + float2(0.5f, 0.5f);
-                 float dr = tex2D(_DrakMaskTex, uv).r;
-                 float3 addAlpha = pow(abs(1 - dr), 0.75f) * _DarkRimBaseColor.rgb;
+                 half3 darkStrength = half3(1.0f,1.0f,1.0f);
+                 half2 uv = (-i.uv) - half2(0.5f, 0.5f);
+                 uv = uv / _DarkRadius + half2(0.5f, 0.5f);
+                 half dr = tex2D(_DrakMaskTex, uv).r;
+                 half3 addAlpha = pow(abs(1 - dr), 0.75f) * _DarkRimBaseColor.rgb;
                  darkStrength = dr * _DarkRimAlphaStrength * darkStrength + addAlpha;
-                 return float4(result * disFactor * darkStrength, 1.0f);
+                 return half4(result * disFactor * darkStrength, 1.0f);
             }
             ENDHLSL
         }
@@ -171,20 +169,20 @@ Shader "WB/Background"
 
             struct appdata
             {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                half4 vertex : POSITION;
+                half2 uv : TEXCOORD0;
 
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
+                half2 uv : TEXCOORD0;
+                half4 vertex : SV_POSITION;
             };
 
             sampler2D _MainTex;
             CBUFFER_START(UnityPerMaterial)
-            float4 _MainTex_ST;
+            half4 _MainTex_ST;
             CBUFFER_END
 
 
@@ -196,10 +194,10 @@ Shader "WB/Background"
                 return o;
             }
 
-            float4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
-                float3 mainColor = tex2D(_MainTex, -i.uv).rgb;
-                 return float4(mainColor,1.0f);
+                half3 mainColor = tex2D(_MainTex, -i.uv).rgb;
+                 return half4(mainColor,1.0f);
             }
             ENDHLSL
         }

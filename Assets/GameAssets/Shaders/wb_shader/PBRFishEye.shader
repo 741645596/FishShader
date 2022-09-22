@@ -47,10 +47,6 @@ Shader "WB/PBRFishEye"
 		[Foldout] _SpecularName("高光控制面板",Range(0,1)) = 0
 		[FoldoutItem]  _SpecularStrength("高光强度", Range(0.95, 1)) = 1.0
 
-        [Foldout] _NonMetalName("非金属度控制面板",Range(0,1)) = 0
-		[FoldoutItem] _NonMetalThreshold("非金属阈值", Range(0, 0.2)) = 0.1
-		[FoldoutItem] _NonMetalStrength("非金属强度", Range(0, 10)) = 1.0
-
 		[Foldout] _FishEyeName("鱼眼径向透明度面板",Range(0,1)) = 0
 		[FoldoutItem] _RadiusAlphaStrength("RadiusAlphaStrength[径向透明度强度]", Range(1, 3)) = 1
 		[FoldoutItem] _RadiusAlphaMin("_RadiusAlphaMin[径向透明度区间]", Range(0, 0.5)) = 0.3
@@ -67,18 +63,12 @@ Shader "WB/PBRFishEye"
 
         [Foldout] _FadeName("淡入淡出控制面板[程序控制]",Range(0,1)) = 0
 		[FoldoutItem] _Alpha("_Alpha", float) = 1
-
-
-	    [Foldout] _LightDirName("灯光方向面板",Range(0,1)) = 0
-		[FoldoutItem][Toggle] _LightDirControl("灯光方向控制开关", Float) = 0.0
-		[FoldoutItem] _LightDir("LightDir", Vector) = (0, 0, 0, 0)
 	}
 
 	SubShader
 	{
 		Tags {  "RenderPipeline" = "UniversalPipeline"  "Queue" = "Transparent -300" }
 		Cull[_CullMode]
-		//LOD 300
 
 		Pass
 		{
@@ -93,18 +83,8 @@ Shader "WB/PBRFishEye"
 			Offset 0 , 0
 			ColorMask RGBA
 			
-			//模板测试总是通过，并写入模板缓存区值为1
-			Stencil
-			{
-				Ref 9
-				Comp always
-				Pass replace
-				Fail keep
-				ZFail keep
-			}
 
 			HLSLPROGRAM
-		    //#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO
             #define _HITCOLORCHANNEL_ALBEDO 1
 
 			#pragma vertex vert
@@ -123,7 +103,6 @@ Shader "WB/PBRFishEye"
 				half3 ase_normal : NORMAL;
 				half4 ase_tangent : TANGENT;
 				half4 texcoord : TEXCOORD0;
-				
 			};
 
 			struct VertexOutput
@@ -138,7 +117,6 @@ Shader "WB/PBRFishEye"
 
 			CBUFFER_START(UnityPerMaterial)
 #include "HitRed_dec.hlsl"
-
 			half4 _BaseColor;
 			half _ColorScale;
 			half _ContrastScale;
@@ -166,16 +144,11 @@ Shader "WB/PBRFishEye"
 			half _HSVValue;
 			half _SpecularStrength;
 
-			half _NonMetalThreshold;
-			half _NonMetalStrength;
-
 			half _RadiusAlphaStrength;
 			half _RadiusAlphaMin, _RadiusAlphaMax;
 
 
 			half _Alpha;
-			half _LightDirControl;
-			half3 _LightDir;
 			CBUFFER_END
 			sampler2D _BaseMap;
 			sampler2D _NormalMap;
@@ -242,14 +215,6 @@ Shader "WB/PBRFishEye"
 				half Smoothness = lerp(_SmoothnessRemapMin, _SmoothnessRemapMax, tex2DNode11.a) * _GlossMapScale;
 				half3 Specular = _SpecularStrength;
 				half Occlusion = tex2DNode11.g * _OcclusionStrength;
-				// 先屏蔽
-				//step(a,b) b >= a ? 1:0
-				float flag = step(_NonMetalThreshold, tex2DNode11.r);
-				/*if (tex2DNode11.r < _NonMetalThreshold)
-				{
-					Occlusion = Occlusion * _NonMetalStrength;
-				}*/
-				Occlusion = Occlusion * lerp(_NonMetalStrength, 1.0f, flag);
 
 				InputData inputData;
 				inputData.positionWS = WorldPosition;
@@ -270,7 +235,7 @@ Shader "WB/PBRFishEye"
 
 			    inputData.bakedGI = SAMPLE_GI( IN.lightmapUVOrVertexSH.xy, SH, inputData.normalWS );
 				// 标识出金鱼眼圈。
-				flag = step(0.3f, tex2DNode11.b);//step(a,b) b >= a ? 1:0
+				half flag = step(0.3f, tex2DNode11.b);//step(a,b) b >= a ? 1:0
 				half cosAngel = saturate(ndv);
 				half RadiusDistance = 1 - cosAngel * cosAngel;
 				half RadiusAlpha = pow(RadiusDistance, _RadiusAlphaStrength);
@@ -287,16 +252,14 @@ Shader "WB/PBRFishEye"
 					Occlusion, 
 					half3(0,0,0),
 					Alpha,
-					_LightDirControl,
-					_LightDir
+					0,
+					half3(0, 0, 0)
 				    );
 
 				color.rgb = HitRed(color.rgb, Emission.rgb, inputData.normalWS, WorldViewDirection);
 				color.rgb = CalcFinalColor(color.rgb, _OverColor, _OverMultiple, _ContrastScale);
 				return color;
 			}
-			
-
 			ENDHLSL
 		}
 	}

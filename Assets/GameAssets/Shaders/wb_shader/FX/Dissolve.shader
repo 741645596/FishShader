@@ -1,4 +1,4 @@
-﻿Shader "WB/Dissolve" {
+Shader "WB/Dissolve" {
     Properties {
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
         [Enum(One, 1 , OneMinusSrcAlpha, 10 )] _DstBlend ("BlendDestination", Float) = 1
@@ -11,7 +11,6 @@
         [HDR] _BaseColor("Base Color", Color) = (1,1,1,1)
 
         _UVBaseScroll("Base UVScroll", Vector) = (0,0,0,0)
-
 
         _GlowScale("Glow Scale", float) = 1
         _AlphaScale("Alpha Scale", float) = 1
@@ -37,11 +36,7 @@
             "RenderPipeline" = "UniversalPipeline"
         }
 
-        // ------------------------------------------------------------------
-        //  Forward pass.
         Pass {
-            // Lightmode matches the ShaderPassName set in UniversalRenderPipeline.cs. SRPDefaultUnlit and passes with
-            // no LightMode tag are also rendered by Universal Render Pipeline
             Name "ForwardLit"
             Blend[_SrcBlend][_DstBlend]
             Cull[_Cull]
@@ -50,23 +45,21 @@
             ZTest [_ZTest]
 
             HLSLPROGRAM
-            // Required to compile gles 2.0 with standard SRP library
-            // All shaders must be compiled with HLSLcc and currently only gles is not using HLSLcc by default
-            #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
-            #pragma target 2.0
+            #pragma vertex vert
+            #pragma fragment frag
+
 
             #pragma multi_compile __ USE_CUTOUT_TEX
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-            float4 _BaseMap_ST;
+            half4 _BaseMap_ST;
             half4 _BaseColor;
-            float2 _UVBaseScroll;
+            half2 _UVBaseScroll;
 
             #ifdef USE_CUTOUT_TEX
-            float4 _CutoutTex_ST;
+            half4 _CutoutTex_ST;
             #endif
 
             half _UseSoftCutout;
@@ -76,39 +69,34 @@
             half4 _CutoutColor;
             half _CutoutThreshold;
 
-            float2 _UVCutOutScroll;
+            half2 _UVCutOutScroll;
 
             half _GlowScale;
             half _AlphaScale;
 
             CBUFFER_END
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
-
-            TEXTURE2D(_CutoutTex);
-            SAMPLER(sampler_CutoutTex);
+            sampler2D _BaseMap;
+            sampler2D _CutoutTex;
 
             struct AttributesParticle
             {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
+                half4 vertex : POSITION;
                 half4 color : COLOR;
-
-                float3 texcoord : TEXCOORD0;
+                half3 texcoord : TEXCOORD0;
             };
 
             struct VaryingsParticle
             {
-                float4 positionCS : SV_POSITION;
-                float2 texcoord : TEXCOORD0;
+                half4 positionCS : SV_POSITION;
+                half2 texcoord : TEXCOORD0;
                 half4 color : COLOR;
                 #if defined (USE_CUTOUT_TEX)
-                float4 texcoordNoise : TEXCOORD2;
+                half4 texcoordNoise : TEXCOORD2;
                 #endif
-                float age_percent : TEXCOORD3;
+                half age_percent : TEXCOORD3;
             };
 
-            VaryingsParticle vertParticleUnlit(AttributesParticle input)
+            VaryingsParticle vert(AttributesParticle input)
             {
                 VaryingsParticle output = (VaryingsParticle)0;
 
@@ -129,33 +117,32 @@
                 return output;
             }
 
-            half4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
+            half4 frag(VaryingsParticle fInput) : SV_Target
             {
                 half4 vertColor = fInput.color;
-                float2 uv = fInput.texcoord.xy;
+                half2 uv = fInput.texcoord.xy;
 
-                float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv +_Time.y * _UVBaseScroll.xy);
-
+                half4 mainTexColor = tex2D(_BaseMap, uv +_Time.y * _UVBaseScroll.xy);
                 half4 col = mainTexColor * _BaseColor;
 
-                float cutout = _CutOut * fInput.age_percent;
+                half cutout = _CutOut * fInput.age_percent;
                 cutout = lerp(cutout, (1.001 - vertColor.a + cutout), _UseParticlesAlphaCutout);
 
                 #ifdef USE_CUTOUT_TEX
-                float2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * _Time.y;
-                float mask = SAMPLE_TEXTURE2D(_CutoutTex, sampler_CutoutTex, cutoutUV).r;
+                half2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * _Time.y;
+                half mask = tex2D(_CutoutTex, cutoutUV).r;
                 #else
-                    float mask = mainTexColor.a;
+                half mask = mainTexColor.a;
                 #endif
 
-                float diffMask = mask - cutout;
-                float alphaMask = lerp(
+                half diffMask = mask - cutout;
+                half alphaMask = lerp(
                     saturate(diffMask * 10000) * col.a,
                     saturate(diffMask * 2) * col.a,
                     _UseSoftCutout);
 
-                float alphaMaskThreshold = saturate((diffMask - _CutoutThreshold) * 10000) * col.a;
-                float3 col2 = lerp(col.rgb, _CutoutColor.rgb, saturate((1 - alphaMaskThreshold) * alphaMask));
+                half alphaMaskThreshold = saturate((diffMask - _CutoutThreshold) * 10000) * col.a;
+                half3 col2 = lerp(col.rgb, _CutoutColor.rgb, saturate((1 - alphaMaskThreshold) * alphaMask));
                 col.rgb = lerp(col.rgb, col2, step(0.01, _CutoutThreshold));
                 col.a = alphaMask;
 
@@ -164,9 +151,6 @@
                 col.a = saturate(col.a * _AlphaScale);
                 return col;
             }
-
-            #pragma vertex vertParticleUnlit
-            #pragma fragment fragParticleUnlit
             ENDHLSL
         }
     }

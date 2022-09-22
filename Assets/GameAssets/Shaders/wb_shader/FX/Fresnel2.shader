@@ -1,15 +1,10 @@
-// Made with Amplify Shader Editor
-// Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "WB/Fresnel2" {
     Properties {
         _Fresnel("Fresnel", Range( 0 , 1)) = 0.1943072
         [HDR]_Color0("Color 0", Color) = (0.9811321,0.9811321,0.9811321,1)
-
     }
 
     SubShader {
-        LOD 0
-
         Tags {"RenderPipeline"="UniversalPipeline" "RenderType"="Transparent" "Queue"="Transparent"}
 
         Cull Back
@@ -29,19 +24,11 @@ Shader "WB/Fresnel2" {
             ColorMask RGBA
 
             HLSLPROGRAM
-            #define ASE_SRP_VERSION 999999
-
-            #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
 
             #pragma vertex vert
             #pragma fragment frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
             half4 _Color0;
@@ -51,42 +38,38 @@ Shader "WB/Fresnel2" {
 
             struct VertexInput
             {
-                float4 vertex : POSITION;
-                float3 ase_normal : NORMAL;
+                half4 vertex : POSITION;
+                half3 ase_normal : NORMAL;
                 half4 ase_color : COLOR;
             };
 
             struct VertexOutput
             {
-                float4 clipPos : SV_POSITION;
-                float4 ase_color : COLOR;
-                float4 ase_texcoord1 : TEXCOORD1;
+                half4 clipPos : SV_POSITION;
+                half4 ase_color : COLOR;
+                half fresnel : TEXCOORD1;
             };
 
             VertexOutput vert(VertexInput v)
             {
                 VertexOutput o = (VertexOutput)0;
 
-                float3 positionWS = TransformObjectToWorld(v.vertex.xyz);
-                float3 viewDirectionWS = (_WorldSpaceCameraPos.xyz - positionWS);
+                half3 positionWS = TransformObjectToWorld(v.vertex.xyz);
+                half3 viewDirectionWS = (_WorldSpaceCameraPos.xyz - positionWS);
                 viewDirectionWS = normalize(viewDirectionWS);
                 half3 normalWS = TransformObjectToWorldNormal(v.ase_normal);
 
                 half NdotV = dot(viewDirectionWS, normalWS);
-                half fresnel = smoothstep(_Fresnel, 1.0, (1.0 - max(NdotV, 0.0)));
-
-                o.ase_texcoord1.x = fresnel;
-
+                o.fresnel = smoothstep(_Fresnel, 1.0, (1.0 - max(NdotV, 0.0)));
                 o.ase_color = v.ase_color;
 
-                //setting value to unused interpolator channels and avoid initialization warnings
-                o.ase_texcoord1.yzw = 0;
+
                 #ifdef ASE_ABSOLUTE_VERTEX_POS
-					float3 defaultVertexValue = v.vertex.xyz;
+                half3 defaultVertexValue = v.vertex.xyz;
                 #else
-                float3 defaultVertexValue = float3(0, 0, 0);
+                half3 defaultVertexValue = half3(0, 0, 0);
                 #endif
-                float3 vertexValue = defaultVertexValue;
+                half3 vertexValue = defaultVertexValue;
                 #ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.vertex.xyz = vertexValue;
                 #else
@@ -101,12 +84,10 @@ Shader "WB/Fresnel2" {
 
             half4 frag(VertexOutput IN) : SV_Target
             {
-                half fresnel = IN.ase_texcoord1.x;
-
                 half4 FresnelColor = _Color0;
 
-                float3 Color = FresnelColor.rgb;
-                float Alpha = IN.ase_color.a * FresnelColor.a * fresnel;
+                half3 Color = FresnelColor.rgb;
+                half Alpha = IN.ase_color.a * FresnelColor.a * IN.fresnel;
 
                 return half4(Color, Alpha);
             }
