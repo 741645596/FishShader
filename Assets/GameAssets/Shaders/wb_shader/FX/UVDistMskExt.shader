@@ -59,39 +59,40 @@ Shader "WB/FXUVDistMskExt" {
             Lighting Off
             ZTest [_ZTest]
             HLSLPROGRAM
+            #include "../ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
             float4 _BaseMap_ST;
-            half4 _BaseColor;
-            half4 _MainSpeed;
-            half _CustomUV;
+            float4 _BaseColor;
+            float4 _MainSpeed;
+            float _CustomUV;
             float4 _ColorTex_ST;
 
-            half4 _MaskTex_ST;
+            float4 _MaskTex_ST;
 
-            half4 _UVNoiseTex_ST;
-            half4 _UVScrollDir;
-            half _UVDistortion;
+            float4 _UVNoiseTex_ST;
+            float4 _UVScrollDir;
+            float _UVDistortion;
 
-            half _UseCutoutTex;
+            float _UseCutoutTex;
             float4 _CutoutTex_ST;
-            half _CutOut;
-            half _CustomCutOut;
-            half _UseSoftCutout;
-            half _UseParticlesAlphaCutout;
-            half4 _CutoutColor;
-            half _CutoutThreshold;
+            float _CutOut;
+            float _CustomCutOut;
+            float _UseSoftCutout;
+            float _UseParticlesAlphaCutout;
+            float4 _CutoutColor;
+            float _CutoutThreshold;
             float2 _UVCutOutScroll;
 
-            half _GlowScale;
-            half _AlphaScale;
-            half4 _MaskSpeed;
+            float _GlowScale;
+            float _AlphaScale;
+            float4 _MaskSpeed;
 
             float4 _VertexAnimateTex_ST;
-            half _VertexScrollingX;
-            half _VertexScrollingY;
-            half _VertexStrength;
+            float _VertexScrollingX;
+            float _VertexScrollingY;
+            float _VertexStrength;
 
             CBUFFER_END
 
@@ -117,7 +118,7 @@ Shader "WB/FXUVDistMskExt" {
             {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
-                half4 color : COLOR;
+                float4 color : COLOR;
                 float4 texCoord0 : TEXCOORD0;
                 float4 texCoordCst : TEXCOORD1;
             };
@@ -125,42 +126,34 @@ Shader "WB/FXUVDistMskExt" {
             struct VaryingsParticle
             {
                 float4 positionCS : SV_POSITION;
-                half4 color : COLOR;
+                float4 color : COLOR;
 
                 float2 texcoord : TEXCOORD0;
-                half2 texcoordColor : TEXCOORD2;
+                float2 texcoordColor : TEXCOORD2;
                 float4 texcoordNoise: TEXCOORD1;
-                half2 texcoordMask : TEXCOORD4;
+                float2 texcoordMask : TEXCOORD4;
                 float3 CustData : TEXCOORD3;
             };
 
-
-            void roateUV(float2 _UVRotate, half2 pivot, inout float2 uv)
-            {
-                half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
-                half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
-                half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
-                uv.xy = mul(roation, uv.xy -= pivot) + pivot;
-            }
-
-            void distorUVbyTex(float2 noiseUV, inout float2 uvMain)
+            void distorUVbyTex(float2 noiseUV,float calcTime, inout float2 uvMain)
             {
                 float2 scrollDir = _UVScrollDir.xy;
                 float2 distStr = _UVScrollDir.zw;
 
-                noiseUV += half2(scrollDir * _Time.y);
-                float2 uvOffset = SAMPLE_TEXTURE2D(_UVNoiseTex, sampler_UVNoiseTex, noiseUV).xy * _UVDistortion *
-                    distStr;
+                noiseUV += float2(scrollDir * calcTime);
+                float2 uvOffset = SAMPLE_TEXTURE2D(_UVNoiseTex, sampler_UVNoiseTex, noiseUV).xy * _UVDistortion * distStr;
                 uvMain += uvOffset;
             }
 
             VaryingsParticle vertParticleUnlit(AttributesParticle input)
             {
                 VaryingsParticle output = (VaryingsParticle)0;
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
                 // 顶点扰动。
                 float3 positionWS = TransformObjectToWorld(input.vertex.xyz);
-                float2 vertexAnimateTexUV = TRANSFORM_TEX(input.texCoord0, _VertexAnimateTex) + half2(_VertexScrollingX, _VertexScrollingY) * _Time.g;
-                half4 vertexAnimateMask = SAMPLE_TEXTURE2D_LOD(_VertexAnimateTex, sampler_VertexAnimateTex, vertexAnimateTexUV, 0);
+                float2 vertexAnimateTexUV = TRANSFORM_TEX(input.texCoord0, _VertexAnimateTex) + float2(_VertexScrollingX, _VertexScrollingY) * calcTime;
+                float4 vertexAnimateMask = SAMPLE_TEXTURE2D_LOD(_VertexAnimateTex, sampler_VertexAnimateTex, vertexAnimateTexUV, 0);
                 positionWS += _VertexStrength * vertexAnimateMask.r * input.normal;
                 output.positionCS = TransformWorldToHClip(positionWS);
                 //
@@ -178,24 +171,27 @@ Shader "WB/FXUVDistMskExt" {
             }
 
 
-            half4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
+            float4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
             {
-                half4 vertColor = fInput.color;
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
+
+                float4 vertColor = fInput.color;
                 float2 uvMain = fInput.texcoord.xy;
-                uvMain += _MainSpeed.xy * _Time.y;
-                half2 pivot = 0.5; //_UVRotate.xy;
-                roateUV(_MainSpeed.zw, pivot, uvMain);
+                uvMain += _MainSpeed.xy * calcTime;
+                float2 pivot = 0.5; //_UVRotate.xy;
+                roateUV(_MainSpeed.zw, calcTime, pivot, uvMain);
                 uvMain += fInput.CustData.xy;
-                distorUVbyTex(fInput.texcoordNoise.xy, uvMain);
+                distorUVbyTex(fInput.texcoordNoise.xy, calcTime,uvMain);
 
                 float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uvMain);
 
 
-                half2 uvMask = fInput.texcoordMask;
-                uvMask.xy += _MaskSpeed.xy * _Time.y;
-                roateUV(_MaskSpeed.zw, pivot, uvMask);
+                float2 uvMask = fInput.texcoordMask;
+                uvMask.xy += _MaskSpeed.xy * calcTime;
+                roateUV(_MaskSpeed.zw,calcTime, pivot, uvMask);
 
-                half4 col = mainTexColor * _BaseColor;
+                float4 col = mainTexColor * _BaseColor;
                 col *= vertColor;
                 col.rgb *= _GlowScale;
 		
@@ -208,7 +204,7 @@ Shader "WB/FXUVDistMskExt" {
 
                     cutout = lerp(cutout, (1.001 - vertColor.a + cutout), _UseParticlesAlphaCutout);
 
-                    float2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * _Time.y;
+                    float2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * calcTime;
                     float mask = SAMPLE_TEXTURE2D(_CutoutTex, sampler_CutoutTex, cutoutUV).r;
                     mask = _UseCutoutTex ? mask : mainTexColor.a;
 
@@ -227,6 +223,7 @@ Shader "WB/FXUVDistMskExt" {
                 float4 maskTexColor = SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, uvMask);
                 col.a = saturate(col.a * _AlphaScale);
                 col.a = saturate(col.a * maskTexColor.r);
+                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             #pragma vertex vertParticleUnlit

@@ -37,10 +37,6 @@ Shader "WB/UI/SpriteHSV"
         #pragma target 2.0
         #include "../ColorCore.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-        #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-        #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 
 
     CBUFFER_START(UnityPerMaterial)
@@ -48,36 +44,35 @@ Shader "WB/UI/SpriteHSV"
         half2 _Flip;
         half4 _Color;
 
-        float _HSVHue;
-        float _HSVSat;
-        float _HSVValue;
+        half _HSVHue;
+        half _HSVSat;
+        half _HSVValue;
     CBUFFER_END
-        
         sampler2D _MainTex;
         
 
         struct appdata_t
         {
-            float4 vertex   : POSITION;
-            float4 color    : COLOR;
-            float2 texcoord : TEXCOORD0;
+            half4 vertex   : POSITION;
+            half4 color    : COLOR;
+            half2 texcoord : TEXCOORD0;
         };
 
         struct v2f
         {
-            float4 vertex   : SV_POSITION;
+            half4 vertex   : SV_POSITION;
             half4 color : COLOR;
-            float2 texcoord : TEXCOORD0;
+            half2 texcoord : TEXCOORD0;
         };
 
-        inline float4 UnityFlipSprite(in float3 pos, in half2 flip)
+        inline half4 UnityFlipSprite(in float3 pos, in half2 flip)
         {
-            return float4(pos.xy * flip, pos.z, 1.0);
+            return half4(pos.xy * flip, pos.z, 1.0);
         }
-        inline float4 UnityPixelSnap(float4 pos)
+        inline half4 UnityPixelSnap(float4 pos)
         {
-            float2 hpc = _ScreenParams.xy * 0.5f;
-            float2 pixelPos = round((pos.xy / pos.w) * hpc);
+            half2 hpc = _ScreenParams.xy * 0.5f;
+            half2 pixelPos = round((pos.xy / pos.w) * hpc);
             pos.xy = pixelPos / hpc * pos.w;
             return pos;
         }
@@ -95,8 +90,6 @@ Shader "WB/UI/SpriteHSV"
             return OUT;
         }
 
-
-
         half4 SampleSpriteTexture(float2 uv)
         {
             half4 color = tex2D(_MainTex, uv);
@@ -106,9 +99,9 @@ Shader "WB/UI/SpriteHSV"
         {
             half4 c = SampleSpriteTexture(IN.texcoord) * IN.color;
             // hsv 处理
-            float3 hvs = rgb2hsv(c.rgb);
+            half3 hvs = rgb2hsv(c.rgb);
             hvs.x = fmod(_HSVHue * 0.00277777785 + hvs.x, 1);
-            hvs.yz *= float2(_HSVSat, _HSVValue);
+            hvs.yz *= half2(_HSVSat, _HSVValue);
             c.rgb = hsv2rgb(hvs);
             c.rgb *= c.a;
             return c;

@@ -46,14 +46,25 @@ half3 CalcFinalColor(half3 resultColor, half3 _OverlayColor, half _OverlayMultip
 	
 }
 
+
+//#include "../wb_Shader/ColorCore.hlsl"
+				// 旋转uv 计算
+void roateUV(float2 _UVRotate, float calcTime, half2 pivot, inout float2 uv)
+{
+	half cosAngle = cos(_UVRotate.x + calcTime * _UVRotate.y);
+	half sinAngle = sin(_UVRotate.x + calcTime * _UVRotate.y);
+	half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
+	uv.xy = mul(roation, uv.xy -= pivot) + pivot;
+}
+
 inline float GammaToLinearSpaceExact(float value)
 {
 	if (value <= 0.04045F)
 		return value / 12.92F;
 	else if (value < 1.0F)
-		return pow((value + 0.055F) / 1.055F, 2.4F);
+		return pow(abs((value + 0.055F) / 1.055F), 2.4F);
 	else
-		return pow(value, 2.2F);
+		return pow(abs(value), 2.2F);
 }
 
 half3 GammaToLinearSpace3(half3 col)
@@ -68,7 +79,7 @@ half3 GammaToLinearSpace3(half3 col)
 // 2.2
 inline float Gamma22(float value)
 {
-	return pow(value, 2.2f);
+	return pow(abs(value), 2.2f);
 }
 
 inline float4 Gamma22(float4 sRGB)
@@ -84,7 +95,7 @@ inline float4 Gamma22(float4 sRGB)
 // 0.45
 inline float Gamma045(float value)
 {
-		return pow(value, 0.45f);
+		return pow(abs(value), 0.45f);
 }
 
 inline float4 Gamma045(float4 sRGB)

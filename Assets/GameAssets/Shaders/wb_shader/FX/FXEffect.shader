@@ -6,6 +6,8 @@ Shader "WB/FXEffect" {
         [FoldoutItem] [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
         [FoldoutItem] [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 0
         [FoldoutItem] [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
+        //[FoldoutItem] _OffsetFactor("Offset Factor", Float) = 0
+        //[FoldoutItem] _OffsetUnits("Offset Units", Float) = 0
         // base
         [Foldout] _BaseName("主纹理面板",Range(0,1)) = 0
         [FoldoutItem] _BaseMap("Base Map", 2D) = "white" {}
@@ -70,6 +72,7 @@ Shader "WB/FXEffect" {
                 ZWrite[_ZWriteMode]
                 Lighting Off
                 ZTest[_ZTest]
+                //Offset[_OffsetFactor],[_OffsetUnits]
 
                 HLSLPROGRAM
                 #pragma multi_compile __ _SCROLL_ON
@@ -84,39 +87,40 @@ Shader "WB/FXEffect" {
 
 
                 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+                #include "../ColorCore.hlsl"
 
                 CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
-                half4 _BaseColor;
-                half _GlowScale;
-                half _AlphaScale;
+                float4 _BaseColor;
+                float _GlowScale;
+                float _AlphaScale;
                 // 流动
                 float4 _MainSpeed;
                 // 附加色
                 float4 _ColorTex_ST;
                 // mask
-                half4 _MaskTex_ST;
+                float4 _MaskTex_ST;
                 float4 _MaskSpeed;
                 // 扰动
-                half _CustomUV;
-                half4 _UVNoiseTex_ST;
-                half4 _UVScrollDir;
-                half _UVDistortion;
+                float _CustomUV;
+                float4 _UVNoiseTex_ST;
+                float4 _UVScrollDir;
+                float _UVDistortion;
                 // 溶解
-                half _UseCutoutTex;
+                float _UseCutoutTex;
                 float4 _CutoutTex_ST;
-                half _CutOut;
-                half _CustomCutOut;
-                half _UseSoftCutout;
-                half _UseParticlesAlphaCutout;
-                half4 _CutoutColor;
-                half _CutoutThreshold;
+                float _CutOut;
+                float _CustomCutOut;
+                float _UseSoftCutout;
+                float _UseParticlesAlphaCutout;
+                float4 _CutoutColor;
+                float _CutoutThreshold;
                 float2 _UVCutOutScroll;
                 // 顶点动画
                 float4 _VertexAnimateTex_ST;
-                half _VertexScrollingX;
-                half _VertexScrollingY;
-                half _VertexStrength;
+                float _VertexScrollingX;
+                float _VertexScrollingY;
+                float _VertexStrength;
 
                 CBUFFER_END
 
@@ -152,7 +156,7 @@ Shader "WB/FXEffect" {
                 {
                     float3 vertex : POSITION;
                     float3 normal : NORMAL;
-                    half4 color : COLOR;
+                    float4 color : COLOR;
                     float2 texcoord :TEXCOORD0;
                     float4 texCoordCst : TEXCOORD1; // 粒子特效中自定义的数据
                 };
@@ -160,10 +164,10 @@ Shader "WB/FXEffect" {
                 struct Varyings
                 {
                     float4 positionCS : SV_POSITION;
-                    half4 color : COLOR;
+                    float4 color : COLOR;
                     float2 texcoord :TEXCOORD0;
 #if _ADDCOLOR_ON
-                    half2 texcoordColor : TEXCOORD1;
+                    float2 texcoordColor : TEXCOORD1;
 #endif
 #if _MASK_ON
                     float2 texcoordMask: TEXCOORD2;
@@ -178,19 +182,12 @@ Shader "WB/FXEffect" {
                 };
 
 
-                // 旋转uv 计算
-                void roateUV(float2 _UVRotate, half2 pivot, inout float2 uv)
-                {
-                    half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
-                    half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
-                    half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
-                    uv.xy = mul(roation, uv.xy -= pivot) + pivot;
-                }
+
                 // 扰动uv 计算
 #if _DISTORTION_ON
-                void distorUVbyTex(float2 noiseUV, inout float2 uvMain)
+                void distorUVbyTex(float2 noiseUV,float calcTime, inout float2 uvMain)
                 {
-                    noiseUV += half2(_UVScrollDir.xy * _Time.y);
+                    noiseUV += float2(_UVScrollDir.xy * calcTime);
                     float2 uvOffset = SAMPLE_TEXTURE2D(_UVNoiseTex, sampler_UVNoiseTex, noiseUV).xy * _UVDistortion * _UVScrollDir.zw;
                     uvMain += uvOffset;
                 }
@@ -199,11 +196,13 @@ Shader "WB/FXEffect" {
                 Varyings vert(Attributes input)
                 {
                     Varyings output;
+                    float t = abs(frac(_Time.y * 0.01));
+                    float calcTime = t * 100;
                     // 顶点动画
                     float3 positionWS = TransformObjectToWorld(input.vertex.xyz);
 #if _VERTEXANI_ON
-                    float2 vertexAnimateTexUV = TRANSFORM_TEX(input.texcoord, _VertexAnimateTex) + half2(_VertexScrollingX, _VertexScrollingY) * _Time.y;
-                    half4 vertexAnimateMask = SAMPLE_TEXTURE2D_LOD(_VertexAnimateTex, sampler_VertexAnimateTex, vertexAnimateTexUV, 0);
+                    float2 vertexAnimateTexUV = TRANSFORM_TEX(input.texcoord, _VertexAnimateTex) + float2(_VertexScrollingX, _VertexScrollingY) * calcTime;
+                    float4 vertexAnimateMask = SAMPLE_TEXTURE2D_LOD(_VertexAnimateTex, sampler_VertexAnimateTex, vertexAnimateTexUV, 0);
                     positionWS += _VertexStrength * vertexAnimateMask.r * input.normal;
 #endif
                     output.positionCS = TransformWorldToHClip(positionWS);
@@ -235,24 +234,26 @@ Shader "WB/FXEffect" {
 
 
 
-                half4 frag(Varyings fInput) : SV_TARGET
+                float4 frag(Varyings fInput) : SV_TARGET
                 {
-                    half2 pivot = 0.5; //_UVRotate.xy;
-                    half4 vertColor = fInput.color;
+                    float t = abs(frac(_Time.y * 0.01));
+                    float calcTime = t * 100;
+                    float2 pivot = 0.5; //_UVRotate.xy;
+                    float4 vertColor = fInput.color;
                     
                     float2 uvMain = fInput.texcoord;
                     // 流动
 #if _SCROLL_ON
-                    uvMain += _MainSpeed.xy * _Time.y;
-                    roateUV(_MainSpeed.zw, pivot, uvMain);
+                    uvMain += _MainSpeed.xy * calcTime;
+                    roateUV(_MainSpeed.zw, calcTime, pivot, uvMain);
 #endif
                     uvMain += fInput.CustData.xy;
                     // 扰动uv
 #if _DISTORTION_ON
-                    distorUVbyTex(fInput.texcoordNoise.xy, uvMain);
+                    distorUVbyTex(fInput.texcoordNoise.xy, calcTime, uvMain);
 #endif
                     float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uvMain);
-                    half4 col = mainTexColor * _BaseColor * vertColor;
+                    float4 col = mainTexColor * _BaseColor * vertColor;
                     col.rgb *= _GlowScale;
                     // 附加色
 #if _ADDCOLOR_ON
@@ -262,7 +263,7 @@ Shader "WB/FXEffect" {
 #if _DISSOLVE_ON
                     float cutout = _CustomCutOut ? fInput.CustData.z : _CutOut;
                     cutout = lerp(cutout, (1.001 - vertColor.a + cutout), _UseParticlesAlphaCutout);
-                    float2 cutoutUV = fInput.texcoordCutOut.xy + _UVCutOutScroll.xy * _Time.y;
+                    float2 cutoutUV = fInput.texcoordCutOut.xy + _UVCutOutScroll.xy * calcTime;
                     float mask = SAMPLE_TEXTURE2D(_CutoutTex, sampler_CutoutTex, cutoutUV).r;
                     mask = _UseCutoutTex ? mask : mainTexColor.a;
 
@@ -276,11 +277,12 @@ Shader "WB/FXEffect" {
                     // mask 部分
 #if _MASK_ON
                     float2 uvMask = fInput.texcoordMask;
-                    uvMask += _MaskSpeed.xy * _Time.y;
-                    roateUV(_MaskSpeed.zw, pivot, uvMask);
+                    uvMask += _MaskSpeed.xy * calcTime;
+                    roateUV(_MaskSpeed.zw,calcTime, pivot, uvMask);
                     col.a *= SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, uvMask).r;
 #endif
-                    col.a = saturate(col.a) * _AlphaScale;
+                    col.a = saturate(col.a * _AlphaScale);
+                    //col.a = col.a * step(0.03, col.a);
                     return col;
                 }
                 ENDHLSL

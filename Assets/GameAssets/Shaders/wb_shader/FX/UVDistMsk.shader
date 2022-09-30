@@ -39,21 +39,22 @@ Shader "WB/FXUVDistMsk" {
             Lighting Off
             ZTest [_ZTest]
             HLSLPROGRAM
+            #include "../ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             CBUFFER_START(UnityPerMaterial)
             float4 _BaseMap_ST;
-            half4 _BaseColor;
-            half4 _MainSpeed;
-            half _CustomUV;
+            float4 _BaseColor;
+            float4 _MainSpeed;
+            float _CustomUV;
 
-            half4 _MaskTex_ST;
+            float4 _MaskTex_ST;
 
-            half4 _UVNoiseTex_ST;
-            half4 _UVScrollDir;
-            half _UVDistortion;
-            half _GlowScale;
-            half _AlphaScale;
-            half4 _MaskSpeed;
+            float4 _UVNoiseTex_ST;
+            float4 _UVScrollDir;
+            float _UVDistortion;
+            float _GlowScale;
+            float _AlphaScale;
+            float4 _MaskSpeed;
             CBUFFER_END
 
             TEXTURE2D(_BaseMap);
@@ -68,38 +69,29 @@ Shader "WB/FXUVDistMsk" {
             {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
-                half4 color : COLOR;
+                float4 color : COLOR;
                 float4 texCoord0 : TEXCOORD0;
             };
 
             struct VaryingsParticle
             {
                 float4 positionCS : SV_POSITION;
-                half4 color : COLOR;
+                float4 color : COLOR;
 
                 float2 texcoord : TEXCOORD0;
                 float2 texcoordNoise: TEXCOORD1;
-                half2 texcoordMask : TEXCOORD2;
+                float2 texcoordMask : TEXCOORD2;
                 float2 CustData : TEXCOORD3;
             };
 
 
-            void roateUV(float2 _UVRotate, half2 pivot, inout float2 uv)
-            {
-                half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
-                half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
-                half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
-                uv.xy = mul(roation, uv.xy -= pivot) + pivot;
-            }
-
-            void distorUVbyTex(float2 noiseUV, inout float2 uvMain)
+            void distorUVbyTex(float2 noiseUV,float calcTime, inout float2 uvMain)
             {
                 float2 scrollDir = _UVScrollDir.xy;
                 float2 distStr = _UVScrollDir.zw;
 
-                noiseUV += half2(scrollDir * _Time.y);
-                float2 uvOffset = SAMPLE_TEXTURE2D(_UVNoiseTex, sampler_UVNoiseTex, noiseUV).xy * _UVDistortion *
-                    distStr;
+                noiseUV += float2(scrollDir * calcTime);
+                float2 uvOffset = SAMPLE_TEXTURE2D(_UVNoiseTex, sampler_UVNoiseTex, noiseUV).xy * _UVDistortion * distStr;
                 uvMain += uvOffset;
             }
 
@@ -118,24 +110,26 @@ Shader "WB/FXUVDistMsk" {
             }
 
 
-            half4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
+            float4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
             {
-                half4 vertColor = fInput.color;
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
+                float4 vertColor = fInput.color;
                 float2 uvMain = fInput.texcoord.xy;
 
-                uvMain += _MainSpeed.xy * _Time.y;
-                half2 pivot = 0.5; //_UVRotate.xy;
-                roateUV(_MainSpeed.zw, pivot, uvMain);
+                uvMain += _MainSpeed.xy * calcTime;
+                float2 pivot = 0.5; //_UVRotate.xy;
+                roateUV(_MainSpeed.zw, calcTime, pivot, uvMain);
 
                 uvMain += fInput.CustData.xy;
 
-                distorUVbyTex(fInput.texcoordNoise.xy, uvMain);
+                distorUVbyTex(fInput.texcoordNoise.xy, calcTime, uvMain);
 
                 float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uvMain);
 
-                half2 uvMask = fInput.texcoordMask;
-                uvMask.xy += _MaskSpeed.xy * _Time.y;
-                roateUV(_MaskSpeed.zw, pivot, uvMask);
+                float2 uvMask = fInput.texcoordMask;
+                uvMask.xy += _MaskSpeed.xy * calcTime;
+                roateUV(_MaskSpeed.zw, calcTime, pivot, uvMask);
 
                 half4 col = mainTexColor * _BaseColor;
 
@@ -145,6 +139,7 @@ Shader "WB/FXUVDistMsk" {
                 float4 maskTexColor = SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, uvMask);
                 col.a = saturate(col.a * _AlphaScale);
                 col.a = saturate(col.a * maskTexColor.r);
+                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             #pragma vertex vertParticleUnlit

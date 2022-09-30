@@ -44,26 +44,20 @@ Shader "WB/Background"
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 
             struct appdata
             {
                 half4 vertex : POSITION;
-                half2 uv : TEXCOORD0;
+                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                half2 uv : TEXCOORD0;
+                float2 uv : TEXCOORD0;
                 half4 vertex : SV_POSITION;
                 half3 worldPos : TEXCOORD1;
             };
-
             sampler2D _MainTex;
             sampler2D _MaskTex;
             sampler2D _DrakMaskTex;
@@ -109,24 +103,26 @@ Shader "WB/Background"
 
             half4 frag(v2f i) : SV_Target
             {
-                 half2 original = _CausticTile * half2(1.5, 1.0) * i.uv;  // 焦散的tiling
-                 half2 offsetUV = _Time.y * _Speed * half2(0.1, 0.1); // uv offset
+                 float t = abs(frac(_Time.y * 0.01));
+                 float calcTime = t * 20;
+                 float2 original = _CausticTile * half2(1.5, 1.0) * i.uv;  // 焦散的tiling
+                 float2 offsetUV = calcTime * _Speed * half2(1, 1) ; // uv offset
                  half col1 = tex2D(_Caustics, original + offsetUV).r;   // 焦散1
-                 half col2 = tex2D(_Caustics, original - offsetUV + half2(0.418f, 0.355f)).r; // 焦散2
+                 half col2 = tex2D(_Caustics, original - offsetUV + float2(0.418f, 0.355f)).r; // 焦散2
                  half minCol = min(col1, col2);
 
-                 half2 mainUV = _Time.y * half2(0.05, 0.0) + i.uv;
+                 float2 mainUV = 3 * calcTime * float2(0.5, 0.0) + i.uv;
                  mainUV = tex2D(_Caustics, mainUV).g * 0.006 - i.uv;
                  half2 RGmaskValue = tex2D(_MaskTex, mainUV).rg;
 
                  half maskValue = (RGmaskValue.r + RGmaskValue.g) * 0.5f;
                  half brightnessStrength = lerp(1,pow(abs(minCol), _Contrast) * _Factor, maskValue) ;
                  half3 mainColor = tex2D(_MainTex, mainUV).rgb;
-                 float grayValue = dot(mainColor, half3(0.2999f, 0.587f, 0.114f));
+                 half grayValue = dot(mainColor, half3(0.2999f, 0.587f, 0.114f));
                  half3 diffColor = lerp(mainColor, half3(grayValue, grayValue, grayValue), _Desaturation);
                  half3 result = lerp(_NoiseColor, _BaseColor * _BaseFactor, brightnessStrength).rgb * diffColor;
                  //
-                 float disFactor = 1.0;
+                 half disFactor = 1.0;
 #if _BOSSOUT_ON
                  half3 p1 = mul(unity_ObjectToWorld, half4(_Position.x, 0, _Position.y, 1.0)).xyz;
                  half dis1 = length(i.worldPos - p1) / _Radius;
@@ -160,18 +156,12 @@ Shader "WB/Background"
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 
             struct appdata
             {
                 half4 vertex : POSITION;
                 half2 uv : TEXCOORD0;
-
             };
 
             struct v2f

@@ -27,7 +27,7 @@ Shader "WB/OutLine"
             Offset 0 , 0
             ColorMask RGBA
             
-        //Ä£°å»º´æÇøµÄÖµÓë1±È½Ï£¬²»ÏàÍ¬¼´²âÊÔÊ§°Ü£¬²¢±£³ÖÄ£°å»º´æÇøµÄÖµ²»±ä
+        //æ¨¡æ¿ç¼“å­˜åŒºçš„å€¼ä¸1æ¯”è¾ƒï¼Œä¸ç›¸åŒå³æµ‹è¯•å¤±è´¥ï¼Œå¹¶ä¿æŒæ¨¡æ¿ç¼“å­˜åŒºçš„å€¼ä¸å˜
 Stencil
 {
     Ref 9
@@ -43,10 +43,6 @@ Stencil
             #pragma fragment frag
             #include "ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "LightingCore.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
             float4 _RimColor;
@@ -73,10 +69,10 @@ Stencil
 
             vertexOutput vert(VertexInput v) {
                 vertexOutput o;
-                //¶¥µãÎ»ÖÃÒÔ·¨Ïß·½ÏòÏòÍâÑÓÉì
+                //é¡¶ç‚¹ä½ç½®ä»¥æ³•çº¿æ–¹å‘å‘å¤–å»¶ä¼¸
                 v.vertex.xyz += v.ase_normal * _RimOffset;
                 float3 positionWS = TransformObjectToWorld(v.vertex.xyz /** _RimOffset*/);
-                // ×ªµ½ÊÀ½ç¿Õ¼ä
+                // è½¬åˆ°ä¸–ç•Œç©ºé—´
                 float3 positionVS = TransformWorldToView(positionWS);
                 float4 positionCS = TransformWorldToHClip(positionWS);
 

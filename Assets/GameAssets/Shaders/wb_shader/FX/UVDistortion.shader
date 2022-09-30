@@ -15,6 +15,7 @@ Shader "WB/UVDistortion" {
         _UVNoiseTex("NoiseTex", 2D) = "black" {}
         _UVDistortion("UVDistortion", Float) = 0.5
         _NoiseScroll("NoiseScroll", Vector) = (0,-0.1,1,1)
+
     }
 
     SubShader {
@@ -38,44 +39,41 @@ Shader "WB/UVDistortion" {
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-
+            #include "../ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-            half4 _BaseMap_ST;
-            half4 _BaseColor;
-            half4 _MainSpeed;
-            half _GlowScale;
-            half _AlphaScale;
-            half4 _UVNoiseTex_ST;
-            half _UVDistortion;
-            half4 _NoiseScroll;
-            CBUFFER_END
+
+            float4 _BaseMap_ST;
+            float4 _BaseColor;
+            float4 _MainSpeed;
+            float _GlowScale;
+            float _AlphaScale;
+
             sampler2D _UVNoiseTex;
-            sampler2D _BaseMap;
+            float4 _UVNoiseTex_ST;
+            float _UVDistortion;
+            float4 _NoiseScroll;
+
+            CBUFFER_END
+
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
 
             struct Attributes
             {
-                half3 vertex : POSITION;
-                half4 color : COLOR;
-                half2 texcoord :TEXCOORD0;
+                float3 vertex : POSITION;
+                float4 color : COLOR;
+                float2 texcoord :TEXCOORD0;
             };
 
             struct Varyings
             {
-                half4 positionCS : SV_POSITION;
-                half4 color : COLOR;
-                half2 texcoord :TEXCOORD0;
-                half2 texcoordNoise: TEXCOORD1;
+                float4 positionCS : SV_POSITION;
+                float4 color : COLOR;
+                float2 texcoord :TEXCOORD0;
+                float2 texcoordNoise: TEXCOORD1;
             };
-
-            void roateUV(half2 _UVRotate, half2 pivot, inout half2 uv)
-            {
-                half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
-                half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
-                half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
-                uv.xy = mul(roation, uv.xy -= pivot) + pivot;
-            }
 
             Varyings vert(Attributes input)
             {
@@ -88,23 +86,26 @@ Shader "WB/UVDistortion" {
             }
 
 
-            half4 frag(Varyings input) : SV_TARGET
+            float4 frag(Varyings in_f) : SV_TARGET
             {
-                half2 uvMain = input.texcoord;
+                float2 uvMain = in_f.texcoord;
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
 
-                uvMain += _MainSpeed.xy * _Time.y;
-                half2 pivot = 0.5; //_UVRotate.xy;
-                roateUV(_MainSpeed.zw, pivot, uvMain);
+                uvMain += _MainSpeed.xy * calcTime;
+                float2 pivot = 0.5; //_UVRotate.xy;
+                roateUV(_MainSpeed.zw, calcTime, pivot, uvMain);
 
-                half2 noiseScrollXY = _NoiseScroll.xy;
-                input.texcoordNoise.xy += half2(_Time.g * noiseScrollXY);
-                float2 noiseMask = tex2D(_UVNoiseTex, input.texcoordNoise.xy).xy * _UVDistortion * _NoiseScroll.zw;
+                float2 noiseScrollXY = _NoiseScroll.xy;
+                in_f.texcoordNoise.xy += float2(calcTime * noiseScrollXY);
+                float2 noiseMask = tex2D(_UVNoiseTex, in_f.texcoordNoise.xy).xy * _UVDistortion * _NoiseScroll.zw;
                 uvMain.xy += noiseMask;
 
-                half4 baseCol = tex2D(_BaseMap, uvMain);
-                half4 col = input.color * baseCol * _BaseColor;
+                float4 baseCol = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uvMain);
+                float4 col = in_f.color * baseCol * _BaseColor;
                 col.rgb *= _GlowScale;
-                col.a = saturate(col.a) * _AlphaScale;
+                col.a = saturate(col.a * _AlphaScale);
+                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             ENDHLSL

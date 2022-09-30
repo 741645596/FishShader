@@ -1,6 +1,7 @@
 Shader "WB/Fresnel" {
     // 模型边缘光fresnel效果 调整光的颜色 宽度 
     Properties {
+
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlendRGB ("BlendSrcRGB", Float) = 1
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlendRGB ("BlendDstRGB", Float) = 10
         [Space(20)]
@@ -16,8 +17,11 @@ Shader "WB/Fresnel" {
         [Header(Fresnel)]
 
         [HDR]_FresnelColor("Fresnel Color", Color) = (1,1,1,1)
+
+        _FresnelR0("Fresnel R0", Float) = 0.00
         _FresnelScale("Fresnel Scale", Float) = 1
         _FresnelPow("Fresnel Pow", Float) = 5
+
     }
 
     SubShader {
@@ -45,31 +49,37 @@ Shader "WB/Fresnel" {
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-            half4 _BaseMap_ST;
-            half4 _BaseColor;
-            half _GlowScale;
-            half _AlphaScale;
 
-            half4 _FresnelColor;
-            half _FresnelScale;
-            half _FresnelPow;
+            float4 _BaseMap_ST;
+            float4 _BaseColor;
+            float _GlowScale;
+            float _AlphaScale;
+
+            float4 _FresnelColor;
+
+            float _FresnelR0;
+            float _FresnelScale;
+            float _FresnelPow;
+
             CBUFFER_END
-            sampler2D _BaseMap;
+
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
 
             struct Attributes
             {
-                half3 vertex : POSITION;
-                half3 normal : NORMAL;
-                half4 color : COLOR;
-                half2 texcoord :TEXCOORD0;
+                float3 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 color : COLOR;
+                float2 texcoord :TEXCOORD0;
             };
 
             struct Varyings
             {
-                half4 positionCS : SV_POSITION;
-                half4 color : COLOR;
-                half2 texcoord :TEXCOORD0;
-                half fresnel : TEXCOORD1;
+                float4 positionCS : SV_POSITION;
+                float4 color : COLOR;
+                float2 texcoord :TEXCOORD0;
+                float fresnel : TEXCOORD1;
             };
 
             Varyings vert(Attributes input)
@@ -79,20 +89,32 @@ Shader "WB/Fresnel" {
                 output.positionCS = TransformObjectToHClip(input.vertex);
                 output.color = input.color;
 
-                half3 camOS = TransformWorldToObject(GetCameraPositionWS());
-                half3 viewDirOS = normalize(camOS - input.vertex);
-                half NdotV = abs(dot(input.normal, viewDirOS));
-                output.fresnel = pow(abs(1 - NdotV) , _FresnelPow) * _FresnelScale;
+                float3 camOS = TransformWorldToObject(GetCameraPositionWS());
+                float3 viewDirOS = normalize(camOS - input.vertex);
+                float NdotV = abs(dot(input.normal, viewDirOS));
+
+
+                float bias = _FresnelR0;
+                float fresnelScale = (1.0 - bias);
+                fresnelScale = _FresnelScale;
+                
+                float invDot = 1 - NdotV;
+                float rimPower = pow(abs(invDot) , _FresnelPow);
+                float fresnel = saturate(fresnelScale * rimPower);
+                output.fresnel = fresnel;
+
                 return output;
             }
 
-            half4 frag(Varyings input) : SV_TARGET
+            float4 frag(Varyings in_f) : SV_TARGET
             {
-                half4 baseCol = tex2D(_BaseMap, input.texcoord);
-                half4 col = input.color * baseCol * _BaseColor;
+                float2 uv = in_f.texcoord;
+                float4 baseCol = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
+                float4 col = in_f.color * baseCol * _BaseColor;
                 col.rgb *= _GlowScale;
-                col.rgb = lerp(col.rgb, _FresnelColor.xyz * col.a, input.fresnel);
-                col.a = saturate(col.a) * _AlphaScale;
+                col.rgb = lerp(col.rgb, _FresnelColor.xyz * col.a, in_f.fresnel);
+                col.a = saturate(col.a * _AlphaScale);
+                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             ENDHLSL

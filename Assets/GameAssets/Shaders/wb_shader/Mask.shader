@@ -15,49 +15,34 @@ Shader "WB/Mask"
         ZWrite[_ZWriteMode]
         ZTest[_ZTest]
 
-        /*Stencil
-        {
-                Ref 255         // 参考索引值
-                Comp always     // 比较方式
-                Pass replace    // 成功处理方式
-                Fail keep       // 没有通过模板测试，处理方式
-                ZFail keep      // 模板测试通过，深度测试未通过
-        }*/
-
         Pass
         {
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #include "ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "LightingCore.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+         
 
             struct appdata
             {
-                float4 vertex : POSITION;
+                half4 vertex : POSITION;
             };
 
             struct v2f
             {
-                float4 vertex : SV_POSITION;
+                half4 vertex : SV_POSITION;
             };
             CBUFFER_START(UnityPerMaterial)
-            float4 _BaseColor;
+            half4 _BaseColor;
             CBUFFER_END
             v2f vert (appdata v)
             {
                 v2f o; 
-                float3 positionWS = TransformObjectToWorld(v.vertex.xyz);
-                //float3 positionVS = TransformWorldToView(positionWS);
-                o.vertex = TransformWorldToHClip(positionWS);
+                o.vertex = TransformObjectToHClip(v.vertex.xyz);
                 return o;
             }
 
-            float4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
                 return _BaseColor;
             }

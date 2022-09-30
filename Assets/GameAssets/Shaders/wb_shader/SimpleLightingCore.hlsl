@@ -272,7 +272,8 @@ half3 LightingPhysicallyBased(BRDFData brdfData,
     half3 radiance = lightColor * (lightAttenuation * NdotL);
 
     half3 brdf = brdfData.diffuse;
-    brdf += brdfData.specular * DirectBRDFSpecular(brdfData, normalWS, lightDirectionWS, viewDirectionWS);
+    // 低画质屏蔽直接光高光部分。
+    //brdf += brdfData.specular * DirectBRDFSpecular(brdfData, normalWS, lightDirectionWS, viewDirectionWS);
     return brdf * radiance;
 }
 
@@ -299,7 +300,7 @@ half4 UniversalFragmentPBR(InputData inputData, SurfaceData surfaceData, half Li
 
     half3 color = GlobalIllumination(brdfData, inputData.bakedGI, surfaceData.occlusion,inputData.normalWS, inputData.viewDirectionWS);
     // 低画质屏蔽直接光。
-    //color += LightingPhysicallyBased(brdfData, mainLight,inputData.normalWS, inputData.viewDirectionWS);
+    color += LightingPhysicallyBased(brdfData, mainLight,inputData.normalWS, inputData.viewDirectionWS);
 
     color += surfaceData.emission;
 

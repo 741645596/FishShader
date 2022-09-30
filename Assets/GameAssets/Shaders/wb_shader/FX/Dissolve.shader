@@ -12,6 +12,7 @@ Shader "WB/Dissolve" {
 
         _UVBaseScroll("Base UVScroll", Vector) = (0,0,0,0)
 
+
         _GlowScale("Glow Scale", float) = 1
         _AlphaScale("Alpha Scale", float) = 1
 
@@ -36,7 +37,11 @@ Shader "WB/Dissolve" {
             "RenderPipeline" = "UniversalPipeline"
         }
 
+        // ------------------------------------------------------------------
+        //  Forward pass.
         Pass {
+            // Lightmode matches the ShaderPassName set in UniversalRenderPipeline.cs. SRPDefaultUnlit and passes with
+            // no LightMode tag are also rendered by Universal Render Pipeline
             Name "ForwardLit"
             Blend[_SrcBlend][_DstBlend]
             Cull[_Cull]
@@ -45,58 +50,64 @@ Shader "WB/Dissolve" {
             ZTest [_ZTest]
 
             HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-
+            // Required to compile gles 2.0 with standard SRP library
+            // All shaders must be compiled with HLSLcc and currently only gles is not using HLSLcc by default
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
+            #pragma target 2.0
 
             #pragma multi_compile __ USE_CUTOUT_TEX
-
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-            half4 _BaseMap_ST;
-            half4 _BaseColor;
-            half2 _UVBaseScroll;
+            float4 _BaseMap_ST;
+            float4 _BaseColor;
+            float2 _UVBaseScroll;
 
             #ifdef USE_CUTOUT_TEX
-            half4 _CutoutTex_ST;
+            float4 _CutoutTex_ST;
             #endif
 
-            half _UseSoftCutout;
-            half _UseParticlesAlphaCutout;
+            float _UseSoftCutout;
+            float _UseParticlesAlphaCutout;
 
-            half _CutOut;
-            half4 _CutoutColor;
-            half _CutoutThreshold;
+            float _CutOut;
+            float4 _CutoutColor;
+            float _CutoutThreshold;
 
-            half2 _UVCutOutScroll;
+            float2 _UVCutOutScroll;
 
-            half _GlowScale;
-            half _AlphaScale;
+            float _GlowScale;
+            float _AlphaScale;
 
             CBUFFER_END
-            sampler2D _BaseMap;
-            sampler2D _CutoutTex;
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
+
+            TEXTURE2D(_CutoutTex);
+            SAMPLER(sampler_CutoutTex);
 
             struct AttributesParticle
             {
-                half4 vertex : POSITION;
-                half4 color : COLOR;
-                half3 texcoord : TEXCOORD0;
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 color : COLOR;
+
+                float3 texcoord : TEXCOORD0;
             };
 
             struct VaryingsParticle
             {
-                half4 positionCS : SV_POSITION;
-                half2 texcoord : TEXCOORD0;
-                half4 color : COLOR;
+                float4 positionCS : SV_POSITION;
+                float2 texcoord : TEXCOORD0;
+                float4 color : COLOR;
                 #if defined (USE_CUTOUT_TEX)
-                half4 texcoordNoise : TEXCOORD2;
+                float4 texcoordNoise : TEXCOORD2;
                 #endif
-                half age_percent : TEXCOORD3;
+                float age_percent : TEXCOORD3;
             };
 
-            VaryingsParticle vert(AttributesParticle input)
+            VaryingsParticle vertParticleUnlit(AttributesParticle input)
             {
                 VaryingsParticle output = (VaryingsParticle)0;
 
@@ -117,40 +128,48 @@ Shader "WB/Dissolve" {
                 return output;
             }
 
-            half4 frag(VaryingsParticle fInput) : SV_Target
+            float4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
             {
-                half4 vertColor = fInput.color;
-                half2 uv = fInput.texcoord.xy;
+                float4 vertColor = fInput.color;
+                float2 uv = fInput.texcoord.xy;
 
-                half4 mainTexColor = tex2D(_BaseMap, uv +_Time.y * _UVBaseScroll.xy);
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
+
+                float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv + calcTime * _UVBaseScroll.xy);
+
                 half4 col = mainTexColor * _BaseColor;
 
-                half cutout = _CutOut * fInput.age_percent;
+                float cutout = _CutOut * fInput.age_percent;
                 cutout = lerp(cutout, (1.001 - vertColor.a + cutout), _UseParticlesAlphaCutout);
 
                 #ifdef USE_CUTOUT_TEX
-                half2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * _Time.y;
-                half mask = tex2D(_CutoutTex, cutoutUV).r;
+                float2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * calcTime;
+                float mask = SAMPLE_TEXTURE2D(_CutoutTex, sampler_CutoutTex, cutoutUV).r;
                 #else
-                half mask = mainTexColor.a;
+                    float mask = mainTexColor.a;
                 #endif
 
-                half diffMask = mask - cutout;
-                half alphaMask = lerp(
+                float diffMask = mask - cutout;
+                float alphaMask = lerp(
                     saturate(diffMask * 10000) * col.a,
                     saturate(diffMask * 2) * col.a,
                     _UseSoftCutout);
 
-                half alphaMaskThreshold = saturate((diffMask - _CutoutThreshold) * 10000) * col.a;
-                half3 col2 = lerp(col.rgb, _CutoutColor.rgb, saturate((1 - alphaMaskThreshold) * alphaMask));
+                float alphaMaskThreshold = saturate((diffMask - _CutoutThreshold) * 10000) * col.a;
+                float3 col2 = lerp(col.rgb, _CutoutColor.rgb, saturate((1 - alphaMaskThreshold) * alphaMask));
                 col.rgb = lerp(col.rgb, col2, step(0.01, _CutoutThreshold));
                 col.a = alphaMask;
 
                 col *= vertColor;
 
                 col.a = saturate(col.a * _AlphaScale);
+                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
+
+            #pragma vertex vertParticleUnlit
+            #pragma fragment fragParticleUnlit
             ENDHLSL
         }
     }

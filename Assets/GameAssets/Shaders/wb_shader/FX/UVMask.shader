@@ -38,35 +38,39 @@ Shader "WB/UVMask" {
             #pragma vertex vert
             #pragma fragment frag
 
-
+            #include "../ColorCore.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-            half4 _BaseMap_ST;
-            half4 _BaseColor;
-            half _GlowScale;
-            half _AlphaScale;
-            half4 _BaseColorSpeed;
-            half4 _Mask_ST;
-            half4 _MaskSpeed;
+
+            float4 _BaseMap_ST;
+            float4 _BaseColor;
+            float _GlowScale;
+            float _AlphaScale;
+            float4 _BaseColorSpeed;
+            float4 _Mask_ST;
+            float4 _MaskSpeed;
+
             CBUFFER_END
 
-            sampler2D _BaseMap;
-            sampler2D _Mask;
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
+            TEXTURE2D(_Mask);
+            SAMPLER(sampler_Mask);
 
             struct Attributes
             {
-                half3 vertex : POSITION;
-                half4 color : COLOR;
-                half2 texcoord :TEXCOORD0;
+                float3 vertex : POSITION;
+                float4 color : COLOR;
+                float2 texcoord :TEXCOORD0;
             };
 
             struct Varyings
             {
-                half4 positionCS : SV_POSITION;
-                half4 color : COLOR;
-                half2 texcoord :TEXCOORD0;
-                half2 texcoordMask: TEXCOORD1;
+                float4 positionCS : SV_POSITION;
+                float4 color : COLOR;
+                float2 texcoord :TEXCOORD0;
+                float2 texcoordMask: TEXCOORD1;
             };
 
 
@@ -80,31 +84,28 @@ Shader "WB/UVMask" {
                 return output;
             }
 
-            void roateUV(half2 _UVRotate, half2 pivot, inout half2 uv)
+            float4 frag(Varyings in_f) : SV_TARGET
             {
-                half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
-                half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
-                half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
-                uv.xy = mul(roation, uv.xy -= pivot) + pivot;
-            }
+                float2 pivot = 0.5; //_UVRotate.xy;
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
 
-            half4 frag(Varyings input) : SV_TARGET
-            {
-                half2 pivot = 0.5; //_UVRotate.xy;
+                float2 uv = in_f.texcoord;
+                uv += _BaseColorSpeed.xy * calcTime;
+                roateUV(_BaseColorSpeed.zw, calcTime, pivot, uv);
+                float4 baseCol = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
 
-                half2 uv = input.texcoord;
-                uv += _BaseColorSpeed.xy * _Time.y;
-                roateUV(_BaseColorSpeed.zw, pivot, uv);
-                float4 baseCol = tex2D(_BaseMap, uv);
+                float2 uvMask = in_f.texcoordMask;
+                uvMask += _MaskSpeed.xy * calcTime;
+                roateUV(_MaskSpeed.zw, calcTime, pivot, uvMask);
+                float4 maskCol = SAMPLE_TEXTURE2D(_Mask, sampler_Mask, uvMask);
 
-                half2 uvMask = input.texcoordMask;
-                uvMask += _MaskSpeed.xy * _Time.y;
-                roateUV(_MaskSpeed.zw, pivot, uvMask);
-                half maskAlpha = tex2D(_Mask, uvMask).r;
-
-                half4 col = input.color * baseCol * _BaseColor;
+                float4 col = in_f.color * baseCol * _BaseColor;
                 col.rgb *= _GlowScale;
-                col.a = saturate(col.a * maskAlpha) * _AlphaScale;
+                col.a = saturate(col.a) * _AlphaScale;
+
+                col.a = saturate(col.a * maskCol.r * in_f.color.a * _BaseColor.a);
+                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             ENDHLSL

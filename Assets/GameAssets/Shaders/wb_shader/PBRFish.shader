@@ -376,8 +376,8 @@ Shader "WB/PBRFish"
 		}
 
 		HLSLPROGRAM
-		#pragma multi_compile __ _EMISSION_ON
-		#pragma multi_compile __ _STREAMER_ON
+		//#pragma multi_compile __ _EMISSION_ON
+		//#pragma multi_compile __ _STREAMER_ON
 		#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
 
 		#pragma vertex vert
@@ -407,9 +407,11 @@ Shader "WB/PBRFish"
 			half4 tSpace1 : TEXCOORD2;
 			half4 tSpace2 : TEXCOORD3;
 			half2 uv : TEXCOORD4;
+/*
 #if _STREAMER_ON
 				half4 streamerUv : TEXCOORD5;
 #endif
+*/
 			};
 
 			CBUFFER_START(UnityPerMaterial)
@@ -436,7 +438,7 @@ Shader "WB/PBRFish"
 			half _OcclusionStrength;
 			half _BumpStrength;
 //#if			_EMISSION_ON
-			half4 _EmissionColor;
+		//	half4 _EmissionColor;
 			//#endif
 
 			half _HSVHue;
@@ -447,12 +449,12 @@ Shader "WB/PBRFish"
 			half _NonMetalThreshold;
 			half _NonMetalStrength;
 			//#if _STREAMER_ON
-			half _StreamerAlpha;
+			/*half _StreamerAlpha;
 			half _StreamerNoiseSpeed;
 			half _StreamerScrollX;
 			half _StreamerScrollY;
 			half4 _StreamerColor;
-			half4 _StreamerTex_ST;
+			half4 _StreamerTex_ST;*/
 			//#endif
 			half _Alpha;
 			half _LightDirControl;
@@ -461,11 +463,11 @@ Shader "WB/PBRFish"
 			sampler2D _BaseMap;
 			sampler2D _NormalMap;
 			sampler2D _MixMap;
-#if			_EMISSION_ON
+/*#if			_EMISSION_ON
 			//float4 _EmissionColor;
 			sampler2D _EmissionMap;
-#endif
-
+#endif*/
+/*
 #if _STREAMER_ON
 			//float _StreamerAlpha;
 			//float _StreamerNoiseSpeed;
@@ -477,7 +479,7 @@ Shader "WB/PBRFish"
 			sampler2D _StreamerTex;
 			sampler2D _StreamerMask;
 #endif
-
+*/
 
 			VertexOutput vert(VertexInput v)
 			{
@@ -496,13 +498,13 @@ Shader "WB/PBRFish"
 				OUTPUT_SH(normalInput.normalWS.xyz, o.lightmapUVOrVertexSH.xyz);
 
 				o.clipPos = positionCS;
-#if _STREAMER_ON
+/*#if _STREAMER_ON
 				half4 offset = (_Time.xyyx * half4(_StreamerScrollX, _StreamerScrollY, _StreamerScrollY, _StreamerScrollX));
 				offset = frac(offset);
 				half4 streamerUv = v.texcoord.xyxy * _StreamerTex_ST.xyxy + _StreamerTex_ST.zwzw;
 				o.streamerUv = streamerUv + offset;
 #endif
-				return o;
+*/				return o;
 			}
 
 			#include "HitRed_fun.hlsl"
@@ -528,13 +530,13 @@ Shader "WB/PBRFish"
 				half4 tex2DNode11 = tex2D(_MixMap, uv_MixMap);
 
 				half4 emission = half4(0, 0, 0, 0);
-#if			_EMISSION_ON
+/*#if			_EMISSION_ON
 				half4 emissionMapColor = tex2D(_EmissionMap, IN.uv.xy);
 				emission = emissionMapColor * _EmissionColor;
 #else
 				emission = _EmissionColor * tex2DNode11.b;
 #endif
-				half4 Albedo = tex2D(_BaseMap, uv_BaseMap).rgba;
+*/				half4 Albedo = tex2D(_BaseMap, uv_BaseMap).rgba;
 				// hsv 处理
 				half3 hvs = rgb2hsv(Albedo.rgb);
 				hvs.x = fmod(_HSVHue * 0.00277777785 + hvs.x, 1);
@@ -564,7 +566,7 @@ Shader "WB/PBRFish"
 				half ndv = dot(SafeNormalize(inputData.normalWS), SafeNormalize(WorldViewDirection + _RimOffset.xyz));
 				half3 rimColor = (pow((1.0 - saturate(ndv)), 5.0 - _RimSpread) * _RimColor).rgb * _RimPower;
 				half3 Emission = emission.rgb + rimColor;
-
+/*
 #if _STREAMER_ON
 				half streamNoiseX = tex2D(_StreamerNoise, IN.streamerUv.yx).x;
 				half streamNoiseY = tex2D(_StreamerNoise, IN.streamerUv.zw).y;
@@ -577,12 +579,8 @@ Shader "WB/PBRFish"
 				streamer *= _StreamerAlpha;
 				Emission += streamer;
 #endif
-				#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
-						half3 SH = SampleSH(inputData.normalWS.xyz);
-				#else
-						half3 SH = IN.lightmapUVOrVertexSH.xyz;
-				#endif
-
+*/
+				half3 SH = IN.lightmapUVOrVertexSH.xyz;
 				inputData.bakedGI = SAMPLE_GI(IN.lightmapUVOrVertexSH.xy, SH, inputData.normalWS);
 
 				Alpha = Alpha * _Alpha;

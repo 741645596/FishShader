@@ -1,13 +1,17 @@
-﻿Shader "WB/UVFlow"
+Shader "WB/UVFlow"
 {
 	// 主贴图+uv
 	Properties
 	{
-		[Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
-        [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("BlendDestination", Float) = 1
-        [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
-        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 0
-        [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
+		[Foldout] _BlendName("混合控制",Range(0,1)) = 0
+		[FoldoutItem] [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
+		[FoldoutItem] [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("BlendDestination", Float) = 1
+		[FoldoutItem] [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
+		[FoldoutItem] [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 0
+		[FoldoutItem] [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
+		[FoldoutItem] _OffsetFactor("Offset Factor", Float) = 0
+		[FoldoutItem] _OffsetUnits("Offset Units", Float) = 0
+
         _BaseMap("Base Map", 2D) = "white" {}
         [HDR] _BaseColor("Base Color", Color) = (1,1,1,1)
 		_GlowScale("Glow Scale", float) = 1
@@ -38,7 +42,7 @@
             ZWrite[_ZWriteMode]
             Lighting Off
             ZTest [_ZTest]
-
+			Offset[_OffsetFactor],[_OffsetUnits]
 			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -50,13 +54,13 @@
 			CBUFFER_START(UnityPerMaterial)
 
 			float4 _BaseMap_ST;
-            half4 _BaseColor;
-			half _GlowScale;
-            half _AlphaScale;
+		    float4 _BaseColor;
+		    float _GlowScale;
+		    float _AlphaScale;
 
 			
-            half4 _FlowMap_ST;
-			half4 _FlowColor;
+		    float4 _FlowMap_ST;
+		    float4 _FlowColor;
 			float2 _FlowSpeed;
 
 			CBUFFER_END
@@ -66,14 +70,14 @@
 			struct Attributes
 			{
 				float3 vertex : POSITION;
-				half4 color : COLOR;
+				float4 color : COLOR;
 				float2 texcoord :TEXCOORD0;
 			};
 
 			struct Varyings
 			{
 				float4 positionCS : SV_POSITION;
-				half4 color : COLOR;
+				float4 color : COLOR;
 				float2 texcoord :TEXCOORD0;
 				float2 texcoordMask: TEXCOORD1;
 			};
@@ -90,21 +94,24 @@
 			}
 
 
-			half4 frag(Varyings in_f) : SV_TARGET
+			float4 frag(Varyings in_f) : SV_TARGET
 			{
+				float t = abs(frac(_Time.y * 0.01));
+				float calcTime = t * 100;
 				float2 uv = in_f.texcoord;
 				float4 baseCol = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
-                half4 col = in_f.color * baseCol * _BaseColor;
+				float4 col = in_f.color * baseCol * _BaseColor;
 				col.rgb *= _GlowScale;
 
-				float2 uvMask = in_f.texcoordMask + _Time.y * _FlowSpeed;
-				half4 uvCol = tex2D(_FlowMap, uvMask);
+				float2 uvMask = in_f.texcoordMask + calcTime * _FlowSpeed;
+				float4 uvCol = tex2D(_FlowMap, uvMask);
 				float node_5670 = (dot(uvCol.rgb, float3(0.3, 0.59, 0.11))*uvCol.a);
 				float3 emissive = (_FlowColor.rgb * saturate((node_5670 - 0.25)) * in_f.color.rgb);
 
 				col.rgb += emissive;
 
 				col.a = saturate(col.a * in_f.color.a * _BaseColor.a * _AlphaScale);
+				//col.a = col.a * step(0.03, col.a);
 				return col;
 			}
 

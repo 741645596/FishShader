@@ -38,11 +38,6 @@ Shader "WB/fish2d"
         #pragma target 2.0
         #include "ColorCore.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-        #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-        #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
-
 
 
     CBUFFER_START(UnityPerMaterial)
@@ -55,21 +50,21 @@ Shader "WB/fish2d"
 
         struct appdata_t
         {
-            float4 vertex   : POSITION;
-            float4 color    : COLOR;
-            float2 texcoord : TEXCOORD0;
+            half4 vertex   : POSITION;
+            half4 color    : COLOR;
+            half2 texcoord : TEXCOORD0;
         };
 
         struct v2f
         {
-            float4 vertex   : SV_POSITION;
+            half4 vertex   : SV_POSITION;
             half4 color : COLOR;
-            float2 texcoord : TEXCOORD0;
+            half2 texcoord : TEXCOORD0;
         };
 
-        inline float4 UnityFlipSprite(in float3 pos, in half2 flip)
+        inline half4 UnityFlipSprite(in half3 pos, in half2 flip)
         {
-            return float4(pos.xy * flip, pos.z, 1.0);
+            return half4(pos.xy * flip, pos.z, 1.0);
         }
 
         v2f SpriteVert(appdata_t IN)
@@ -82,18 +77,15 @@ Shader "WB/fish2d"
             return OUT;
         }
 
-
-
-        half4 SampleSpriteTexture(float2 uv)
+        half4 SampleSpriteTexture(half2 uv)
         {
             half4 color = tex2D(_MainTex, uv);
             return color;
         }
-        //#include "HitRed_fun.hlsl"
+
         half4 SpriteFrag(v2f IN) : SV_Target
         {
             half4 c = SampleSpriteTexture(IN.texcoord) * IN.color;
-            //c.rgb = HitRed(c.rgb, float3(0,0,0), float3(1, 0, 0), float3(1, 0, 0));
             c.rgb *= c.a;
             return c;
         }
