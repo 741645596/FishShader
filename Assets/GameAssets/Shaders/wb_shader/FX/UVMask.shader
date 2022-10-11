@@ -4,7 +4,7 @@ Shader "WB/UVMask" {
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("BlendDestination", Float) = 1
         [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
-        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
         [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         [HDR] _BaseColor("Base Color", Color) = (1,1,1,1)
@@ -105,7 +105,6 @@ Shader "WB/UVMask" {
                 col.a = saturate(col.a) * _AlphaScale;
 
                 col.a = saturate(col.a * maskCol.r * in_f.color.a * _BaseColor.a);
-                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             ENDHLSL

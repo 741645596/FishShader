@@ -90,20 +90,15 @@ Shader "WB/Dissolve" {
             struct AttributesParticle
             {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
                 float4 color : COLOR;
-
                 float3 texcoord : TEXCOORD0;
             };
 
             struct VaryingsParticle
             {
                 float4 positionCS : SV_POSITION;
-                float2 texcoord : TEXCOORD0;
+                float4 mainUV : TEXCOORD0;
                 float4 color : COLOR;
-                #if defined (USE_CUTOUT_TEX)
-                float4 texcoordNoise : TEXCOORD2;
-                #endif
                 float age_percent : TEXCOORD3;
             };
 
@@ -115,7 +110,7 @@ Shader "WB/Dissolve" {
 
                 output.color = input.color;
 
-                output.texcoord.xy = TRANSFORM_TEX(input.texcoord, _BaseMap);
+                output.mainUV.xy = TRANSFORM_TEX(input.texcoord, _BaseMap);
 
                 if (input.texcoord.z == 0)
                     output.age_percent = 1;
@@ -123,7 +118,7 @@ Shader "WB/Dissolve" {
                     output.age_percent = input.texcoord.z;
 
                 #ifdef USE_CUTOUT_TEX
-                output.texcoordNoise.zw = TRANSFORM_TEX(input.texcoord, _CutoutTex);
+                output.mainUV.zw = TRANSFORM_TEX(input.texcoord, _CutoutTex);
                 #endif
                 return output;
             }
@@ -131,7 +126,7 @@ Shader "WB/Dissolve" {
             float4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
             {
                 float4 vertColor = fInput.color;
-                float2 uv = fInput.texcoord.xy;
+                float2 uv = fInput.mainUV.xy;
 
                 float t = abs(frac(_Time.y * 0.01));
                 float calcTime = t * 100;
@@ -144,7 +139,7 @@ Shader "WB/Dissolve" {
                 cutout = lerp(cutout, (1.001 - vertColor.a + cutout), _UseParticlesAlphaCutout);
 
                 #ifdef USE_CUTOUT_TEX
-                float2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * calcTime;
+                float2 cutoutUV = fInput.mainUV.zw + _UVCutOutScroll.xy * calcTime;
                 float mask = SAMPLE_TEXTURE2D(_CutoutTex, sampler_CutoutTex, cutoutUV).r;
                 #else
                     float mask = mainTexColor.a;
@@ -164,7 +159,6 @@ Shader "WB/Dissolve" {
                 col *= vertColor;
 
                 col.a = saturate(col.a * _AlphaScale);
-                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
 

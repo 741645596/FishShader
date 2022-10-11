@@ -56,7 +56,7 @@ void roateUV(float2 _UVRotate, float calcTime, half2 pivot, inout float2 uv)
 	half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
 	uv.xy = mul(roation, uv.xy -= pivot) + pivot;
 }
-
+/*
 inline float GammaToLinearSpaceExact(float value)
 {
 	if (value <= 0.04045F)
@@ -107,6 +107,6 @@ inline float4 Gamma045(float4 sRGB)
 	//return float4(GammaToLinearSpaceExact(sRGB.r), GammaToLinearSpaceExact(sRGB.g), GammaToLinearSpaceExact(sRGB.b), sRGB.a);
 
 }
-
+*/
 
 #endif // COLOR_CORE_INCLUDED

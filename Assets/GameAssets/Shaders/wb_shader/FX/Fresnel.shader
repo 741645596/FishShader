@@ -6,7 +6,7 @@ Shader "WB/Fresnel" {
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlendRGB ("BlendDstRGB", Float) = 10
         [Space(20)]
         [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
-        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
         [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
         _BaseMap("Base Map", 2D) = "white" {}
         [HDR] _BaseColor("Base Color", Color) = (1,1,1,1)

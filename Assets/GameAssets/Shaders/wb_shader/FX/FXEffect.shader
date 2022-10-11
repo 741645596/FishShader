@@ -4,10 +4,8 @@ Shader "WB/FXEffect" {
         [FoldoutItem] [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend("BlendSource", Float) = 5
         [FoldoutItem] [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend("BlendDestination", Float) = 1
         [FoldoutItem] [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
-        [FoldoutItem] [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 0
+        [FoldoutItem] [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 2
         [FoldoutItem] [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
-        //[FoldoutItem] _OffsetFactor("Offset Factor", Float) = 0
-        //[FoldoutItem] _OffsetUnits("Offset Units", Float) = 0
         // base
         [Foldout] _BaseName("主纹理面板",Range(0,1)) = 0
         [FoldoutItem] _BaseMap("Base Map", 2D) = "white" {}
@@ -19,10 +17,6 @@ Shader "WB/FXEffect" {
         [Foldout] _ScrollName("流动面板",Range(0,1)) = 0
         [FoldoutItem][Toggle] _Scroll("流动控制开关", Float) = 0.0
         [FoldoutItem] _MainSpeed("流动速度及方向", Vector) = (1,1,0,0)
-        //  附加色
-        [Foldout] _AddColorName("附加色面板",Range(0,1)) = 0
-        [FoldoutItem][Toggle] _Addcolor("附加色控制开关", Float) = 0.0
-        [FoldoutItem] _ColorTex("ColorTex", 2D) = "black" {}
         // mask
         [Foldout] _MaskName("Mask 面板",Range(0,1)) = 0
         [FoldoutItem][Toggle] _Mask("Mask开关", Float) = 0.0
@@ -72,11 +66,9 @@ Shader "WB/FXEffect" {
                 ZWrite[_ZWriteMode]
                 Lighting Off
                 ZTest[_ZTest]
-                //Offset[_OffsetFactor],[_OffsetUnits]
 
                 HLSLPROGRAM
-                #pragma multi_compile __ _SCROLL_ON
-                #pragma multi_compile __ _ADDCOLOR_ON
+                //#pragma multi_compile __ _SCROLL_ON
                 #pragma multi_compile __ _MASK_ON
                 #pragma multi_compile __ _DISTORTION_ON
                 #pragma multi_compile __ _DISSOLVE_ON
@@ -95,9 +87,8 @@ Shader "WB/FXEffect" {
                 float _GlowScale;
                 float _AlphaScale;
                 // 流动
+                float _Scroll;
                 float4 _MainSpeed;
-                // 附加色
-                float4 _ColorTex_ST;
                 // mask
                 float4 _MaskTex_ST;
                 float4 _MaskSpeed;
@@ -141,11 +132,6 @@ Shader "WB/FXEffect" {
                 SAMPLER(sampler_CutoutTex);
 #endif
 
-#if _ADDCOLOR_ON
-                TEXTURE2D(_ColorTex);
-                SAMPLER(sampler_ColorTex);
-#endif
-
 #if _VERTEXANI_ON
                 TEXTURE2D(_VertexAnimateTex);
                 SAMPLER(sampler_VertexAnimateTex);
@@ -166,9 +152,6 @@ Shader "WB/FXEffect" {
                     float4 positionCS : SV_POSITION;
                     float4 color : COLOR;
                     float2 texcoord :TEXCOORD0;
-#if _ADDCOLOR_ON
-                    float2 texcoordColor : TEXCOORD1;
-#endif
 #if _MASK_ON
                     float2 texcoordMask: TEXCOORD2;
 #endif
@@ -210,10 +193,6 @@ Shader "WB/FXEffect" {
                     output.color = input.color;
                     // 主纹理
                     output.texcoord = TRANSFORM_TEX(input.texcoord, _BaseMap);
-                    // 附加色
-#if _ADDCOLOR_ON
-                    output.texcoordColor = TRANSFORM_TEX(input.texcoord, _ColorTex);
-#endif
                     // mask
 #if _MASK_ON
                     output.texcoordMask = TRANSFORM_TEX(input.texcoord, _MaskTex);
@@ -243,10 +222,10 @@ Shader "WB/FXEffect" {
                     
                     float2 uvMain = fInput.texcoord;
                     // 流动
-#if _SCROLL_ON
-                    uvMain += _MainSpeed.xy * calcTime;
-                    roateUV(_MainSpeed.zw, calcTime, pivot, uvMain);
-#endif
+//#if _SCROLL_ON
+                    uvMain += _MainSpeed.xy * _Scroll * calcTime;
+                    roateUV(_MainSpeed.zw * _Scroll, calcTime, pivot, uvMain);
+//#endif
                     uvMain += fInput.CustData.xy;
                     // 扰动uv
 #if _DISTORTION_ON
@@ -255,10 +234,6 @@ Shader "WB/FXEffect" {
                     float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uvMain);
                     float4 col = mainTexColor * _BaseColor * vertColor;
                     col.rgb *= _GlowScale;
-                    // 附加色
-#if _ADDCOLOR_ON
-                    col.rgb += SAMPLE_TEXTURE2D(_ColorTex, sampler_ColorTex, fInput.texcoordColor).rgb;
-#endif
                     // 溶解
 #if _DISSOLVE_ON
                     float cutout = _CustomCutOut ? fInput.CustData.z : _CutOut;
@@ -282,7 +257,6 @@ Shader "WB/FXEffect" {
                     col.a *= SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, uvMask).r;
 #endif
                     col.a = saturate(col.a * _AlphaScale);
-                    //col.a = col.a * step(0.03, col.a);
                     return col;
                 }
                 ENDHLSL

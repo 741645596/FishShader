@@ -1,10 +1,7 @@
-// Made with Amplify Shader Editor
-// Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "WB/Fresnel2" {
     Properties {
         _Fresnel("Fresnel", Range( 0 , 1)) = 0.1943072
         [HDR]_Color0("Color 0", Color) = (0.9811321,0.9811321,0.9811321,1)
-
     }
 
     SubShader {
@@ -60,7 +57,7 @@ Shader "WB/Fresnel2" {
             {
                 float4 clipPos : SV_POSITION;
                 float4 ase_color : COLOR;
-                float4 ase_texcoord1 : TEXCOORD1;
+                float fresnel : TEXCOORD1;
             };
 
             VertexOutput vert(VertexInput v)
@@ -75,12 +72,10 @@ Shader "WB/Fresnel2" {
                 float NdotV = dot(viewDirectionWS, normalWS);
                 float fresnel = smoothstep(_Fresnel, 1.0, (1.0 - max(NdotV, 0.0)));
 
-                o.ase_texcoord1.x = fresnel;
+                o.fresnel = fresnel;
 
                 o.ase_color = v.ase_color;
 
-                //setting value to unused interpolator channels and avoid initialization warnings
-                o.ase_texcoord1.yzw = 0;
                 #ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
                 #else
@@ -101,13 +96,12 @@ Shader "WB/Fresnel2" {
 
             float4 frag(VertexOutput IN) : SV_Target
             {
-                float fresnel = IN.ase_texcoord1.x;
+                float fresnel = IN.fresnel;
 
                 float4 FresnelColor = _Color0;
 
                 float3 Color = FresnelColor.rgb;
                 float Alpha = saturate(IN.ase_color.a * FresnelColor.a * fresnel);
-                //Alpha = Alpha * step(0.03, Alpha);
                 return float4(Color, Alpha);
             }
             ENDHLSL

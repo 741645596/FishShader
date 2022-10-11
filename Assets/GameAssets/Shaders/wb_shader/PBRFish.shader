@@ -235,6 +235,14 @@ Shader "WB/PBRFish"
 
 				OUTPUT_SH(normalInput.normalWS.xyz, o.lightmapUVOrVertexSH.xyz);
 
+#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
+				half3 SH = SampleSH(normalInput.normalWS.xyz);
+#else
+				half3 SH = o.lightmapUVOrVertexSH.xyz;
+#endif
+
+				o.lightmapUVOrVertexSH.xyz = SAMPLE_GI(o.lightmapUVOrVertexSH.xy, SH, normalInput.normalWS);
+
 				o.clipPos = positionCS;
 #if _STREAMER_ON
 				half4 offset = (_Time.xyyx * half4(_StreamerScrollX, _StreamerScrollY, _StreamerScrollY, _StreamerScrollX));
@@ -317,13 +325,9 @@ Shader "WB/PBRFish"
 				streamer *= _StreamerAlpha;
 				Emission += streamer;
 #endif
-				#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
-				     half3 SH = SampleSH(inputData.normalWS.xyz);
-				#else
-				     half3 SH = IN.lightmapUVOrVertexSH.xyz;
-				#endif
 
-			    inputData.bakedGI = SAMPLE_GI( IN.lightmapUVOrVertexSH.xy, SH, inputData.normalWS );
+
+			    inputData.bakedGI = IN.lightmapUVOrVertexSH;
 
 				Alpha = Alpha * _Alpha;
 				half4 color = UniversalFragmentPBR(
@@ -580,8 +584,8 @@ Shader "WB/PBRFish"
 				Emission += streamer;
 #endif
 */
-				half3 SH = IN.lightmapUVOrVertexSH.xyz;
-				inputData.bakedGI = SAMPLE_GI(IN.lightmapUVOrVertexSH.xy, SH, inputData.normalWS);
+				//half3 SH = IN.lightmapUVOrVertexSH.xyz;
+				inputData.bakedGI = IN.lightmapUVOrVertexSH.xyz;
 
 				Alpha = Alpha * _Alpha;
 				half4 color = UniversalFragmentPBR(

@@ -1,10 +1,10 @@
-﻿Shader "FX/UVDistortion" {
+Shader "FX/UVDistortion" {
     // 纹理扰动效果，扰动数值，扰动的速度以及方向
     Properties {
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
         [Enum(One, 1 , OneMinusSrcAlpha, 10 )] _DstBlend ("BlendDestination", Float) = 1
         [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
-        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
         [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
         _BaseMap("Base Map", 2D) = "white" {}
         [HDR] _BaseColor("Base Color", Color) = (1,1,1,1)
@@ -46,14 +46,14 @@
             CBUFFER_START(UnityPerMaterial)
 
             float4 _BaseMap_ST;
-            half4 _BaseColor;
-            half4 _MainSpeed;
-            half _GlowScale;
-            half _AlphaScale;
+            float4 _BaseColor;
+            float4 _MainSpeed;
+            float _GlowScale;
+            float _AlphaScale;
 
-            half4 _UVNoiseTex_ST;
-            half _UVDistortion;
-            half4 _NoiseScroll;
+            float4 _UVNoiseTex_ST;
+            float _UVDistortion;
+            float4 _NoiseScroll;
 
             CBUFFER_END
 
@@ -65,14 +65,14 @@
             struct Attributes
             {
                 float3 vertex : POSITION;
-                half4 color : COLOR;
+                float4 color : COLOR;
                 float2 texcoord :TEXCOORD0;
             };
 
             struct Varyings
             {
                 float4 positionCS : SV_POSITION;
-                half4 color : COLOR;
+                float4 color : COLOR;
                 float2 texcoord :TEXCOORD0;
                 float2 texcoordNoise: TEXCOORD1;
             };
@@ -89,38 +89,34 @@
                 return output;
             }
 
-            void roateUV(float2 _UVRotate, half2 pivot, inout float2 uv)
+            float4 frag(Varyings in_f) : SV_TARGET
             {
-                half cosAngle = cos(_UVRotate.x + _Time.y * _UVRotate.y);
-                half sinAngle = sin(_UVRotate.x + _Time.y * _UVRotate.y);
-                half2x2 roation = half2x2(cosAngle, -sinAngle, sinAngle, cosAngle);
-                uv.xy = mul(roation, uv.xy -= pivot) + pivot;
-            }
-            half4 frag(Varyings in_f) : SV_TARGET
-            {
-                half4 vertColor = in_f.color;
-                vertColor = Gamma22(vertColor);
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
+                float4 vertColor = in_f.color;
+                // vertColor = Gamma22(vertColor);
                 float2 uvMain = in_f.texcoord;
 
-                uvMain += _MainSpeed.xy * _Time.y;
-                half2 pivot = 0.5; //_UVRotate.xy;
-                roateUV(_MainSpeed.zw, pivot, uvMain);
+                uvMain += _MainSpeed.xy * calcTime;
+                float2 pivot = 0.5; //_UVRotate.xy;
+                roateUV(_MainSpeed.zw,calcTime, pivot, uvMain);
 
                 float2 noiseScrollXY = _NoiseScroll.xy;
-                in_f.texcoordNoise.xy += half2(_Time.g * noiseScrollXY);
+                in_f.texcoordNoise.xy += float2(calcTime * noiseScrollXY);
                 
                 float2 noiseMask = SAMPLE_TEXTURE2D(_UVNoiseTex,sampler_UVNoiseTex, in_f.texcoordNoise.xy).xy * _UVDistortion * _NoiseScroll.zw;
                 uvMain.xy += noiseMask;
 
                 float4 baseCol = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uvMain);
-                baseCol = Gamma22(baseCol);
-                _BaseColor = Gamma22(_BaseColor);
+                // baseCol = Gamma22(baseCol);
+                // _BaseColor = Gamma22(_BaseColor);
 
-                half4 col = vertColor * baseCol * _BaseColor;
+                float4 col = vertColor * baseCol * _BaseColor;
                 col.rgb *= _GlowScale;
-                col.a = saturate(col.a) * _AlphaScale;
+                col.a = saturate(col.a * _AlphaScale);
+                //col.a = col.a * step(0.03, col.a);
 
-                col = Gamma045(col);
+                // col = Gamma045(col);
 
                 return col;
             }

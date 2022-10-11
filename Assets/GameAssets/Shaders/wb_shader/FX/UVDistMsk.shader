@@ -139,7 +139,6 @@ Shader "WB/FXUVDistMsk" {
                 float4 maskTexColor = SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, uvMask);
                 col.a = saturate(col.a * _AlphaScale);
                 col.a = saturate(col.a * maskTexColor.r);
-                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             #pragma vertex vertParticleUnlit

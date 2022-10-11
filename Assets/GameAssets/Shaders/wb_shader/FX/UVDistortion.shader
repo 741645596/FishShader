@@ -4,7 +4,7 @@ Shader "WB/UVDistortion" {
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
         [Enum(One, 1 , OneMinusSrcAlpha, 10 )] _DstBlend ("BlendDestination", Float) = 1
         [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
-        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
         [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
         _BaseMap("Base Map", 2D) = "white" {}
         [HDR] _BaseColor("Base Color", Color) = (1,1,1,1)
@@ -50,13 +50,12 @@ Shader "WB/UVDistortion" {
             float _GlowScale;
             float _AlphaScale;
 
-            sampler2D _UVNoiseTex;
             float4 _UVNoiseTex_ST;
             float _UVDistortion;
             float4 _NoiseScroll;
 
             CBUFFER_END
-
+            sampler2D _UVNoiseTex;
             TEXTURE2D(_BaseMap);
             SAMPLER(sampler_BaseMap);
 
@@ -105,7 +104,6 @@ Shader "WB/UVDistortion" {
                 float4 col = in_f.color * baseCol * _BaseColor;
                 col.rgb *= _GlowScale;
                 col.a = saturate(col.a * _AlphaScale);
-                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             ENDHLSL

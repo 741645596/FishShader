@@ -14,8 +14,6 @@ Shader "WB/FXUVDistMskExt" {
         _MainSpeed("MainTex Speed", Vector) = (0,0,0,0)
         [ToggleUI] _CustomUV("自定义主贴图UV偏移曲线TEXCOORD1.xy", Float) = 1.0
 
-        _ColorTex("ColorTex", 2D) = "black" {}
-
         [Space(20)]
         _UVNoiseTex("UVNoiseTex", 2D) = "black" {}
         _UVDistortion("UVDistortion", Float) = 0
@@ -35,12 +33,6 @@ Shader "WB/FXUVDistMskExt" {
         [HDR]_CutoutColor("Cutout Color", Color) = (0,0,0,1)
         _UVCutOutScroll("Cutout UVScroll", Vector) = (0,0,0,0)
         _CutoutThreshold("Cutout Threshold", Range(0, 1)) = 0
-
-        [Space(30)]
-        _VertexAnimateTex("顶点动画图",2D) = "black"{}
-        _VertexScrollingX("顶点动画流动U", Float) = 0
-        _VertexScrollingY("顶点动画流动Y", Float) = 0
-        _VertexStrength("顶点动画强度", Float) = 0
     }
     SubShader {
         Tags {
@@ -67,8 +59,6 @@ Shader "WB/FXUVDistMskExt" {
             float4 _BaseColor;
             float4 _MainSpeed;
             float _CustomUV;
-            float4 _ColorTex_ST;
-
             float4 _MaskTex_ST;
 
             float4 _UVNoiseTex_ST;
@@ -88,19 +78,10 @@ Shader "WB/FXUVDistMskExt" {
             float _GlowScale;
             float _AlphaScale;
             float4 _MaskSpeed;
-
-            float4 _VertexAnimateTex_ST;
-            float _VertexScrollingX;
-            float _VertexScrollingY;
-            float _VertexStrength;
-
             CBUFFER_END
 
             TEXTURE2D(_BaseMap);
             SAMPLER(sampler_BaseMap);
-
-            TEXTURE2D(_ColorTex);
-            SAMPLER(sampler_ColorTex);
 
             TEXTURE2D(_MaskTex);
             SAMPLER(sampler_MaskTex);
@@ -110,10 +91,6 @@ Shader "WB/FXUVDistMskExt" {
 
             TEXTURE2D(_CutoutTex);
             SAMPLER(sampler_CutoutTex);
-
-            TEXTURE2D(_VertexAnimateTex);
-            SAMPLER(sampler_VertexAnimateTex);
-
             struct AttributesParticle
             {
                 float4 vertex : POSITION;
@@ -129,7 +106,6 @@ Shader "WB/FXUVDistMskExt" {
                 float4 color : COLOR;
 
                 float2 texcoord : TEXCOORD0;
-                float2 texcoordColor : TEXCOORD2;
                 float4 texcoordNoise: TEXCOORD1;
                 float2 texcoordMask : TEXCOORD4;
                 float3 CustData : TEXCOORD3;
@@ -148,13 +124,7 @@ Shader "WB/FXUVDistMskExt" {
             VaryingsParticle vertParticleUnlit(AttributesParticle input)
             {
                 VaryingsParticle output = (VaryingsParticle)0;
-                float t = abs(frac(_Time.y * 0.01));
-                float calcTime = t * 100;
-                // 顶点扰动。
                 float3 positionWS = TransformObjectToWorld(input.vertex.xyz);
-                float2 vertexAnimateTexUV = TRANSFORM_TEX(input.texCoord0, _VertexAnimateTex) + float2(_VertexScrollingX, _VertexScrollingY) * calcTime;
-                float4 vertexAnimateMask = SAMPLE_TEXTURE2D_LOD(_VertexAnimateTex, sampler_VertexAnimateTex, vertexAnimateTexUV, 0);
-                positionWS += _VertexStrength * vertexAnimateMask.r * input.normal;
                 output.positionCS = TransformWorldToHClip(positionWS);
                 //
                 output.color = input.color;
@@ -162,8 +132,6 @@ Shader "WB/FXUVDistMskExt" {
 
                 output.CustData.xy = _CustomUV ? input.texCoordCst.xy : float2(0, 0);
                 output.CustData.z = input.texCoordCst.z;
-
-                output.texcoordColor = TRANSFORM_TEX(input.texCoord0, _ColorTex);
                 output.texcoordMask = TRANSFORM_TEX(input.texCoord0, _MaskTex);
                 output.texcoordNoise.xy = TRANSFORM_TEX(input.texCoord0, _UVNoiseTex);
                 output.texcoordNoise.zw = TRANSFORM_TEX(input.texCoord0, _CutoutTex);
@@ -194,9 +162,6 @@ Shader "WB/FXUVDistMskExt" {
                 float4 col = mainTexColor * _BaseColor;
                 col *= vertColor;
                 col.rgb *= _GlowScale;
-		
-                float4 mapColor = SAMPLE_TEXTURE2D(_ColorTex, sampler_ColorTex, fInput.texcoordColor);		
-                col.rgb += mapColor.rgb;
 
                 {
                     //CutOut
@@ -223,7 +188,6 @@ Shader "WB/FXUVDistMskExt" {
                 float4 maskTexColor = SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, uvMask);
                 col.a = saturate(col.a * _AlphaScale);
                 col.a = saturate(col.a * maskTexColor.r);
-                //col.a = col.a * step(0.03, col.a);
                 return col;
             }
             #pragma vertex vertParticleUnlit

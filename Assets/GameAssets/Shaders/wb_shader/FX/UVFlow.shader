@@ -7,7 +7,7 @@ Shader "WB/UVFlow"
 		[FoldoutItem] [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
 		[FoldoutItem] [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("BlendDestination", Float) = 1
 		[FoldoutItem] [Enum(Off,0, On,1)] _ZWriteMode("ZWrite Mode", Int) = 0
-		[FoldoutItem] [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 0
+		[FoldoutItem] [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
 		[FoldoutItem] [Enum(Always,0,Less,2,LessEqual,4)] _ZTest("ZTest Mode", Int) = 4
 		[FoldoutItem] _OffsetFactor("Offset Factor", Float) = 0
 		[FoldoutItem] _OffsetUnits("Offset Units", Float) = 0
@@ -109,9 +109,7 @@ Shader "WB/UVFlow"
 				float3 emissive = (_FlowColor.rgb * saturate((node_5670 - 0.25)) * in_f.color.rgb);
 
 				col.rgb += emissive;
-
 				col.a = saturate(col.a * in_f.color.a * _BaseColor.a * _AlphaScale);
-				//col.a = col.a * step(0.03, col.a);
 				return col;
 			}
 

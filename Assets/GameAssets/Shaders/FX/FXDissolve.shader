@@ -1,4 +1,4 @@
-﻿Shader "FX/Dissolve" {
+Shader "FX/Dissolve" {
     Properties {
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("BlendSource", Float) = 5
         [Enum(One, 1 , OneMinusSrcAlpha, 10 )] _DstBlend ("BlendDestination", Float) = 1
@@ -63,24 +63,24 @@
 
             CBUFFER_START(UnityPerMaterial)
             float4 _BaseMap_ST;
-            half4 _BaseColor;
+            float4 _BaseColor;
             float2 _UVBaseScroll;
 
             #ifdef USE_CUTOUT_TEX
             float4 _CutoutTex_ST;
             #endif
 
-            half _UseSoftCutout;
-            half _UseParticlesAlphaCutout;
+            float _UseSoftCutout;
+            float _UseParticlesAlphaCutout;
 
-            half _CutOut;
-            half4 _CutoutColor;
-            half _CutoutThreshold;
+            float _CutOut;
+            float4 _CutoutColor;
+            float _CutoutThreshold;
 
             float2 _UVCutOutScroll;
 
-            half _GlowScale;
-            half _AlphaScale;
+            float _GlowScale;
+            float _AlphaScale;
 
             CBUFFER_END
             TEXTURE2D(_BaseMap);
@@ -93,7 +93,7 @@
             {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
-                half4 color : COLOR;
+                float4 color : COLOR;
 
                 float3 texcoord : TEXCOORD0;
             };
@@ -102,7 +102,7 @@
             {
                 float4 positionCS : SV_POSITION;
                 float2 texcoord : TEXCOORD0;
-                half4 color : COLOR;
+                float4 color : COLOR;
                 #if defined (USE_CUTOUT_TEX)
                 float4 texcoordNoise : TEXCOORD2;
                 #endif
@@ -113,7 +113,7 @@
             {
                 VaryingsParticle output = (VaryingsParticle)0;
 
-                output.positionCS = TransformObjectToHClip(input.vertex);
+                output.positionCS = TransformObjectToHClip(input.vertex.xyz);
 
                 output.color = input.color;
 
@@ -130,22 +130,25 @@
                 return output;
             }
 
-            half4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
+            float4 fragParticleUnlit(VaryingsParticle fInput) : SV_Target
             {
-                half4 vertColor = fInput.color;
-                vertColor = Gamma22(vertColor);
+                float t = abs(frac(_Time.y * 0.01));
+                float calcTime = t * 100;
+
+                float4 vertColor = fInput.color;
+                // vertColor = Gamma22(vertColor);
                 float2 uv = fInput.texcoord.xy;
 
-                float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv +_Time.y * _UVBaseScroll.xy);
-                mainTexColor = Gamma22(mainTexColor);
-                _BaseColor = Gamma22(_BaseColor);
-                half4 col = mainTexColor * _BaseColor;
+                float4 mainTexColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv + calcTime * _UVBaseScroll.xy);
+                // mainTexColor = Gamma22(mainTexColor);
+                // _BaseColor = Gamma22(_BaseColor);
+                float4 col = mainTexColor * _BaseColor;
 
                 float cutout = _CutOut * fInput.age_percent;
                 cutout = lerp(cutout, (1.001 - vertColor.a + cutout), _UseParticlesAlphaCutout);
 
                 #ifdef USE_CUTOUT_TEX
-                float2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * _Time.y;
+                float2 cutoutUV = fInput.texcoordNoise.zw + _UVCutOutScroll.xy * calcTime;
                 float mask = SAMPLE_TEXTURE2D(_CutoutTex, sampler_CutoutTex, cutoutUV).r;
                 #else
                     float mask = mainTexColor.a;
@@ -165,7 +168,8 @@
                 col *= vertColor;
 
                 col.a = saturate(col.a * _AlphaScale);
-                col = Gamma045(col);
+                //col.a = col.a * step(0.03, col.a);
+                // col = Gamma045(col);
                 return col;
             }
 
