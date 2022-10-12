@@ -1,5 +1,5 @@
 
-Shader "WB/PBRFish"
+Shader "WB/PBRFish_Streamer"
 {
 	Properties
 	{
@@ -70,6 +70,17 @@ Shader "WB/PBRFish"
 		[FoldoutItem][HDR]_EmissionColor("Emission Color[自发光]", Color) = (0, 0, 0, 0)
 		[FoldoutItem][NoScaleOffset] _EmissionMap("EmissionMap[自发光]", 2D) = "black" {}
 
+		[Foldout] _StreamerName("流光控制面板",Range(0,1)) = 0
+		[FoldoutItem][Toggle] _Streamer("流光控制开关开关", Float) = 0.0
+		[FoldoutItem] _StreamerNoise("StreamerNoise", 2D) = "black" {}
+		[FoldoutItem] _StreamerMask("StreamerMask[流光mask]", 2D) = "black" {}
+		[FoldoutItem] _StreamerTex("StreamerTex[流光纹理]", 2D) = "black" {}
+		[FoldoutItem] _StreamerAlpha("StreamerAlpha[流光Alpha]", Range(0, 1)) = 1
+		[FoldoutItem] _StreamerNoiseSpeed("StreamerNoiseSpeed[流光速度]", Range(0, 10)) = 1
+		[FoldoutItem] _StreamerScrollX("StreamerScrollX[流光方向]", Range(-10, 10)) = 1
+		[FoldoutItem] _StreamerScrollY("StreamerScrollY[流光方向]", Range(-10, 10)) = 1
+		[FoldoutItem][HDR]_StreamerColor("StreamerColor", Color) = (0, 0, 0, 0)
+
 	    [Foldout] _LightDirName("灯光方向面板",Range(0,1)) = 0
 		[FoldoutItem][Toggle] _LightDirControl("灯光方向控制开关", Float) = 0.0
 		[FoldoutItem] _LightDir("LightDir", Vector) = (0, 0, 0, 0)
@@ -106,7 +117,8 @@ Shader "WB/PBRFish"
 
 			HLSLPROGRAM
 			#pragma multi_compile __ _EMISSION_ON
-		    #pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
+		    //#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
+			#define _HITCOLORCHANNEL_RIM 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -135,6 +147,7 @@ Shader "WB/PBRFish"
 				half4 tSpace1 : TEXCOORD2;
 				half4 tSpace2 : TEXCOORD3;
 				half2 uv : TEXCOORD4;
+				half4 streamerUv : TEXCOORD5;
 			};
 
 			CBUFFER_START(UnityPerMaterial)
@@ -171,7 +184,12 @@ Shader "WB/PBRFish"
 
 			half _NonMetalThreshold;
 			half _NonMetalStrength;
-
+			half _StreamerAlpha;
+			half _StreamerNoiseSpeed;
+			half _StreamerScrollX;
+			half _StreamerScrollY;
+			half4 _StreamerColor;
+			half4 _StreamerTex_ST;
 			half _Alpha;
 			half _LightDirControl;
 			half3 _LightDir;
@@ -184,7 +202,10 @@ Shader "WB/PBRFish"
 			sampler2D _EmissionMap;
 #endif
 
-
+			sampler2D _StreamerNoise;
+			sampler2D _StreamerTex;
+			sampler2D _StreamerMask;
+			
 
 			VertexOutput vert ( VertexInput v )
 			{
@@ -211,6 +232,10 @@ Shader "WB/PBRFish"
 				o.lightmapUVOrVertexSH.xyz = SAMPLE_GI(o.lightmapUVOrVertexSH.xy, SH, normalInput.normalWS);
 
 				o.clipPos = positionCS;
+				half4 offset = (_Time.xyyx * half4(_StreamerScrollX, _StreamerScrollY, _StreamerScrollY, _StreamerScrollX));
+				offset = frac(offset);
+				half4 streamerUv = v.texcoord.xyxy * _StreamerTex_ST.xyxy + _StreamerTex_ST.zwzw;
+				o.streamerUv = streamerUv + offset;
 				return o;
 			}
 
@@ -258,7 +283,7 @@ Shader "WB/PBRFish"
 				half Smoothness = lerp(_SmoothnessRemapMin, _SmoothnessRemapMax, tex2DNode11.a) * _GlossMapScale;
 				half3 Specular = _SpecularStrength;
 				half Occlusion = tex2DNode11.g * _OcclusionStrength;
-				// 先屏蔽
+
 				half flag = step(_NonMetalThreshold, tex2DNode11.r);
 				Occlusion = Occlusion * lerp(_NonMetalStrength, 1.0f, flag);
 
@@ -272,6 +297,18 @@ Shader "WB/PBRFish"
 				half ndv = dot(SafeNormalize(inputData.normalWS), SafeNormalize(WorldViewDirection + _RimOffset.xyz));
 				half3 rimColor = (pow((1.0 - saturate(ndv)), 5.0 - _RimSpread) * _RimColor).rgb * _RimPower;
 				half3 Emission = emission.rgb + rimColor;
+
+				half streamNoiseX = tex2D(_StreamerNoise, IN.streamerUv.yx).x;
+				half streamNoiseY = tex2D(_StreamerNoise, IN.streamerUv.zw).y;
+				half streamNoise = streamNoiseX * streamNoiseY;
+				half2 streamerUvNew = streamNoise.xx * _StreamerNoiseSpeed + IN.streamerUv.xy;
+				half3 streamer = tex2D(_StreamerTex, streamerUvNew.xy).xyz;
+				half3 streamerMask = tex2D(_StreamerMask, IN.uv.xy).xyz;
+				streamer *= _StreamerColor.rgb;
+				streamer *= streamerMask;
+				streamer *= _StreamerAlpha;
+				Emission += streamer;
+
 
 			    inputData.bakedGI = IN.lightmapUVOrVertexSH.xyz;
 
@@ -326,7 +363,9 @@ Shader "WB/PBRFish"
 		}
 
 		HLSLPROGRAM
-		#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
+		//#pragma multi_compile __ _EMISSION_ON
+		//#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
+        #define _HITCOLORCHANNEL_RIM 1
 
 		#pragma vertex vert
 		#pragma fragment frag
@@ -380,9 +419,6 @@ Shader "WB/PBRFish"
 			half _GlossMapScale;
 			half _OcclusionStrength;
 			half _BumpStrength;
-//#if			_EMISSION_ON
-		//	half4 _EmissionColor;
-			//#endif
 
 			half _HSVHue;
 			half _HSVSat;
@@ -391,7 +427,6 @@ Shader "WB/PBRFish"
 
 			half _NonMetalThreshold;
 			half _NonMetalStrength;
-
 			half _Alpha;
 			half _LightDirControl;
 			half3 _LightDir;
@@ -478,6 +513,7 @@ Shader "WB/PBRFish"
 				half ndv = dot(SafeNormalize(inputData.normalWS), SafeNormalize(WorldViewDirection + _RimOffset.xyz));
 				half3 rimColor = (pow((1.0 - saturate(ndv)), 5.0 - _RimSpread) * _RimColor).rgb * _RimPower;
 				half3 Emission = emission.rgb + rimColor;
+
 				//half3 SH = IN.lightmapUVOrVertexSH.xyz;
 				inputData.bakedGI = IN.lightmapUVOrVertexSH.xyz;
 

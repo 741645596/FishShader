@@ -94,7 +94,6 @@ Shader "WB/FXUVDistMskExt" {
             struct AttributesParticle
             {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
                 float4 color : COLOR;
                 float4 texCoord0 : TEXCOORD0;
                 float4 texCoordCst : TEXCOORD1;
@@ -124,8 +123,7 @@ Shader "WB/FXUVDistMskExt" {
             VaryingsParticle vertParticleUnlit(AttributesParticle input)
             {
                 VaryingsParticle output = (VaryingsParticle)0;
-                float3 positionWS = TransformObjectToWorld(input.vertex.xyz);
-                output.positionCS = TransformWorldToHClip(positionWS);
+                output.positionCS = TransformObjectToHClip(input.vertex.xyz);
                 //
                 output.color = input.color;
                 output.texcoord.xy = TRANSFORM_TEX(input.texCoord0, _BaseMap);

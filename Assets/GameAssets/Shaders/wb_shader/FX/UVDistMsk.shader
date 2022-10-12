@@ -68,7 +68,6 @@ Shader "WB/FXUVDistMsk" {
             struct AttributesParticle
             {
                 float4 vertex : POSITION;
-                float3 normal : NORMAL;
                 float4 color : COLOR;
                 float4 texCoord0 : TEXCOORD0;
             };
