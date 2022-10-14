@@ -160,9 +160,7 @@ Shader "WB/PBRFish"
 			half _GlossMapScale;
 			half _OcclusionStrength;
 			half _BumpStrength;
-//#if			_EMISSION_ON
 			half4 _EmissionColor;
-//#endif
 
 			half _HSVHue;
 			half _HSVSat;
@@ -180,7 +178,6 @@ Shader "WB/PBRFish"
 			sampler2D _NormalMap;
 			sampler2D _MixMap;
 #if			_EMISSION_ON
-			//float4 _EmissionColor;
 			sampler2D _EmissionMap;
 #endif
 
@@ -326,6 +323,7 @@ Shader "WB/PBRFish"
 		}
 
 		HLSLPROGRAM
+		#pragma multi_compile __ _EMISSION_ON
 		#pragma multi_compile  _HITCOLORCHANNEL_RIM _HITCOLORCHANNEL_ALBEDO _HITCOLORCHANNEL_NONE
 
 		#pragma vertex vert
@@ -355,9 +353,9 @@ Shader "WB/PBRFish"
 			half4 tSpace1 : TEXCOORD2;
 			half4 tSpace2 : TEXCOORD3;
 			half2 uv : TEXCOORD4;
-			};
+		};
 
-			CBUFFER_START(UnityPerMaterial)
+		CBUFFER_START(UnityPerMaterial)
 #include "HitRed_dec.hlsl"
 
 			half4 _BaseColor;
@@ -380,9 +378,7 @@ Shader "WB/PBRFish"
 			half _GlossMapScale;
 			half _OcclusionStrength;
 			half _BumpStrength;
-//#if			_EMISSION_ON
-		//	half4 _EmissionColor;
-			//#endif
+            half4 _EmissionColor;
 
 			half _HSVHue;
 			half _HSVSat;
@@ -399,6 +395,11 @@ Shader "WB/PBRFish"
 			sampler2D _BaseMap;
 			sampler2D _NormalMap;
 			sampler2D _MixMap;
+#if			_EMISSION_ON
+			sampler2D _EmissionMap;
+#endif
+
+
 
 			VertexOutput vert(VertexInput v)
 			{
@@ -415,6 +416,14 @@ Shader "WB/PBRFish"
 				o.tSpace2 = half4(normalInput.bitangentWS, positionWS.z);
 
 				OUTPUT_SH(normalInput.normalWS.xyz, o.lightmapUVOrVertexSH.xyz);
+
+#if defined(ENABLE_TERRAIN_PERPIXEL_NORMAL)
+				half3 SH = SampleSH(normalInput.normalWS.xyz);
+#else
+				half3 SH = o.lightmapUVOrVertexSH.xyz;
+#endif
+
+				o.lightmapUVOrVertexSH.xyz = SAMPLE_GI(o.lightmapUVOrVertexSH.xy, SH, normalInput.normalWS);
 
 				o.clipPos = positionCS;
 				return o;
@@ -443,13 +452,13 @@ Shader "WB/PBRFish"
 				half4 tex2DNode11 = tex2D(_MixMap, uv_MixMap);
 
 				half4 emission = half4(0, 0, 0, 0);
-/*#if			_EMISSION_ON
+#if			_EMISSION_ON
 				half4 emissionMapColor = tex2D(_EmissionMap, IN.uv.xy);
 				emission = emissionMapColor * _EmissionColor;
 #else
 				emission = _EmissionColor * tex2DNode11.b;
 #endif
-*/				half4 Albedo = tex2D(_BaseMap, uv_BaseMap).rgba;
+				half4 Albedo = tex2D(_BaseMap, uv_BaseMap).rgba;
 				// hsv 处理
 				half3 hvs = rgb2hsv(Albedo.rgb);
 				hvs.x = fmod(_HSVHue * 0.00277777785 + hvs.x, 1);
@@ -464,7 +473,7 @@ Shader "WB/PBRFish"
 				half Smoothness = lerp(_SmoothnessRemapMin, _SmoothnessRemapMax, tex2DNode11.a) * _GlossMapScale;
 				half3 Specular = _SpecularStrength;
 				half Occlusion = tex2DNode11.g * _OcclusionStrength;
-
+				// 先屏蔽
 				half flag = step(_NonMetalThreshold, tex2DNode11.r);
 				Occlusion = Occlusion * lerp(_NonMetalStrength, 1.0f, flag);
 
@@ -474,11 +483,10 @@ Shader "WB/PBRFish"
 				inputData.shadowCoord = half4(0, 0, 0, 0);
 
 				inputData.normalWS = TransformTangentToWorld(Normal, half3x3(WorldTangent, WorldBiTangent, WorldNormal));
-
 				half ndv = dot(SafeNormalize(inputData.normalWS), SafeNormalize(WorldViewDirection + _RimOffset.xyz));
 				half3 rimColor = (pow((1.0 - saturate(ndv)), 5.0 - _RimSpread) * _RimColor).rgb * _RimPower;
 				half3 Emission = emission.rgb + rimColor;
-				//half3 SH = IN.lightmapUVOrVertexSH.xyz;
+
 				inputData.bakedGI = IN.lightmapUVOrVertexSH.xyz;
 
 				Alpha = Alpha * _Alpha;
@@ -499,7 +507,7 @@ Shader "WB/PBRFish"
 				color.rgb = CalcFinalColor(color.rgb, _OverColor, _OverMultiple, _ContrastScale);
 				return color;
 			}
-		    ENDHLSL
+			ENDHLSL
 		}
 	}
 CustomEditor "FoldoutShaderGUI"

@@ -40,6 +40,13 @@ Shader "WB/FXEffect" {
         [FoldoutItem] [HDR]_CutoutColor("Cutout Color", Color) = (0,0,0,1)
         [FoldoutItem]  _UVCutOutScroll("Cutout UVScroll", Vector) = (0,0,0,0)
         [FoldoutItem]  _CutoutThreshold("Cutout Threshold", Range(0, 1)) = 0
+        // 顶点动画
+        [Foldout] _VertexAnimateName("顶点动画面板",Range(0,1)) = 0
+        [FoldoutItem][Toggle] _Vertexani("顶点动画开关", Float) = 0.0
+        [FoldoutItem][NoScaleOffset] _VertexAnimateTex("顶点动画纹理",2D) = "black"{}
+        [FoldoutItem] _VertexScrollingX("顶点动画流动U", Float) = 0
+        [FoldoutItem] _VertexScrollingY("顶点动画流动Y", Float) = 0
+        [FoldoutItem] _VertexStrength("顶点动画强度", Float) = 0
     }
 
         SubShader{
@@ -61,9 +68,11 @@ Shader "WB/FXEffect" {
                 ZTest[_ZTest]
 
                 HLSLPROGRAM
+                //#pragma multi_compile __ _SCROLL_ON
                 #pragma multi_compile __ _MASK_ON
                 #pragma multi_compile __ _DISTORTION_ON
                 #pragma multi_compile __ _DISSOLVE_ON
+                #pragma multi_compile __ _VERTEXANI_ON
 
                 #pragma vertex vert
                 #pragma fragment frag
@@ -98,6 +107,11 @@ Shader "WB/FXEffect" {
                 float4 _CutoutColor;
                 float _CutoutThreshold;
                 float2 _UVCutOutScroll;
+                // 顶点动画
+                float4 _VertexAnimateTex_ST;
+                float _VertexScrollingX;
+                float _VertexScrollingY;
+                float _VertexStrength;
 
                 CBUFFER_END
 
@@ -118,10 +132,16 @@ Shader "WB/FXEffect" {
                 SAMPLER(sampler_CutoutTex);
 #endif
 
+#if _VERTEXANI_ON
+                TEXTURE2D(_VertexAnimateTex);
+                SAMPLER(sampler_VertexAnimateTex);
+#endif
+
 
                 struct Attributes
                 {
                     float3 vertex : POSITION;
+                    float3 normal : NORMAL;
                     float4 color : COLOR;
                     float2 texcoord :TEXCOORD0;
                     float4 texCoordCst : TEXCOORD1; // 粒子特效中自定义的数据
@@ -159,7 +179,16 @@ Shader "WB/FXEffect" {
                 Varyings vert(Attributes input)
                 {
                     Varyings output;
-                    output.positionCS = TransformObjectToHClip(input.vertex.xyz);
+                    float t = abs(frac(_Time.y * 0.01));
+                    float calcTime = t * 100;
+                    // 顶点动画
+                    float3 positionWS = TransformObjectToWorld(input.vertex.xyz);
+#if _VERTEXANI_ON
+                    float2 vertexAnimateTexUV = TRANSFORM_TEX(input.texcoord, _VertexAnimateTex) + float2(_VertexScrollingX, _VertexScrollingY) * calcTime;
+                    float4 vertexAnimateMask = SAMPLE_TEXTURE2D_LOD(_VertexAnimateTex, sampler_VertexAnimateTex, vertexAnimateTexUV, 0);
+                    positionWS += _VertexStrength * vertexAnimateMask.r * input.normal;
+#endif
+                    output.positionCS = TransformWorldToHClip(positionWS);
                     // 顶点色
                     output.color = input.color;
                     // 主纹理
