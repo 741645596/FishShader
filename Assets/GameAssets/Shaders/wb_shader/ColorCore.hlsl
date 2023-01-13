@@ -28,10 +28,17 @@ half3 CalcFinalColor(half3 resultColor, half _ContrastScale)
 	half Luminance = dot(linearRgb.xyz, half3(0.212500006, 0.715399981, 0.0720999986));    //LinearRgbToLuminance
 	half4 col = 0;
 	col.rgb = (rimedColor.xyz - Luminance) * 1.35000002 + Luminance;
+	// 等价
+	// col.rgb = lerp(Luminance, rimedColor.xyz, 1.35f);
 	col.w = 1;
 	col.rgb = (col.rgb - _ContrastScale * 0.5) * 1.10000002 + _ContrastScale * 0.5;
+	// 等价
+	// col.rgb = lerp(_ContrastScale * 0.5, col.rgb, 1.1f);
 	return col.rgb;
 }
+
+
+
 half3 CalcFinalColor(half3 resultColor, half3 _OverlayColor, half _OverlayMultiple, half _ContrastScale)
 {
 	half3 mulColor = _OverlayColor.xyz * _OverlayMultiple;
@@ -40,12 +47,29 @@ half3 CalcFinalColor(half3 resultColor, half3 _OverlayColor, half _OverlayMultip
 	half Luminance = dot(linearRgb.xyz, half3(0.212500006, 0.715399981, 0.0720999986));    //LinearRgbToLuminance
 	half4 col=0;
 	col.rgb = (rimedColor.xyz - Luminance) * 1.35000002 + Luminance;
+	// 等价
+	// col.rgb = lerp(Luminance, rimedColor.xyz, 1.35f);
 	col.w = 1;
 	col.rgb = (col.rgb - _ContrastScale * 0.5) * 1.10000002 + _ContrastScale * 0.5;
+	// 等价
+    // col.rgb = lerp(_ContrastScale * 0.5, col.rgb, 1.1f);
 	return col.rgb;
 	
 }
+//  上述函数来源于：
+//  https://zhuanlan.zhihu.com/p/84313625 
+// 然后加入了对高光颜色的，对比度和饱和度的单独调节，来减少这部分的差异
+half3 colorAdjust(half3 Color, half _Saturation, half _Contrast)
+{
+	half3 finalColor = Color;
+	half gray = 0.2125 * Color.r + 0.7154 * Color.g + 0.0721 * Color.b;
+	half3 grayColor = half3(gray, gray, gray);
+	finalColor = lerp(grayColor, finalColor, _Saturation);
+	half3 avgColor = half3(0.5, 0.5, 0.5);
+	finalColor = lerp(avgColor, finalColor, _Contrast);
 
+	return finalColor;
+}
 
 //#include "../wb_Shader/ColorCore.hlsl"
 				// 旋转uv 计算
